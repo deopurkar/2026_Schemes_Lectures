@@ -1,4 +1,38 @@
 \documentclass{article}
+
+% AMS packages and theorem style setup
+\usepackage{amssymb, amsthm, amsmath}
+\theoremstyle{definition}
+    \newtheorem{example}{Example}[section]
+    \newtheorem{nonexample}{Non-Example}[section]
+
+    \newtheorem{definition}{Definition}[section]
+
+
+\theoremstyle{remark}
+    \newtheorem{remark}{Remark}[section]
+
+\theoremstyle{plain}
+    \newtheorem{proposition}{Proposition}[section]
+    \newtheorem{theorem}{Theorem}[section]
+
+% Typesetting shortcuts
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\spec}{\mathrm{spec}}
+
+
+
+% Tikz
+\usepackage{tikz-cd}
+
+
 \title{The Geometry of Schemes}
 \author{Students at ANU}
 
@@ -6,5 +40,7 @@
 \maketitle
 
 \input{lecture1}
+\input{lecture2}
+\input{lecture3}
 
 \end{document}

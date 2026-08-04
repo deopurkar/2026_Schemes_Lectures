@@ -1,0 +1,201 @@
+% temporary newpage to make easier to write :)
+\newpage
+
+
+\stepcounter{section}
+\section*{Lecture 2: details of sheaves and ringed spaces}
+
+% TODO: 
+% Remark about two ways to define manifolds, relate to schemes
+% Define presheaf
+% Examples presheaf
+% Define sheaf
+% Examples sheaf
+% Remark sheaf with empty set
+% Define ringed space
+% Examples ringed spaces
+% Define maximal ideal (???)
+% Proposition about local ring / maximal ideal
+
+\begin{remark}
+    A manifold is a topological space equipped with extra data which forces it to "locally resemble" Euclidean space. Recall that there are two (equivalent) ways to define a manifold from a base topological space:
+    \begin{enumerate}
+        \item Using charts and atlases.
+        \item By attaching a sheaf of functions.
+    \end{enumerate}
+
+    Usually one learns the chart definition and then derives and uses properties of sheaves while working with manifolds. We will work towards defining schemes in a similar manner, but primarily focus on the sheaf construction instead, and the analogues to charts will follow.
+\end{remark}
+
+We will need to define the machinery of sheaves to build towards schemes.
+
+
+\begin{definition}[Presheaf]
+    A \textbf{presheaf} (of sets) $\mathcal{F}$ on a topological space $X$ consists of the following data:
+    \begin{enumerate}
+        \item For each open $U \subseteq X$, a set $\mathcal{F}(U)$.
+        \item For each inclusion of open sets $V \subseteq U$, a \textbf{restriction} function 
+            \begin{align*}
+            % Not sure what notation we're using so this for now , also should add map name to tikz diagram 
+                \text{res}^U_V : \mathcal{F}(U) \to \mathcal{F}(V)
+            \end{align*}
+            which satisfies the following properties (contravariant functoriality):
+            \begin{enumerate}
+                \item For $V = U$, the restriction map for $V \subseteq U$ is the identity map $\text{res}_U^U = \text{id}_{\mathcal{F}(U)}$.
+                \item For $W \subseteq V \subseteq U$, the following diagram commutes:
+                    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7Rn0oVykiXSxbMiwwLCJcXG1hdGhjYWx7Rn0oVikiXSxbMiwyLCJcXG1hdGhjYWx7Rn0oVSkiXSxbMSwwXSxbMiwxXSxbMiwwXV0=
+                    \[\begin{tikzcd}
+                    	{\mathcal{F}(W)} && {\mathcal{F}(V)} \\
+                    	\\
+                    	&& {\mathcal{F}(U)}
+                    	\arrow[from=1-3, to=1-1]
+                    	\arrow[from=3-3, to=1-1]
+                    	\arrow[from=3-3, to=1-3]
+                    \end{tikzcd}\]
+                
+            \end{enumerate}
+    \end{enumerate}
+    The pair $(X, \mathcal{F})$ form a presheaf, but we may also call the individual components $X$ or $\mathcal{F}$ a presheaf depending on context.
+\end{definition}
+
+Typically the elements of $\mathcal{F}(U)$ are functions defined on $U$. These functions $f \in \mathcal{F}(U)$ are called \textbf{sections}, and elements of $\mathcal{F}(X)$ are \textbf{global sections}. For $f \in \mathcal{F}(U)$ and $V \subseteq U$, the restriction is typically written $\text{res}_V^U (f) = f|_V$, in line with restriction of functions.
+
+
+
+\begin{example}
+    Let $X$ be a topological space. The following are examples of presheaves.
+
+    \begin{enumerate}
+        \item $X = \R^n$ with the usual topology, equipped with the presheaf $\mathcal{F} = C_X^\infty$ of smooth functions $f: X \to X$.
+        \item $X$, equipped with the presheaf $\mathcal{F} = C_X$ of continuous functions $f: X \to X$.
+        \item Fix a topological space $Y$. $X$, equipped with the presheaf of continuous maps $f: X \to Y$, is a presheaf.
+        \item Fix a set $S$. For each open $U \subseteq X$, define $\mathcal{F}(U) = S$, and the restriction map to be $\text{id}_S$. This is the \textbf{constant presheaf}.
+        % \item Fix a topological space $Y$. The presheaf of maps into $Y$ is denoted
+        %     \[
+        %         \text{Maps}(-, Y) 
+        %     \]
+        % and let $U \subseteq X$ be open. Then the set of maps $f: U \to Y$, denoted $\text{Maps}(-,Y)$
+        % \item 
+    \end{enumerate}
+    
+\end{example}
+
+% wanted to include footnote in case people forgot from analysis and for easy reference? probably not necessary.
+\begin{definition}[Sheaf]
+
+    Let $(X, \mathcal{F})$ be a presheaf, and consider an open subset $U \subseteq X$ with an open cover\footnote{Precisely, this condition is $U = \bigcup_{i \in I} U_i$.} $\{U_i\}_{i \in I}$. We say that $(X, \mathcal{F})$ is a \textbf{sheaf} if the following compatibility conditions are satisfied:
+    \begin{enumerate}
+        \item \textbf{Locality.} If $f, g \in \mathcal{F}(U)$ such that $f|_{U_i} = g|_{U_i}$ for all $i \in I$, then $f = g$. That is, \textit{functions are equal if they are locally equal}.
+        \item \textbf{Gluing.} Given $f_i \in \mathcal{F}(U_i)$ such that $f_i|_{U_i \cap U_j} = f_j |_{U_i \cap U_j}$ for all $i, j \in I$, there exists a (unique) function $f \in \mathcal{F}(U)$ such that $f|_{U_i} = f_i$ for all $i \in I$. 
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    The gluing condition only requires the existence of a function which restricts correctly to the open cover. However, uniqueness of this function is guaranteed by the locality condition.
+\end{remark}
+
+
+
+
+\begin{example} Most of the above presheaves are also examples of sheaves. This includes:
+    \begin{enumerate}
+        \item Smooth ($C^\infty$) functions on $\R^n$
+        \item Continuous functions $C_X$ on $X$
+        \item Continuous functions $\text{Maps}(X,Y)$ from $X$ to $Y$
+        \item Holomorphic functions on $\C$
+        \item $n$-forms $\Omega_X^n$ on a manifold $X$
+        \item Sheaf of groups. If the $\mathcal{F}(U)$'s are groups, then the restriction map is a group homomorphism. That is, $\text{res}^U_V (f \cdot g) = \text{res}^U_V(f) \cdot \text{res}^U_V(g)$. 
+        \item Sheaf of rings, where the restriction map is a ring homomorphism.
+        % \item The sheaf of continuous functions $(X, C_X)$
+        % \item The sheaf of holomorphic functions on $\C^n$
+        % \item The sheaf of $n$-forms $\Omega_X^n$ on a manifold $X$
+        % \item 
+    \end{enumerate}
+\end{example}
+
+However, not all presheaves are sheaves. The following is an important property of sheaves, which easily excludes certain presheaves from being sheaves.
+
+\begin{proposition}[Sheaf behaviour on the empty set]
+    If $\mathcal{F}$ is a sheaf, then $\mathcal{F}(\varnothing) = \{\cdot\}$ is a singleton set. 
+\end{proposition}
+
+\begin{proof}
+    Let $f, g \in \mathcal{F}(\varnothing)$. The only open cover of $\varnothing$ is the empty covering. So $f = g$ (vacuously) on every part of the open cover. Then by the locality condition, $f = g$. So $\mathcal{F}(\varnothing)$ has exactly one element.
+\end{proof}
+
+
+
+\begin{nonexample}
+    Fix $S$ to be a non-singleton set. The constant presheaf with $\mathcal{F}(U) = S$ is not a sheaf, because $\mathcal{F}(\varnothing) = S$ which is not a singleton.
+\end{nonexample}
+
+One might think we can fix this by manually setting $\mathcal{F}(\varnothing)$ to some singleton. But even this does not work in general, because it can break the gluing condition.
+
+\begin{nonexample}
+    Fix $X = \R$ and $S = \Z$. Take the constant presheaf, but modify it so that now $\mathcal{F}(U) = \{0\}$ (chosen arbitrarily to satisfy the singleton condition). In particular, take $U_1 = (0,1)$ and $U_2 = (2,3)$, which are disjoint and form an open cover for $U = U_1 \cup U_2$. Suppose $f_1 \in \mathcal{F}(U_1)$ is the constant function $1$, and $f_2 \in \mathcal{F}(U_2)$ is constant $-1$. These functions are compatible as they both restrict to the same element, $0$, on their intersection. But there is no function $f \in \mathcal{F}(U)$ which restricts correctly on both $U_1$ and $U_2$, because $1 \neq -1$.
+\end{nonexample}
+
+% It is also common for the topology of the underlying space to be too "non-algebraic" to admit 
+
+
+
+
+% include something about locally constant being a valid sheaf?
+
+Now we come to the defintion of a ringed space, which will be key moving forwards.
+
+\begin{definition}[Ringed space]
+    A \textbf{ringed space} is a topological space $X$, equipped with a sheaf of rings $\mathcal{O}_X$.
+\end{definition}
+
+In future lectures we will be able to take a ring $R$, and construct from it a ringed space called $\text{spec}(R)$. Each $\text{spec}(R)$ will be an affine scheme, which we can glue together to form general schemes.
+
+
+% An important property of ringed spaces is that they are entirely informed by the algebraic structure of a ring. 
+
+\begin{nonexample}
+    It is tempting to consider as an example, the space $X = \R$ with the presheaf as $\mathcal{F}(U) = \{\text{polynomials} : U \to \R \}$. But the gluing condition can break, for example if we take the zero polynomial on $U_1 = (-\infty, 0)$, and $x^2$ on $U_2 = (0, \infty)$. The polynomials automatically agree on the (empty) intersection, so should be compatible. But there is no global polynomial on the union $\R \setminus \{0\}$ which correctly restricts onto both $U_1$ and $U_2$.
+\end{nonexample}
+
+So what has gone wrong here, why is this not a sheaf? The answer is in the topology of the base space. The standard topology on $\R$ is the Euclidean topology, which relies on a number of non-algebraic operations such as square rooting, that may not be available or even compatible with rings. This motivates defining a topology which will be nicely compatible with all the algebraic properties we want to use. That will be another day. 
+
+For now, let's build up some terminology to work with sheaves.
+
+\begin{definition}[Stalk]
+    Let $(X, \mathcal{F})$ be a sheaf. For a given point $x \in X$, we define the \textbf{stalk} of $\mathcal{F}$ at $x$ to be 
+    \begin{align*}
+        \mathcal{F}_x & = \varinjlim_{U \ni x} \mathcal{F}(U) \\
+        & = \bigsqcup_{U \ni x, f \in \mathcal{F}(U)} (U,f) \slash \sim
+    \end{align*}
+    where $(U,f) \sim (V, g)$ if there is a $W \ni x$, $W \subseteq U \cap V$, such that $f|_W = g|_W$. These equivalence classes are called \textbf{germs}.
+\end{definition}
+
+The stalk captures the behaviour of the sheaf around a given point. 
+
+\begin{example}
+    Let $X = \R$ and $\mathcal{F} = C_X$ the sheaf of continuous functions on $X$. The stalk $\mathcal{F}_0$ contains a copy of $\R$, corresponding to the constant functions, but it also contains other things like $x, x^2, x^3, \sqrt{x}, e^x, \sin(x), |x|$.
+
+    In fact, $\mathcal{F}_0$ is a ring. It has no nilpotents, but is not an integral domain. 
+\end{example}
+
+\begin{proposition}
+    The $\mathcal{F}_0$ above is a "local ring", meaning it has exactly one maximal ideal.
+\end{proposition}
+\begin{proof}
+    The maximal ideal is given by the kernel of the evaluation map at zero:
+    \[
+        m = \ker (\text{eval}_0) = \{f \; | \; f(0) = 0\}
+    \]
+    The evaluation map at zero is surjective onto $\R$ (every $\R$ corresponds to a constant function), so the first isomorphism theorem gives $\mathcal{F}_0 \slash m \cong \R$. Since $\R$ is a field, this means $m$ is maximal.
+\end{proof}
+
+
+
+% \begin{remark}
+%     Arbitrary topologies (such as the standard Euclidean topology) may not behave according to the rigid properties of algebraic structures such as rings. 
+% \end{remark}
+
+
+
+
+% For now, let's become familiar with ringed spaces.
