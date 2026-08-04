@@ -1,10 +1,10 @@
 \stepcounter{section}
 \section*{Lecture 1: The animals before the taxonomy}
 \begin{remark}
-    An echidna is known by many different names in different languages: for example, \textit{nyingarn} (Noongar), \textit{bigibila} (Gamilaraay), \textit{tachyglossus} (scientific name), \textit{spiny anteater} (original English name). Some names are older than others; the Indigenous ones in particular have been around for tens of thousands of years. However, they all refer to the same underlying object, the animal itself, which has been around for much longer - likely tens of millions of years. Changing the name does not change the object. \\
-    \\
+    An echidna is known by many different names in different languages: for example, \textit{nyingarn} (Noongar), \textit{bigibila} (Gamilaraay), \textit{tachyglossus} (scientific name), \textit{spiny anteater} (original English name). Some names are older than others; the Indigenous ones in particular have been around for tens of thousands of years. However, they all refer to the same underlying object, the animal itself, which has been around for much longer - likely tens of millions of years. Changing the name does not change the object. 
+    
     We shall take this as an analogy for \textbf{schemes}. The objects we call schemes are, in many cases, already familiar to us. What is new is not the objects themselves, but rather the language and perspective through which we view them. \\
-    \\
+    
     Thus, we will postpone a formal definition for this lecture. Instead, we will examine a variety of examples that can be recognised as schemes. At first, you may already recognise them through different lenses: a set, a topological space, an algebraic variety. This is much like recognising an echidna as merely an animal - such an observation is correct, but it overlooks the richer structure that distinguishes the object. Our goal through these examples is to develop an intuition for schemes before we formally define them.
 \end{remark}
 \begin{example}[Affine space]
@@ -28,7 +28,7 @@
     \[
     X\subset\A^2, \qquad X=\{y^2-e^x=0\} 
     \]
-    Why not? Crucially, it uses an operation that cannot be generalised to any ring: the exponential map. When we say `generalised to any ring', we mean 'uses the operations of a ring': addition, multiplication, and subtraction. This is what makes this set not an algebraic scheme - it uses something more than ring theory. 
+    Why not? Crucially, it uses an operation that cannot be generalised to any ring: the exponential map. When we say `generalised to any ring', we mean `uses the operations of a ring': addition, multiplication, and subtraction. This is what makes this set not an algebraic scheme - it uses something more than ring theory. 
 \end{nonexample}
 So far the examples given have all been schemes over $\mathbb{Z}$: the polynomials involved have all used integral coefficients, which make sense in any ring $R$ using the unique homomorphism $\mathbb{Z}\to R$. If for example, we defined the following:
 \[
@@ -51,7 +51,7 @@ this would be a scheme over $\C$, but not over $\mathbb{Z}$. That is, it makes s
     \[
     \mathrm{GL}_n\to\mathrm{GL}_n, \quad (a_{ij},t)\mapsto (t\cdot \mathrm{Adj}(a_{ij}), \det(a_{ij}))
     \]
-    Note that these maps are both 'algebraic': they use only ring operations. Furthermore, there exists
+    Note that these maps are both `algebraic': they use only ring operations. Furthermore, there exists
     \[
     I=\left(\begin{pmatrix}
         1 &  & \\
@@ -77,12 +77,14 @@ this would be a scheme over $\C$, but not over $\mathbb{Z}$. That is, it makes s
     \[
     C:=\{[X:Y:Z] \mid X^2-YZ=0\}
     \]
-    is a subscheme. In fact, it will turn out to be 'isomorphic' to $\P^1$ (whatever 'isomorphic' means). \\
-    In $\P^5$, the following well-known space is a subscheme:
+    is a subscheme. In fact, it will turn out to be `isomorphic' to $\P^1$ (whatever `isomorphic' means).
+  \end{example}    
+\begin{example}
+  In $\P^5$, the following space is a subscheme:
     \[
     A=\{[a:b:c:k:l:m] \mid 4k^2=2b^2+2c^2-a^2, \; 4l^2=2c^2+2a^2-b^2, \; 4m^2=2a^2+2b^2-c^2\}
     \]
-    This scheme is also what is known as a K3 surface.
+    This scheme is an example of something called a K3 surface.
 \end{example}
 \begin{nonexample}
     Consider the subset of $\P^2$, defined by
@@ -100,7 +102,8 @@ this would be a scheme over $\C$, but not over $\mathbb{Z}$. That is, it makes s
     \[
     \P^2\setminus C_X=\{[0:Y:Z]\},
     \]
-    which is easily seen to be a copy of $\P^1$. \\
+    which is easily seen to be a copy of $\P^1$.
+    
     Taking analogously $C_Y$ and $C_Z$, we see that there are three copies of $\A^2$ lying in $\P^2$. Moreover, they cover $\P^2$, since $[0:0:0]$ is not a valid element. This displays a key property of schemes: a general scheme is one which has an open cover by \textbf{affine} schemes.
 \end{example}
 \begin{example}[Line bundles]
@@ -113,7 +116,8 @@ this would be a scheme over $\C$, but not over $\mathbb{Z}$. That is, it makes s
         \item $\mathrm{rank}\begin{pmatrix} a_0 &\cdots &a_n \\ b_0 & \cdots & b_n \end{pmatrix}\leq 1$
         \item $a_ib_j=a_jb_i \;\;\forall i,j$
     \end{itemize}
-    In this sense, $\Xi$ is an algebraic scheme. We have a natural projection map $\pi$ to $\P^n$, and we are interested in its fibers. Indeed, the points that map to $\ell\in \P^n$ are exactly those $(b_0,\ldots,b_n)$ which lie on $\ell$. In this sense, $\Xi\to \P^n$ is called a \textbf{line bundle}, as its fibers are lines. This particular one is called the \textbf{tautological} or \textbf{universal} line bundle. \\
+    In this sense, $\Xi$ is an algebraic scheme. We have a natural projection map $\pi$ to $\P^n$, and we are interested in its fibers. Indeed, the points that map to $\ell\in \P^n$ are exactly those $(b_0,\ldots,b_n)$ which lie on $\ell$. In this sense, $\Xi\to \P^n$ is called a \textbf{line bundle}, as its fibers are lines. This particular one is called the \textbf{tautological} or \textbf{universal} line bundle.
+    
     Another example of a line bundle is the natural projection
     \[
     \P^n\times \A^1\to\P^n.
@@ -121,14 +125,18 @@ this would be a scheme over $\C$, but not over $\mathbb{Z}$. That is, it makes s
     Here the fibers are always $\A^1$, a line. This line bundle is the \textbf{trivial} line bundle. It turns out that it is not isomorphic to the universal line bundle!
 \end{example}
 \begin{remark}
-    The notion of 'isomorphic' has been brought up a few times now, so what do we mean when we say two schemes are isomorphic? Very generally, it means there is a bijection between them that preserves the algebraic structure: the addition, multiplication and subtraction given by the ring.
-\end{remark}
+  The notion of `isomorphic' has been brought up a few times now, so what do we mean when we say two schemes are isomorphic?
+  Roughly speaking, a morphism between two schemes is a map defined only using algebraic operations (addition, multiplication, and subtraction).  An isomorphism is a morphism that admits an inverse morphism.
+  \end{remark}
 \begin{example}[Algebraic isomorphism]
-    Recall from Example~\ref{P1=x^2-yz} that $\P^1\cong\{X^2-YZ\}\subset\P^2$. Taking $[s:t]\in\P^1$, we have the map
+  In Example~\ref{P1=x^2-yz} we asserted that $\P^1\cong\{X^2-YZ\}\subset\P^2$.
+  Now we give the pair of inverse morphisms.
+
+  In one direction, we have the map 
     \[
     \P^1\to \{X^2-YZ\}, \qquad [s:t]\mapsto [st:s^2:t^2].
     \]
-    This map is a 'morphism of schemes'. The inverse is given by
+    This map is a `morphism of schemes'. The inverse is given by
     \[
     \{X^2-YZ\}\to \P^1, \qquad [X:Y:Z]\mapsto \begin{cases}
         [Y:X] &\text{if }Y\ne0 \\
@@ -142,13 +150,14 @@ this would be a scheme over $\C$, but not over $\mathbb{Z}$. That is, it makes s
     \[
     C=\{y^2-x^3-1=0\}\subset \A^2
     \]
-    We have a natural projection to $\A^1$ given by $(x,y)\mapsto x$. We look at the ring of 'algebraic functions' on $C$ - essentially this means polynomial functions. This turns out to be
+    We have a natural projection to $\A^1$ given by $(x,y)\mapsto x$. We look at the ring of `algebraic functions' on $C$ - essentially this means polynomial functions. This turns out to be
     \[
     R=\C[x,y]/(y^2-x^3-1),
     \]
-    since multiples of this polynomial vanish on $C$. We define a $\C$-algebra to be a ring $R$ with a homomorphism $\C\to R$. A $\C$-algebra homomorphism $R\to \C$ by definition does nothing to $\C$, and so is determined by the images $x\mapsto a,y\mapsto b$. These must satisfy $b^2=a^3+1$ - that is, $(a,b)\in C$. As a result, points of $C$ are in bijection with $\mathrm{Hom}_\C(R,\C)$, the ring of $\C$-algebra homomorphisms $R\to \C$. \\
-    Similarly considering $\A^1$, its ring of algebraic functions is $\C[x]$, and points of $\A^1$ are in bijection with $\mathrm{Hom}_\C(\C[x],\C)$, as homomorphisms are determined by the image of $x$. \\
-    \\
+    since multiples of this polynomial vanish on $C$. We define a $\C$-algebra to be a ring $R$ with a homomorphism $\C\to R$. A $\C$-algebra homomorphism $R\to \C$ by definition does nothing to $\C$, and so is determined by the images $x\mapsto a,y\mapsto b$. These must satisfy $b^2=a^3+1$ - that is, $(a,b)\in C$. As a result, points of $C$ are in bijection with $\mathrm{Hom}_\C(R,\C)$, the ring of $\C$-algebra homomorphisms $R\to \C$.
+    
+    Similarly considering $\A^1$, its ring of algebraic functions is $\C[x]$, and points of $\A^1$ are in bijection with $\mathrm{Hom}_\C(\C[x],\C)$, as homomorphisms are determined by the image of $x$. 
+    
     This bijection also translates to morphisms: given the map
     \[
     \C[x]\to \C[x,y]/(y^2-x^3-1)=R
@@ -160,12 +169,14 @@ this would be a scheme over $\C$, but not over $\mathbb{Z}$. That is, it makes s
     given by the projection $(a,b)\mapsto a$. That is, the morphism of schemes $C\to\A^1$ was reconstructed from the morphism of their corresponding rings, but in the opposite direction. 
 \end{example}
 \begin{remark}
-    In time, to every ring $R$ we will associate a scheme called $\spec R$. There will be a notion of '$k$-valued points' of $\spec R$ (for $k$ a ring), and there will be a one-to-one correspondence between such $k$-valued points and $\mathrm{Hom}(R,k)$. When $k$ is an algebraically closed field, a $k$-valued point is called a \textbf{geometric point}.
+    In time, to every ring $R$ we will associate a scheme called $\spec R$. There will be a notion of `$k$-valued points' of $\spec R$ (for $k$ a ring), and there will be a one-to-one correspondence between such $k$-valued points and $\mathrm{Hom}(R,k)$. When $k$ is an algebraically closed field, a $k$-valued point is called a \textbf{geometric point}.
 \end{remark}
 \begin{example}[Geometric points]
-    Let $R=\Z$. We look for the $\C$-valued points of $\spec\Z$, recalling that they are in one-to-one correspondence with $\mathrm{Hom}(\Z,\C)$. There is a unique homomorphism $\Z\to\C$, and hence only one $\C$-valued point. Similarly, there is only one $\overline{\F}_p$-valued point. \\
-    We now consider $\Z[i]$. There is a unique homomorphism $\Z\to\Z[i]$, and by our above discussion we should expect a corresponding scheme morphism $\spec\Z[i]\to\spec\Z$, sending $k$-valued points to $k$-valued points. To find the $\C$-valued points of $\spec\Z[i]$, we note that there are two homomorphisms $\Z[i]\to\C$, given by $i\mapsto i$ and $i\mapsto -i$. So, there are 2 distinct $\C$-valued points. For the $\overline{\F}_p$-valued points, for $p\ne2$ there are similarly $2$ homomorphisms, as there are two solutions to $x^2+1$. For $p=2$ there is only one homomorphism however. \\
-    As such, our corresponding morphism $\spec\Z[i]\to\spec\Z$ must send both $\C$-valued points to the singular one in $\spec\Z$, and similarly for $\overline{\F}_p$ for $p\ne2$. For $p=2$, it send the unique $\overline{\F}_2$-valued point to the unique one in $\spec\Z$.
+  Let $R=\Z$. We look for the $\C$-valued points of $\spec\Z$, recalling that they are in one-to-one correspondence with $\mathrm{Hom}(\Z,\C)$. There is a unique homomorphism $\Z\to\C$, and hence only one $\C$-valued point. Similarly, there is only one $\overline{\F}_p$-valued point.
+  
+  We now consider $\Z[i]$. There is a unique homomorphism $\Z\to\Z[i]$, and by our above discussion we should expect a corresponding scheme morphism $\spec\Z[i]\to\spec\Z$, sending $k$-valued points to $k$-valued points. To find the $\C$-valued points of $\spec\Z[i]$, we note that there are two homomorphisms $\Z[i]\to\C$, given by $i\mapsto i$ and $i\mapsto -i$. So, there are 2 distinct $\C$-valued points. For the $\overline{\F}_p$-valued points, for $p\ne2$ there are similarly $2$ homomorphisms, as there are two solutions to $x^2+1 = 0$ in \(\overline{\F}_p\). For $p=2$ there is only one homomorphism however (given by \(x = 1)\)
+  
+    As such, our corresponding morphism $\spec\Z[i]\to\spec\Z$ must send both $\C$-valued points to the single \(\C\)-valued point in $\spec\Z$, and similarly for $\overline{\F}_p$ for $p\ne2$. For $p=2$, it sends the unique $\overline{\F}_2$-valued point to the unique one in $\spec\Z$.
 \end{example}
 
 
