@@ -8,7 +8,7 @@ In this lecture (number 4, originally given 6 August 2026), we define the Sheaf 
 
 Recall Grothenstieck: The topology carries the rings.
 
-The Sheaf of Rings on a given topological space is called \emph{The Structure Sheaf}.
+The Sheaf of Rings on the topological space of an affine scheme is called \emph{The Structure Sheaf}.
 We recall from Lecture 3 that we need to associate a ring for every open set in $\Spec{R}$.
 We showed that the empty set must be sent to a singleton, which for a ring means the zero ring.
 We also recall that $\Spec{R}$ is the largest open set in $\Spec{R}$\footnote{
@@ -24,10 +24,10 @@ This is supposed to be the analogue of smooth or holomorphic functions, so how d
 \end{example}
 
 Consider another approach that generalises well.
-We recall that the underlying set (`points') of $\Spec{R}$ is the prime ideals of $\C[x,y]$ (consisting of $(0)$, irreducible polynomials (see Hartshorne pg 7, Krull's \emph{Hauptidealsatz}), and the maximal ideals $(x-a,y-b)$).
+We recall that the underlying set (`points') of $\Spec{R}$ is the prime ideals of $\C[x,y]$ (consisting of $(0)$, ideals of irreducible polynomials in $\C[x,y]$ (see Hartshorne pg 7, Krull's \emph{Hauptidealsatz}, note that $\C[x,y]$ is a UFD), and the maximal ideals $(x-a,y-b)$).
 For the maximal ideals, we have that $\mathfrak{m}\leftrightarrow \A_\C^2$.
-We now consider the image of $f\in\C[x,y]$ in $\faktor{\C[x,y]}{(x-a)(y-b)}$.
-As $(x-a,y-b)$ is a maximal ideal, this gives us a field, and there's a canonical isomorphism of $\C$-algebras to this ring.
+We now consider the image of $f\in\C[x,y]$ in $\faktor{\C[x,y]}{(x-a,y-b)}$.
+As $(x-a,y-b)$ is a maximal ideal, this gives us a field, and there's a canonical isomorphism of $\C$-algebras to this ring given by $[f]\mapsto f(a,b)$.
 In this ideal, we note that $x\mapsto a$ and $y\mapsto b$ gives us what we want.
 This is how we can think of elements of $R$ as functions.
 \begin{example}
@@ -39,13 +39,13 @@ This is how we can think of elements of $R$ as functions.
 
 \begin{example}
     Let $R=\Z$ and let $f=67$.
-    Then evaluating $67$ at $(2)$ gives $(1)$.
-    The \emph{Vanishing Locus} of $V(67)$ is the set of all primes at which $67$ has value $(0)$, which is only $67$: $V(67)=(67)$.
+    Then evaluating $67$ at $(2)$ gives $[1]$.
+    The \emph{Vanishing Locus} of $V(67)$ is the set of all primes at which $67$ has value $[0]$, which is only $67$: $V(67)=(67)$.
     $V(100)=\{(2),(5)\}$.
 \end{example}
 
 \begin{remark}
-    $\Spec{\Z}$ is a really funky place to do geometry: $\Spec{\Z}$ describes a non-singular curve.
+    $\Spec{\Z}$ is a really funky place to do geometry: $\Spec{\Z}$ describes a non-singular curve (Vakil).
 \end{remark}
 
 The traditional examples of these rings are things like:
@@ -60,11 +60,12 @@ These points of the scheme are closed, and are the \emph{closed points of the sc
     Recall that the prime ideals are the points of $\Spec{R}$ and that a maximal ideal is prime.
     Then closed sets are `indexed' by the ideals: $V(\mathfrak{m})=\{\mathfrak{p}\mid \mathfrak{m}\subseteq\mathfrak{p}\}$.
     Clearly, we are looking for those ideals $P$ such that $\mathfrak{m}\subseteq P\subseteq\Spec{R}$.
-    Note that $\mathfrak{m}$ is explicitly maximal, so $P$ is either $\mathfrak{m}$ or $\Spec{R}$.
-    But $\Spec{R}$ is not considered a prime ideal by our convention, so $V(\mathfrak{m})=\{\mathfrak{m}\}$.
+    Note that $\mathfrak{m}$ is explicitly maximal, so $P$ is either $\mathfrak{m}$ or $R$.
+    But $R$ is not considered a prime ideal by our convention, so $V(\mathfrak{m})=\{\mathfrak{m}\}$.
 \end{proof}
 
-Quotienting by a maximal ideal of $\Spec{R}$ at a closed point gives us the base field of the scheme.
+If $\mathfrak{m}$ is maximal, $\faktor{R}{\mathfrak{m}}$ is the residue field at a closed point of $\Spec{R}$.
+Quotienting by a maximal ideal of $\Spec{R}$ at a closed point gives us the base field of the scheme (over an algebraically closed field).
 
 \begin{example}
     Let $R=\faktor{\Z}{24\Z}$. Take $f=12$.
@@ -87,11 +88,11 @@ At this point, we have assigned the ring $R$ to the largest open subset of $\Spe
     We need some new algebra to continue.
 
     Take a ring $R$, and a subset $S\subset R$ which is closed under multiplication.
-    We will return to the examples of $S=\{1,f,f^2,f^3,\dots\}$ and $S$ the complement of a prime ideal (for example, $R=\Z$ and $S=(2)$, and the multiplicative subset is thus the odd numbers).
+    We will return to the examples of $S=\{1,f,f^2,f^3,\dots\}$ and $S$ the complement of a prime ideal (for example, $R=\Z$ and $S=(2)$, and $R_{(S)}$ is thus the odd numbers).
     Note that $S$ will always need to contain the unit; a short (but not satisfying) argument is that the product of zero elements must be $1$.
     
     We form a new ring: $S^{-1}R$ formed by equivalence classes of $(r_1,s_1)\sim(r_2,s_2)$ if there exists $s\in S$ such that $s\cdot(r_1s_2-s_1r_2)=0$.
-    Considering $S^{-1}R$ as the fractions with denominators coming from $S$ is fine when $R$ is an integral domain, but falls apart if it is not (although it is a useful notation).
+    Considering $S^{-1}R$ as the fractions with denominators coming from $S$ is fine when $R$ is an integral domain, but falls apart if it is not (although it is a useful notation) via the equivalence relation.
     Using the previous definition fixes this issue.
 
     \begin{example}[How $S^{-1}R$ breaks when $R$ not a domain]
@@ -160,11 +161,11 @@ At this point, we have assigned the ring $R$ to the largest open subset of $\Spe
 
         Recall the sheaf conditions:
         \begin{enumerate}
-            \item If $f,g\in\mathcal{F}$ and $\{U_i\}$ is an open cover of some open $U$, then if $f\in\mathcal{F}(U_i)=g\in\mathcal{F}(U_i$ for all $i$, then $f=g$
-            \item Given $f_i\in\mathcal{F}(U_i)$ for all $i$ such that for all $i,j$ the image of $f_i\in\mathcal{F}(U_i\cap U_j)$ equals the image of $j_j\in\mathcal{F}(U_i\cap U_j)$ then there exists $f\in\mathcal{F}(U)$ that maps to all the $f_i$.
+            \item If $f,g\in\mathcal{F}$ and $\{U_i\}$ is an open cover of some open $U$, then if $f\in\mathcal{F}(U_i)=g\in\mathcal{F}(U_i)$ for all $i$, then $f=g$
+            \item Given $f_i\in\mathcal{F}(U_i)$ for all $i$ such that for all $i,j$ the image of $f_i\in\mathcal{F}(U_i\cap U_j)$ equals the image of $f_j\in\mathcal{F}(U_i\cap U_j)$ then there exists $f\in\mathcal{F}(U)$ that maps to all the $f_i$.
         \end{enumerate}
 
-        Let $\Spec{R}=D_f\cup D_g$, then there are maps $R\to R_g$ and $R\to R_f$.
+        If there is no prime ideal containig both $f$ and $g$, then $\Spec{R}=D_f\cup D_g$, then there are maps $R\to R_g$ and $R\to R_f$.
         The first condition requires for every ideal that $f\neq 0$ or $g\neq 0$, as there is no ideal with $f=0$ and $g=0$.
         Then $f\cup g=(1)$ and $(f,g)=(1)$, so we can find some $af+bg=1$.
 
