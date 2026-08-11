@@ -2,3 +2,25 @@
 
 \stepcounter{section}
 \section*{Lecture 3: The topologies of locally ringed spaces}
+
+\begin{definition}
+    A locally ringed space $(X, \mathcal{O}_X)$ is a topological space $X$, with a sheaf of rings $\mathcal{O}_X$, where the stalks of $\mathcal{O}_X$ are local rings.
+\end{definition}
+One example of a locally ringed space is the space $\mathrm{Spec}R$ associated with the ring $R$. This is what we call an Affine Scheme, and schemes of these forms are the basis of all other schemes. We start by investigating the topology of $\mathrm{Spec}R$, defining the space as:
+\begin{definition}
+    For a ring $R$, it's spectrum $\mathrm{Spec}R$ is the set of all prime ideals of $R$. It has a topology called the Zariski topology, where all the closed sets are of the form $V(I)$, where $I$ is an ideal in $R$, and $V(I) = \{ p \in \mathrm{Spec}R : I \subseteq p \}$.
+\end{definition}
+\begin{theorem}
+    The Zariski topology on the spectrum of a ring follows all the axioms of a topology, and the sets $D_f = \mathrm{Spec}R - V((f))$, for $f \in R$, form a basis for this topology.
+\end{theorem}
+\begin{proof}
+    We first recognise that $V((0))$, the closed set associated with the zero ideal, is the entire space $\mathrm{Spec}R$, as every prime ideal contains the zero ideal. Similarly, $V(R)$ is the empty set, as no prime ideals can contain $R$, as then they'd be the entire space, which prime ideals are explicitly forbidden from being.
+
+    Thus, the topology is non-empty and contains the empty set and the entire space. All we have left to verify is that finite unions of $V(I)$ are closed and infinite intersections of $V(I)$ are closed.
+
+    TBC
+\end{proof}
+All of the examples 
+\begin{example}
+    $\mathrm{Spec}(\mathbb{Z})$ consists of the elements $(p)$ where $p$ is a prime integer, and $(0)$. 
+\end{example}
