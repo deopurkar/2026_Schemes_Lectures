@@ -1,0 +1,186 @@
+
+\newpage
+
+\stepcounter{section}
+\section*{Lecture 4: Sheaf of Rings and Localisation}
+
+In this lecture (number 4, originally given 6 August 2026), we define the Sheaf of Rings (and some elementary properties), and define and study the beginnings of Localisation.
+
+Recall Grothenstieck: The topology carries the rings.
+
+The Sheaf of Rings on the topological space of an affine scheme is called \emph{The Structure Sheaf}.
+We recall from Lecture 3 that we need to associate a ring for every open set in $\Spec{R}$.
+We showed that the empty set must be sent to a singleton, which for a ring means the zero ring.
+We also recall that $\Spec{R}$ is the largest open set in $\Spec{R}$\footnote{
+    Recall that the open sets are the complement of closed sets, so an open set is of the form $\Spec{R}\setminus{V(I)}$. Let $I=(1)$, then $V(I)$ is empty, so $\Spec{R}$ is the largest open subset.}, 
+    so we can safely associate $\Spec{R}\rightsquigarrow R$.
+
+This is supposed to be the analogue of smooth or holomorphic functions, so how do we consider the elements of $R$ as functions?
+
+\begin{example}
+    Let $R=\C[x,y]$, and note that these are polynomials over $x$ and $y$.
+    We can consider the notion of evaluation of $f\in R$ by subsititution: the \emph{Value of $f$ at $p$} is $f(a,b)\in\C$ (where $f$ is a $\C$-valued function).
+    This doesn't generalise well: how do you evaluate $67\in\Z$ (or any other member of $\Z$) in $\Spec\Z$? There is no polynomial for subsititution or evaluation.
+\end{example}
+
+Consider another approach that generalises well.
+We recall that the underlying set (`points') of $\Spec{R}$ is the prime ideals of $\C[x,y]$ (consisting of $(0)$, ideals of irreducible polynomials in $\C[x,y]$ (see Hartshorne pg 7, Krull's \emph{Hauptidealsatz}, note that $\C[x,y]$ is a UFD), and the maximal ideals $(x-a,y-b)$).
+For the maximal ideals, we have that $\mathfrak{m}\leftrightarrow \A_\C^2$.
+We now consider the image of $f\in\C[x,y]$ in $\faktor{\C[x,y]}{(x-a,y-b)}$.
+As $(x-a,y-b)$ is a maximal ideal, this gives us a field, and there's a canonical isomorphism of $\C$-algebras to this ring given by $[f]\mapsto f(a,b)$.
+In this ideal, we note that $x\mapsto a$ and $y\mapsto b$ gives us what we want.
+This is how we can think of elements of $R$ as functions.
+\begin{example}
+    Let $R=\C[x,y]$ and let $f\in\C[x,y]$.
+    Then the evaluation at the maximal ideal $(x-a,y-b)$ corresponding to $(a,b)\in\A^2$ of $\Spec{R}$ is the image of $f$ in $\faktor{\C[x,y]}{(x-a,y-b)}$.
+    As an example, consider $f=x-y$ at the points $(x-1,y-1)$ and $(x-1,y-2)$.
+    Then at $(x-1,y-1)$, $f=(1-1)=[0]$ and at $(x-1,y-2)$ $f=(1-2)=[-1]$, which agrees with our intuition for evaluation.
+\end{example}
+
+\begin{example}
+    Let $R=\Z$ and let $f=67$.
+    Then evaluating $67$ at $(2)$ gives $[1]$.
+    The \emph{Vanishing Locus} of $V(67)$ is the set of all primes at which $67$ has value $[0]$, which is only $67$: $V(67)=(67)$.
+    $V(100)=\{(2),(5)\}$.
+\end{example}
+
+\begin{remark}
+    $\Spec{\Z}$ is a really funky place to do geometry: $\Spec{\Z}$ describes a non-singular curve (Vakil).
+\end{remark}
+
+The traditional examples of these rings are things like:
+\begin{align*}
+    &\faktor{\C[x,y]}{(y^2-x^3)}\\
+    &\faktor{\C[x,y,z]}{xy-z,zx-1}
+\end{align*}
+
+From the Nullstellensatz, we have that the maximal ideals of $\faktor{\C[x,y]}{(y^2-x^3)}$ are exactly those $(x-a,y-b)\ni (y^2-x^3)$.
+These points of the scheme are closed, and are the \emph{closed points of the scheme}.
+\begin{proof}
+    Recall that the prime ideals are the points of $\Spec{R}$ and that a maximal ideal is prime.
+    Then closed sets are `indexed' by the ideals: $V(\mathfrak{m})=\{\mathfrak{p}\mid \mathfrak{m}\subseteq\mathfrak{p}\}$.
+    Clearly, we are looking for those ideals $P$ such that $\mathfrak{m}\subseteq P\subseteq\Spec{R}$.
+    Note that $\mathfrak{m}$ is explicitly maximal, so $P$ is either $\mathfrak{m}$ or $R$.
+    But $R$ is not considered a prime ideal by our convention, so $V(\mathfrak{m})=\{\mathfrak{m}\}$.
+\end{proof}
+
+If $\mathfrak{m}$ is maximal, $\faktor{R}{\mathfrak{m}}$ is the residue field at a closed point of $\Spec{R}$.
+Quotienting by a maximal ideal of $\Spec{R}$ at a closed point gives us the base field of the scheme (over an algebraically closed field).
+
+\begin{example}
+    Let $R=\faktor{\Z}{24\Z}$. Take $f=12$.
+    The points of $\Spec{R}$ are $(2)$ and $(3)$ because we have zero divisors (so $(0)$ is not prime).
+    $f(2)=f(3)=0$. In fact, $f$ evaluated at any point of the scheme is zero, but $f\neq 0$ (is distinct from the zero function).
+\end{example}
+
+This is a genuinely new feature, and can happen in a more traditional example.
+
+\begin{example}
+    Let $R=\faktor{\C[x]}{x^3}$ and $f=x$.
+    What is the value of $f$ at the point $(x)$ (a maximal ideal of $\faktor{\C[x]}{x^3})$?
+    We want to see what the image of $f$ is in $\faktor{R}{(x)}$ (which is clearly $[0]$).
+    So evaluating $f$ at a point of $\Spec{R}$ is a lossy thing.
+\end{example}
+
+At this point, we have assigned the ring $R$ to the largest open subset of $\Spec{R}$.
+
+\subsection{Localisation}
+    We need some new algebra to continue.
+
+    Take a ring $R$, and a subset $S\subset R$ which is closed under multiplication.
+    We will return to the examples of $S=\{1,f,f^2,f^3,\dots\}$ and $S$ the complement of a prime ideal (for example, $R=\Z$ and $S=(2)$, and $R_{(S)}$ is thus the odd numbers).
+    Note that $S$ will always need to contain the unit; a short (but not satisfying) argument is that the product of zero elements must be $1$.
+    
+    We form a new ring: $S^{-1}R$ formed by equivalence classes of $(r_1,s_1)\sim(r_2,s_2)$ if there exists $s\in S$ such that $s\cdot(r_1s_2-s_1r_2)=0$.
+    Considering $S^{-1}R$ as the fractions with denominators coming from $S$ is fine when $R$ is an integral domain, but falls apart if it is not (although it is a useful notation) via the equivalence relation.
+    Using the previous definition fixes this issue.
+
+    \begin{example}[How $S^{-1}R$ breaks when $R$ not a domain]
+        We consider the equivalence relation defined by $(r_1,s_1)\sim(r_2,s_2)$ if $r_1s_2-s_1r_2=0$.
+        Assume that $R$ is not an integral domain. Then there must exist zero divisors.
+        We have that $(r_1,s_1)\sim(r_2,s_2)\implies r_1s_2=s_1r_2$, and $(r_2,s_2)\sim(r_3,s_3)\implies r_2s_3=s_2r_3$.
+        Then we want to show that $(r_1,s_1)\sim(r_3,s_3)$.
+        So we multiply through by $s_3$: $s_3r_1s_2-s_3s_1r_2=0$ and $s_1r_2s_3-s_1s_2r_3=0$.
+        Note that we now have $s_3r_1s_2-s_1s_2r_3=0$, but if $s_2$ is a zero divisor, then $r_1s_3-s_1r_3$ may not be zero but may appear that way.
+    \end{example}
+
+    We note that $R\to S^{-1}R$ as $S$ contains the unit, so $R\subseteq S^{-1}R$. This is a natural map.
+    When does $a\neq0\in R\mapsto0$ in $S^{-1}R$?
+    This happens if and only if $(a,1)\sim(0,1)$ and this occurs if and only if $\exists sa=0$, which implies that $S$ has got zero divisors.
+    This shows that the map is not always injective.
+
+    More generally, if $S$ contains no zero divisors, then the map is injective.
+    This map is very rarely surjective.
+    Finally, the it can happen that the localisation is the zero ring, which occurs if and only if $0\in S$, which occurs if and only if $S$ contains a nilpotent.
+
+    All the elements of $S$ are sent to units: the inverse of $(s,1)$ is $(1,s)$ (consider this written as a fraction).
+    This is the smallest extension of $R$ such that all elements of $S$ become units.
+
+    We now consider a universal mapping property:
+    \begin{equation*}
+        \begin{tikzcd}
+            R\ar[d]\ar[dr,"\varphi"]& \\
+            S^{-1}R\ar[r,dashed,"\exists!"]&B
+        \end{tikzcd}
+    \end{equation*}
+
+    with $\varphi$ any ring homomorphism such that images of elements of $S$ are invertible in $B$.
+
+    \subsection{Prime Ideals of Localisation}
+        What are the prime ideals of $S^{-1}R$ and how does $\Spec{R}$ relate to $\Spec{S^{-1}R}$?
+        \begin{equation*}
+            \begin{tikzcd}
+                R\ar[r,"i"]&S^{-1}R\\
+                i^{-1}(\mathfrak{p})\ar[u, phantom, sloped, "\subset"]&\mathfrak{p}\ar[u, phantom, sloped, "\subset"]
+            \end{tikzcd}
+        \end{equation*}
+        We first consider the map above, and note that $i^{-1}(\mathfrak{p})$ must be a prime ideal that does not contain an element of $S$, as elements of $S$ are sent to units in $S^{-1}R$ (by the correspondence theorem).
+        Taking a prime ideal $\mathfrak{p}\in R$, $\l i(\mathfrak{p})\r=\left\{\frac{r}{s}\mid r\in\mathfrak{p}\right\}$.
+        
+        This is a bijection.
+        Note that $\frac{f_1}{s_1}\cdot\frac{f_2}{s_2}=\frac{f}{s}$ for some $f$ and $s$.
+        \begin{proof}
+            By definition, $s^\prime sf_1f_2=s_1s_2fs^\prime$ (the equivalence relation), and is an equality in $R$.
+            The RHS is a member of $\mathfrak{p}$, which gives us that the LHS must also be a member of $\mathfrak{p}$.
+            But $s^\prime$ is not a member of $p$, which means that the other parts must be, so one of $f_1$ or $f_2$ must be in $\mathfrak{p}$
+        \end{proof}
+
+        What is $\Spec{R_f}$? (recall that $R_f=(1,f,f^2,\dots)^{-1}R$, the \emph{localisation of $R$ at $f$}).
+        So we've got that $\Spec{R_f}=\Spec{R}\setminus{V(f)}\eqqcolon D_f$ (base of the topology), noting that $V(f)$ is the set of prime ideals where $f$ vanishes.
+        So $\Spec{R_f}$ is the prime ideals of $R$ that don't contain $f$.
+
+    \subsection{Building the Structure Sheaf}
+        So we may now send $\Spec{R}\to R$ and $D_f\to R_f$ as the start of building the structure sheaf.
+        If $D_f\subset D_g$, then we need to find a map $R_g\to R_f$.
+        We need $(g)=(1)$ in $R_f$, otherwise we don't have a map.
+
+        Take $\mathfrak{p}\subset R_f$ containing $g$ and look at the preimage $\tilde{\mathfrak{p}}\subset R$ of $\mathfrak{p}$.
+        We note that $\tilde{\mathfrak{p}}$ contains $g$, but not $f$ as we're pulled back from a place where $f$ is invertible.
+
+        We now have a pre-sheaf on the distinguished open sets, and this is the natural approach here.
+
+        Recall the sheaf conditions:
+        \begin{enumerate}
+            \item If $f,g\in\mathcal{F}$ and $\{U_i\}$ is an open cover of some open $U$, then if $f\in\mathcal{F}(U_i)=g\in\mathcal{F}(U_i)$ for all $i$, then $f=g$
+            \item Given $f_i\in\mathcal{F}(U_i)$ for all $i$ such that for all $i,j$ the image of $f_i\in\mathcal{F}(U_i\cap U_j)$ equals the image of $f_j\in\mathcal{F}(U_i\cap U_j)$ then there exists $f\in\mathcal{F}(U)$ that maps to all the $f_i$.
+        \end{enumerate}
+
+        If there is no prime ideal containig both $f$ and $g$, then $\Spec{R}=D_f\cup D_g$, then there are maps $R\to R_g$ and $R\to R_f$.
+        The first condition requires for every ideal that $f\neq 0$ or $g\neq 0$, as there is no ideal with $f=0$ and $g=0$.
+        Then $f\cup g=(1)$ and $(f,g)=(1)$, so we can find some $af+bg=1$.
+
+        Take $h_1$ and $h_2$ such that they are equal on both localisations.
+        So $(h_1-h_2)\cdot g^n=0$ and $(h_1-h_2)\cdot f^m=0$. Note that the differences are killed by powers of generators.
+        We want $h_1-h_2=0$ (but not as a function that evaluates to zero, actually zero).
+        For example, consider $n\cdot 2^m=0$ implies that $n=0$ (we don't necessarily have no nilpotents, so this is an important check).
+
+        Two sections that are equal locally must be equal globally.
+        We can check that the object that we have so far satisfies the sheaf axioms (Exercise.)
+
+        We now have the structure sheaf:
+        \begin{itemize}
+            \item $\Spec{R}$ with this structure sheaf is our affine scheme
+            \item Any open set can be covered by $D_f$s as they are a basis for the topology
+            \item We need to check on double intersections
+            \item This is effectively a book-keeping exercise
+        \end{itemize}

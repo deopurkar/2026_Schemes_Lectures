@@ -2,6 +2,14 @@
 
 % AMS packages and theorem style setup
 \usepackage{amssymb, amsthm, amsmath}
+
+% Tikz
+\usepackage{tikz-cd}
+
+% Misc packages
+\usepackage{faktor}
+\usepackage{mathtools}
+
 \usepackage{hyperref}
 \usepackage{cleveref}
 \theoremstyle{definition}
@@ -18,6 +26,8 @@
     \newtheorem{proposition}{Proposition}[section]
     \newtheorem{theorem}{Theorem}[section]
 
+\newcommand{\Spec}[1][]{\ensuremath{\operatorname{Spec}#1}}
+
 % Typesetting shortcuts
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -28,11 +38,9 @@
 \newcommand{\F}{\mathbb{F}}
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\spec}{\mathrm{spec}}
+\renewcommand{\l}{\langle}
+\renewcommand{\r}{\rangle}
 
-
-
-% Tikz
-\usepackage{tikz-cd}
 
 
 \title{The Geometry of Schemes}
@@ -44,5 +52,6 @@
 \input{lecture1}
 \input{lecture2}
 \input{lecture3}
+\input{lecture4}
 
 \end{document}
