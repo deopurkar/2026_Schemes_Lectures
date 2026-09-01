@@ -16,9 +16,20 @@ One example of a locally ringed space is the space $\mathrm{Spec}R$ associated w
 \begin{proof}
     We first recognise that $V((0))$, the closed set associated with the zero ideal, is the entire space $\mathrm{Spec}R$, as every prime ideal contains the zero ideal. Similarly, $V(R)$ is the empty set, as no prime ideals can contain $R$, as then they'd be the entire space, which prime ideals are explicitly forbidden from being.
 
-    Thus, the topology is non-empty and contains the empty set and the entire space. All we have left to verify is that finite unions of $V(I)$ are closed and infinite intersections of $V(I)$ are closed. For finite unions, this is done by showing that $V(I) \cup V(J) = V(IJ)$. The forward inclusion is clear, as if $\mathfrak{p} > I$ or $\mathfrak{p} > J$, then $IJ$, which is contained in both $I$ and $J$, will surely be contained in $\mathfrak{p}$. The reverse direction is harder, but doable, and requires using the fact that any $\mathfrak{p}$ containing $IJ$ is a prime ideal. TODO
-
-    For infinite intersections, consider $\bigcap_\alpha V(I_\alpha)$. This TODO
+    Thus, the topology is non-empty and contains the empty set and the entire space. All we have left to verify is that finite unions of $V(I)$ are closed and infinite intersections of $V(I)$ are closed. For finite unions, this is done by showing that $V(I) \cup V(J) = V(IJ)$. The forward inclusion is clear, as if $\mathfrak{p} > I$ or $\mathfrak{p} > J$, then $IJ$, which is contained in both $I$ and $J$, will surely be contained in $\mathfrak{p}$.
+    
+    For the reverse direction, $V(IJ) \subseteq V(I) \cup V(J)$ we need to show that if an arbitrary $\mathfrak{p}$ contains $IJ$, then it contains $I$ or $J$. Now, if every $i \in I$ has $i \in \mathfrak{p}$, then we're done, as $\mathfrak{p} \in V(IJ)$ is contained in $V(I)$. However, if this isn't the case, there is some $i \notin \mathfrak{p}$, then consider $ij$ for every $j \in J$. This product is in $IJ$, and so it is in $\mathfrak{p}$. Now as $\mathfrak{p}$ is prime, this means that either $i$ or $j$ is in $\mathfrak{p}$. As $i \notin \mathfrak{p}$, this means that for every $j \in J$ we have $j \in \mathfrak{p}$, so $J \subseteq \mathfrak{p}$. Thus, $V(IJ) \subseteq V(I) \cup V(J)$, and with the above, $V(IJ) = V(I) \cup V(J)$.
+    
+    For infinite intersections, consider $\bigcap_\alpha V(I_\alpha)$:
+    \begin{align*}
+        \bigcap_\alpha V(I_\alpha) &= \bigcap_\alpha \{ \mathfrak{p} \in \mathrm{Spec}\,R : I_\alpha \subseteq \mathfrak{p} \} \\
+        &= \{ \mathfrak{p} \in \mathrm{Spec}\,R : \forall \alpha, I_\alpha \subseteq \mathfrak{p} \} \\
+        &= \{ \mathfrak{p} \in \mathrm{Spec}\,R : \forall \alpha, \forall x \in  I_\alpha, x \in \mathfrak{p} \} \\
+        &= \left\{ \mathfrak{p} \in \mathrm{Spec}\,R : \sum_i  x_i \in \mathfrak{p}, x_i \in I_i \right\} \\
+        &= \left\{ \mathfrak{p} \in \mathrm{Spec}\,R : \sum_\alpha I_\alpha \subseteq \mathfrak{p} \right\} \\
+        &= V\left(\sum_\alpha I_\alpha\right)
+    \end{align*}
+    The first line is by definition, the second moves the intersection inside the set definition. The third line unfolds the definition of a subset, and the fourth either adds terms of an ideal together, or takes only a single sum if going in the opposite direction. The fifth line is the definition of the sum of ideals, and the final is by definition again.
 \end{proof}
 To help understand the topologies of these spectra, we shall investigate a few examples. But first, a proposition that helps describes their topologies:
 \begin{proposition}

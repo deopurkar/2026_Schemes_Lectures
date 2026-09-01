@@ -1,0 +1,41 @@
+\newpage
+
+\stepcounter{section}
+\section*{Lecture 10: Morphisms to and from Projective Space}
+Recall that we defined projective space \(\mathbf{P}^n\) such that the \(k\)-points of \(\mathbf{P}^n\) are 1-dimensional subspaces of \(k^{n+1}\), which we write as \([a_0:a_1:\cdots:a_{n+1}]\). Let us begin by constructing a map from \(\mathbf{P}^1_k\) to \(\mathbf{P}^2_k\) which, on $k$-points, sends \([a:b]\) to \([a^2:ab:b^2]\). We state without proof the following proposition, which will be very useful in this construction:
+\begin{proposition}\label{prop:morphisms-form-a-sheaf}
+If \(\{U_i\}\) is an open cover of a locally ringed space \(X\), and \(f_i:U_i\to Y\) are morphisms of locally ringed spaces such that \(f_i = f_j\) as functions from \(U_i\cap U_j\) to \(Y\), then there exists a morphism of locally ringed spaces \(f:X\to Y\). 
+\end{proposition}
+Now recall that \(\mathbf{P}^1_k=  \mathrm{Spec}(k[s])\cup \mathrm{Spec}(k[t])\), so we need maps from \(k[s]\) and \(k[t]\) to \(\mathbf{P}^2_k\). 
+
+First, it suits us to rephrase our cover of \(\mathbf{P}^1_k\). Note that for any \(n\), we may take the cover of \(\mathbf{P}^n_k\) given by \(U_n = \mathrm{Spec}(k[\frac{x_0}{x_n},\frac{x_1}{x_n},\cdots,\frac{x_{n-1}}{x_n}])\) and so on, because the intersection \(U_{n-1}\cap U_n\) becomes 
+\[U_{n-1}\cap U_n = \mathrm{Spec}\left(k\left[\frac{x_0}{x_n},\cdots,\frac{x_{n-1}}{x_n}\right]_{\frac{x_{n-1}}{x_n}}\right)\]
+\[U_{n-1}\cap U_n = \mathrm{Spec}\left(k\left[\frac{x_0}{x_{n-1}},\cdots,\frac{x_{n}}{x_{n-1}}\right]_{\frac{x_n}{x_{n-1}}}\right)\]
+These two rings are now exactly the same subring of \(k[x_0,\cdots,x_n]_{x_{n-1},x_n}\), so the gluing maps are now the identity. 
+
+Returning to our map from \(\mathbf{P}^1_k\) to \(\mathbf{P}^2_k\) sending the \(k\)-points \([a:b]\) to \([a^2:ab:b^2]\), we use now the covers \(\mathbf{P}^1 = \mathrm{Spec}(k[\frac{a}{b}])\cup \mathrm{Spec}(k[\frac b a])\) and \(\mathbf{P}^2 = \mathrm{Spec}(k[\frac u w, \frac v w ])\cup \mathrm{Spec}(k[\frac u v,\frac w v])\cup \mathrm{Spec}(k[\frac v u, \frac w u])\). 
+
+We finally define the map \(\mathrm{Spec}(k[\frac a b])\to \mathrm{Spec}(k[\frac u w,\frac v w])\) corresponding to the ring homomorphism with \(\frac u w \mapsto (\frac a b)^2\) and \(\frac v w\mapsto \frac a b\), and the map \(\mathrm{Spec}(k[\frac b a])\to \mathrm{Spec}(k[\frac v u,\frac w u])\) corresponding to the ring homomorphism with \(\frac v u \mapsto \frac b a\) and \(\frac w u \mapsto (\frac b a )^2\). On the overlaps, we have maps \(\mathrm{Spec}(k[\frac a b]_{\frac a b})\to \mathrm{Spec}(k[\frac u w,\frac v w]_{\frac u w})\) and \(\mathrm{Spec}(k[\frac b a ]_{\frac b a})\to \mathrm{Spec}(k[\frac v u, \frac w u]_{\frac w u})\) which are compatible with the gluing maps by our choices above. 
+
+This defines our map \(i:\mathbf{P}^1_k\to \mathbf{P}^2_k\). We would like to check that \(i\) is a closed embedding; to do so, it suffices to check on a cover. For example, on the open set \(\mathrm{Spec}(k[\frac b a]) = U_0\), which is \(i^{-1}(V_0)\) for \(V_0 = \mathrm{Spec}(k[\frac w u, \frac v u])\), we see that \(i:\mathrm{Spec}(k[\frac b a])\to \mathrm{Spec}(k[\frac w u,\frac v u])\) arises from a surjective map of rings \(k[\frac w u,\frac v u]\to k[\frac b a]\), so \(U_0\cong \mathrm{Spec}(V_0/I)\): we have a closed embedding locally here (and similarly everywhere else). 
+
+One can also obtain similar maps such as \(\mathbf{P}^1_k \to \mathbf{P}^3_k\) with \([a:b]\mapsto [a^3:a^2b:ab^2:b^3]\) and \(\mathbf{P}^2_k\to \mathbf{P}^5_k\) with \([x:y:z]\mapsto[x^2:xy:y^2:xz:z^2:yz]\). These are called Veronese embeddings, after Giuseppe Veronese (1854-1917). 
+
+
+Now, what if we wanted a map with \([a:b]\mapsto[a+b:a-b]\)? We quickly see that the covers do not match as pleasantly as they did before. It would be much more useful to have a general idea of maps from any scheme \(X\) to \(\mathbf{P}^n\) as we did for affine schemes, where for affine \(Y\), maps \(X\to Y\) correspond to ``solving equations in \(\mathcal{O}_X(X)\)''. 
+
+Consider \(\mathbf{P}^n_\mathbf{Z}\). A map \(\mathrm{Spec} (k)\to \mathbf{P}^n\) is a 1-dimensional subspace of \(k^{n+1}\). Could we likewise consider maps \(\mathrm{Spec}(R)\to \mathbf{P}^n\) as ``1-dimensional'' submodules of \(R^{n+1}\)? We will need the following:
+\begin{definition}
+For any locally ringed space \((X,\mathcal{O}_X)\), an \(\mathcal{O}_X\)-module \(\mathcal{M}\) is a sheaf of abelian groups with a multiplication \(\mathcal{O}_X(U)\times \mathcal{M}(U)\to \mathcal{M}(U)\) compatible with the sheaf restrictions.
+\end{definition}
+Just as a module in the traditional sense is free, we define what it means for an \(\mathcal{O}_X\)-module to be locally free:
+\begin{definition}
+If \((X,\mathcal{O}_X)\) a locally ringed space, \(\mathcal{M}\) an \(\mathcal{O}_X\)-module, we say \(\mathcal{M}\) is locally free of rank \(r\) if there exists a cover \(\{U_i\}\) of \(X\) such that \(\mathcal{M}|_{U_i} \cong \mathcal{O}_{U_i}^{\oplus r}\). 
+\end{definition}
+This allows us to classify morphisms from \(X\to \mathbf{P}^n\) with the following theorem (to be proven later?).
+\begin{theorem}
+    A morphism from \(X\) to \(\mathbf{P}^n\) is precisely a locally free \(\mathcal{O}_X\)-module of rank 1, \(\mathcal{L}\), and a locally split injection of \(\mathcal{O}_X\)-modules \(\mathcal{L}\to\mathcal{O}^{n+1}_X\). 
+\end{theorem}
+\begin{definition}
+A split injection \(f:X\to Y\) is one with another morphism \(g:Y\to X\) such that \(g\circ f\) is the identity on \(X\).
+\end{definition}
