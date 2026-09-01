@@ -1,0 +1,229 @@
+\documentclass[a4,12pt]{article}
+
+%\usepackage{amsmath}
+\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{amscd}
+%\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{units}
+%\usepackage{graphicx}
+%\usepackage{cancel}
+\usepackage{tikz-cd}
+\usepackage{xcolor}
+
+%\usepackage[style=numeric]{biblatex}
+%\addbibresource{}
+
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+    \newtheorem{example}{Example}[section]
+    \newtheorem{nonexample}{Non-Example}[section]
+
+    \newtheorem{definition}{Definition}[section]
+
+
+\theoremstyle{remark}
+    \newtheorem{remark}{Remark}[section]
+
+\theoremstyle{plain}
+    \newtheorem{proposition}{Proposition}[section]
+    \newtheorem{theorem}{Theorem}[section]
+	\newtheorem{lemma}{Lemma}[section]
+	\newtheorem{conjecture}{Conjecture}[section]
+	\newtheorem{corollary}{Corollary}[section]
+
+\numberwithin{equation}{section}
+
+\setlength{\parskip}{4pt}
+\allowdisplaybreaks[1]
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\RP}{\mathbb{RP}}
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\Spec}{\textnormal{Spec}\,}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} %Partial Derivative
+\newcommand{\2}[4]{\begin{bmatrix}#1 & #2 \\ #3 & #4 \end{bmatrix}} %2x2 matrix w/ square brackets
+\newcommand{\3}[9]{\begin{bmatrix}#1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}} %3x3 matrix w/ square brackets
+\newcommand{\bv}[1]{\mathbf{#1}}
+
+\begin{document}
+
+\section{Two results about non-vanishing sections on a ringed space}
+
+We begin with two lemmas, which will make essential use of the sheaf conditions. Recall for a locally ringed space $(X,\mathcal{O}_X)$ and $f \in \mathcal{O}_X(X)$,  the \textit{evaluation of $f$ at $x$} is the image of $f$ under the map $\mathcal{O}_X \to \nicefrac{\mathcal{O}_{X,x}}{\mathfrak{m}_x}$. We denote $f(x)$ as this evaluation.
+
+\begin{theorem}
+If $f(x) \ne 0$ for all $x \in X$, then $f \in \mathcal{O}_X(X)$ is a unit. 
+\end{theorem}
+
+\begin{proof}
+  Because $f(x) \in \nicefrac{\mathcal{O}_{X,x}}{\mathfrak{m}_x}$ is non-zero, \(f \in \mathcal{O}_{X,x}\) does not lie in \(\mathfrak m_x\).
+  Since \(\mathcal{O}_{X,x}\) is local, every element in the complement of the maximal ideal \(\mathfrak m_x\) is a unit.
+  So there exists \(g_x \in \mathcal{O}_{X,x}\) such that \(f \cdot g_x = 1\) in \(\mathcal{O}_{X,x}\).
+  This is to say that there is some function $g_x$ defined on an open neighbourhood $U_x$ of $x$ for which $f(x)g_x = 1$ on \(U_x\). Then we have an open cover $\{U_x\}_{x \in X}$ of $X$ and a multiplicative inverse \(g_x\) of \(f\) on each \(U_x\).
+
+  We now use the sheaf axioms to prove that the \(g_x\) glue to give a global section \(g\).
+  To do that, we consider the diagram
+\begin{equation}
+\begin{tikzcd}
+& \mathcal{O}_X(X) \arrow[dl] \arrow[dr] &\\
+g_x \in \mathcal{O}_X(U_x) \arrow[dr]&  & \mathcal{O}_X(U_y) \owns g_y\arrow[dl]\\
+& \mathcal{O}_X(U_x \cap U_y)&
+\end{tikzcd}
+\end{equation}
+
+Both $g_x|_{U_{x} \cap U_{y}}$ and $g_y|_{U_{x} \cap U_{y}}$ are inverses of $f|_{U_{x} \cap U_{y}} \in \mathcal{O}_X(U_x \cap U_y)$.
+In any ring,  multiplicative inverses are unique, so $g_x|_{U_{x} \cap U_{y}} = g_y|_{U_{x} \cap U_{y}}$. 
+By the sheaf axioms, the $g_x$s glue together to give a global $g$ which satisfies $fg = 1$ in $\mathcal{O}_X(X)$.
+\end{proof}
+
+\begin{theorem}
+The set $Y = \{x \in X \, | \, f(x) \ne 0\} \subseteq X$ is open.
+\end{theorem}
+
+\begin{proof}
+In the proof of Theorem 1.1, we found a local inverse $g_x$ of $f$ defined in some open neighbourhood $U_x$ of $x$ so long as $f(x) \ne 0$. But then $f$ is non-zero in this entire neighbourhood, so $U_x \subseteq Y$.
+\end{proof}
+
+\section{Morphisms of Locally Ringed Spaces}
+
+Having defined locally ringed spaces, we now turn our attention to maps between them. As it turns out, by asking a few common-sense things of our morphisms, we will find that in the case when our locally ringed spaces are both spectra, the morphisms of locally ringed spaces are exactly in bijection with the ring homomorphisms on the underlying rings.
+
+Let us consider what we will require from a map $(X,\mathcal{O}_X)$ to $(Y,\mathcal{O}_Y)$.
+As both spaces have $X$ and $Y$ as underlying topological spaces, we will require a continuous map $\phi : X \to Y$. This does not uniquely define the sheaf data (e.g. from Assignment 1 in a ring $R$ containing nilpotent elements, evaluating $f$ at every point of $\Spec R$ does not uniquely determine $f$), so we will also require some way of comparing the sheaves on $X$ and $Y$. This is not possible a priori, as $\mathcal{O}_X$ and $\mathcal{O}_Y$ are sheaves of rings on distinct topological spaces. Nonetheless, we can compare the sheaves of rings by making use of the \textit{pushforward}. 
+
+\begin{definition}
+Given two topological spaces $X$ and $Y$, a continuous map {$\phi : X \to Y$} and a sheaf of rings $\mathcal{F}$ defined on $X$, the pushforward $\phi_\ast\mathcal{F}$ is a sheaf of rings on $Y$ defined by
+\begin{equation}
+(\phi_\ast\mathcal{F})(U) 	:= 	\mathcal{F}(\phi^{-1}U)
+\end{equation}
+for all open sets $U$ in $Y$.
+\end{definition}
+
+A map from \((X, \mathcal{O}_X)\) to \((Y, \mathcal{O}_Y)\) will consist of a continuous map \(\phi \colon X \to Y\) together with a morphism of sheaves of rings $\phi^\# : \mathcal{O}_Y \to \phi_\ast\mathcal{O}_X$.
+We will require \(\phi^{\#}\) to satisfy an additional condition.
+Roughly speaking, we will require \(\phi^{\#}\) to be compatible with evaluation maps.
+We now make this precise.
+
+For any continuous map \(\phi \colon X \to Y\) and any sheaf \(\mathcal{F}\) on \(X\), we have a natural map
+\[ (\phi_{*} \mathcal{F})_{\phi(x)} \to \mathcal{F}_x.\]
+This map sends an element of \(\phi_{*} \mathcal{F})_{\phi(x)}\) represented by a section \(s \in \phi_{*} \mathcal{F} (U)\) to the same section \(s \in \mathcal{F}(\phi^{-1}(U))\).
+In particular, we have a map
+\begin{equation}
+(\phi_\ast \mathcal{O}_X)_{\phi(x)}  	\to 	\mathcal{O}_{X,x}. \label{FirstStalkMap}
+\end{equation}
+Composing this with the map $\phi^\#$ produces a ring homomorphism on stalks
+\[\phi_x^\# : \mathcal{O}_{Y,\phi(x)} \to \mathcal{O}_{X,x}.\] 
+
+The map \(\phi_x^{\#}\) allows us to compare the evaluation of \(f \in \mathcal{O}_{Y, \phi(x)}\) at \(\phi(x)\) with the evaluation of \(f^{\#} := \phi_x^{\#}(f)\) at \(x\).
+This cannot be achieved in its entirety --- the evaluation of \(f\) lies in the field \(\mathcal{O}_{Y, \phi(x)}/ \mathfrak m_{\phi (x)}\) and the evaluation of \(f^{\#}\) lies in \(\mathcal{O}_{Y, \phi(x)}/ \mathfrak m_x\), and a priori there is no map between these quotient rings.
+But it is possible to transfer the data that the respective functions evaluate to \(0\).
+We require that \(f^{\#}(x) = 0\) if and only if \(f(\phi(x)) = 0\).
+This condition motivates the following.
+\begin{definition}
+  Let \(R\) and \(S\) be local rings with maximal ideals \(\mathfrak{m}_R\) and \(\mathfrak{m}_{S}\).
+A \emph{local ring homomorphism} is a ring homomorphism $f: R \to S$ for which $f^{-1}(\mathfrak{m}_S) = \mathfrak{m}_R$.
+\end{definition}
+
+Combining what we've done, we can now define a morphism of locally ringed spaces.
+
+\begin{definition}
+A morphism of locally ringed spaces $(X,\mathcal{O}_X) \to (Y,\mathcal{O}_Y)$, consists of the following:
+\begin{enumerate}
+\item a continuous map $\phi : X \to Y$, and
+\item a morphism of sheaves $\phi^\# : \mathcal{O}_Y \to \phi_\ast\mathcal{O}_X$, where
+\item for all $x \in X$, the induced map on stalks $\phi_x^\# : \mathcal{O}_{Y,\phi(x)} \to \mathcal{O}_{X,x}$ is a local homomorphism of local rings.
+\end{enumerate}
+\end{definition}
+
+\begin{example}\label{Good Q to Z}
+We will now construct a morphism of locally ringed spaces $(\Spec \Q, \mathcal{O}_{\Spec\Q}) \to (\Spec\Z, \mathcal{O}_{\Spec\Z})$ by providing the required maps.
+\end{example}
+Our continuous map $\phi : \Spec\Q \to \Spec\Z$ will be the map defined by sending the zero ideal of $\Q$ to the zero ideal of $\Z$. To determine our pushforward sheaf $\phi_\ast \mathcal{O}_{\Spec\Q}$, because every non-empty open set $U$ contains the zero ideal, we have
+\begin{align*}
+(\phi_\ast \mathcal{O}_{\Spec\Q})\left(U\right)
+&= 	
+\mathcal{O}_{\Spec\Q}\Big((0)\Big)\\
+&= \Q.
+\end{align*}
+Then, writing the open sets as $U = D(p_1 \cdots p_n)$ we get
+\begin{equation}
+\mathcal{O}_{\Spec\Z}(U) = \Z[1/p_1 \cdots p_n].
+\end{equation}
+
+So let $\phi^\# : \mathcal{O}_{\Spec\Z} \to \phi_\ast\mathcal{O}_{\Spec\Q}$ be the inclusion map $\Z[1/p_1\cdots p_n] \xhookrightarrow{} \Q$ for each $U$.
+
+Finally, let us check the last condition.
+There is only one point to check, namely the zero ideal of \(\mathbb{Q}\).
+At this point, we have
+\[\phi_0^\# : \mathcal{O}_{\Spec\Z, (0)} \to \mathcal{O}_{\Spec\Q, (0)}\] and because
+\begin{align*}
+\mathcal{O}_{\Spec\Z, (0)} 	&= 	\Z_{(0)} = \Q, \text{ and }\\
+\mathcal{O}_{\Spec\Q, (0)} 	&= 	\Q_{(0)} = \Q,
+\end{align*}
+the induced map is the identity map, which is a local homomorphism.
+
+\begin{nonexample} \label{Bad Q to Z}
+We will consider a continuous map from $\phi : \Spec\Q \to \Spec\Z$ and a morphism of sheaves for which the induced homomorphism on stalks is not a local homomorphism.
+
+Consider the continuous map $\phi : \Spec\Q \to \Spec\Z$ defined by sending the zero ideal to $(p)$ for some (non-zero) prime $p \in \Z$. Again, let $U = D(1/p_1\dots p_n)$, then
+\begin{equation}
+(\phi_\ast\mathcal{O}_{\Spec\Q}) (U) 	= 	\begin{cases}
+\{0\} 	&\text{if } p = p_i,\\
+\Q &\text{otherwise},
+\end{cases}
+\end{equation}
+and as before $O_{\Spec\Z}(\textnormal{Spec}\Z[1/p_1\cdots p_n]) = \Z[1/p_1\cdots p_n]$. We define $\phi^\#$ as either inclusion into $\Q$ or the unique map to the zero ring as appropriate, and we check this is a map of sheaf of rings by checking the diagram
+\begin{equation}
+\begin{tikzcd}
+\Z\left[\frac{1}{p_1 \cdots p_n}\right] 	\arrow[r, hook] \arrow[d]
+& \Q \arrow[d] \\
+\Z\left[\frac{1}{p p_1 \cdots p_n}\right] \arrow[r, two heads] & \{0\}.
+\end{tikzcd},
+\end{equation}
+This diagram obviously commutes because the homomorphism into the zero ring is unique. 
+
+When we consider the induced map on stalks however, we find that
+\begin{equation}
+\mathcal{O}_{\Spec\Z,(p)} 
+=
+\Z_{(p)}
+=
+\left\{ \frac{m}{n} \, \Big| \, m,n \in \Z, p \!\not| \,m \right\}
+\end{equation}
+and again $\mathcal{O}_{\Spec\Q, (0)} = \Q$, so the induced map on stalks is inclusion $\Z_{(p)} \xhookrightarrow{} \Q$. But this is not a local homomorphism, as the preimage of the zero ideal in $\Q$ is not the ideal $(p)$ in $\Z_{(p)}$. In the context of our motivating remarks, we our induced map on stalks has destroyed the information that $p$ evaluates to 0 in $\nicefrac{\mathcal{O}_{\Spec\Z,(p)}}{\mathfrak{m}_p} = \nicefrac{\Z}{17}$.
+\end{nonexample}
+
+\begin{remark}
+Example \ref{Good Q to Z} and Non-example \ref{Bad Q to Z} together show that there is a unique morphism of locally ringed spaces $(\Spec\Q, \mathcal{O}_{\Spec\Q}) \to (\Spec\Z, \mathcal{O}_{\Spec\Z})$, which in fact could be induced by the unique map $\Z \to \Q$. This is an example of a bigger theorem given below.
+\end{remark}
+
+\section{Maps of rings induce maps of spectra}
+Let \(R\) and \(S\) be rings and \(f \colon R \to S\) a ring homomorphism.
+We explain how \(f\) induces a map of locally ringed spaces
+\[ \phi = \phi_{f} \colon \Spec S \to \Spec R.\] 
+The map of topological spaces is defined by
+\begin{equation}
+ \phi \colon \mathfrak{p} \mapsto f^{-1}(\mathfrak{p})
+\end{equation}
+To define the map of sheaves
+\[ \mathcal{O}_{\Spec R} \to \phi_{*} \mathcal{O}_{\Spec S},\]
+it is enough to define it on basic open sets.
+Consider the basic open \(D_a \subset \Spec R\).
+It is easy to check that its pre-image in \(\Spec S\) is \(D_{f(a)}\).
+Now, we have
+\[ \mathcal{O}_{\Spec R} (D_{r}) = R_a \text{ and } \phi_{*} \mathcal{O}_{\Spec S} (D_a) =  \mathcal{O}_{\Spec S}(D_{f(a)}) = S_{f(a)}.\]
+Since \(f \colon R \to S\) sends \(a \in R\) to a unit \(f(a) \in S_{f(a)}\), it induces a unique homomorphism
+\[ R_a \to S_{f(a)}.\]
+This gives the required map on sheaves of rings.
+It can be checked that this is a local homomorphism on stalks.
+\end{document}
