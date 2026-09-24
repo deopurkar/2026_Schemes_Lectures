@@ -1,0 +1,95 @@
+\stepcounter{section}
+\section*{Lecture 9: Closed Subschemes after a bit of Sheaf Theory}
+Notes by Yuki Ishihara.
+
+Given an abelian group \(G\) and a subgroup \(N \subset G\), we can construct the quotient group \(G/N\). This motivates us to wonder if we can construct the quotient sheaf of abelian groups.  So let $X$ be a topological space, $\mathcal{F}$ a sheaf on $X$ and $\mathcal{G} \subset \mathcal{F}$ a subsheaf of abelian groups. One approach to construct $\mathcal{F}/\mathcal{G}$ is to send the open set $U \to \mathcal{F}(U)/\mathcal{G}(U) =: \mathcal{F}/\mathcal{G}(U)$.  This is a good candidate for the quotient and is a good presheaf however is not a sheaf in general. The following example illustrates how the gluing axiom can fail.
+\begin{example}
+    $X = \mathbb{P}_\C^1, \mathcal{F} = \mathcal{O}_X$ and $G \subset \mathcal{O}_X$ subsheaf consisting of sections that evaluate to 0 at 0 and $\infty$. Or:
+    $$\mathcal{G}(U) = \left\{f \in \mathcal{O}_X : f(0) = 0 \text{ if } 0 \in U \text{ and } f(\infty) = 0 \text{ if } \infty \in U\right\}$$
+    We consider the points $0 = [0 : 1] \in \mathbb{P}_\C^1$ and $\infty = [1 : 0] \in \mathbb{P}_\C^1$ and the open set $U = \mathbb{P}^1_\C$. Let $U_1 = U\backslash \{\infty\}$ and $U_2 = U \backslash \{0\}$ an open covering of $U$. \smallskip \\
+    On $U$ we have $\mathcal{O}_X(U) = \C$ the constant functions and $\mathcal{G}(U) = \{0\}$ ie. the only constant map that evaluates to 0 at 0 and $\infty$ is the zero map. So $\mathcal{O}_X/\mathcal{G}(U) = \C$ \smallskip \\
+    On $U_1 = \spec\C[x]$ we have $\mathcal{O}_X(U_1) = \C[x]$ and $\mathcal{G}(U_1) = x\C[x]$. So $\mathcal{O}_X/\mathcal{G}(U_1) = \C$. \smallskip \\
+    On $U_2 = \spec\text{ }\C[x^{-1}]$ we have $\mathcal{O}_X(U_2) = \C[x^{-1}]$ and $\mathcal{G}(U_2) = x^{-1}\C[x^{-1}]$. So $\mathcal{O}_X/\mathcal{G}(U_2) = \C$ \smallskip \\
+    On the intersection $U_1 \cap U_2 = \mathbb{P}^1_\C$ we have $\mathcal{O}_X(U_1 \cap U_2) = \C[x, x^{-1}]$ and $\mathcal{G}(U_1 \cap U_2) = \C[x, x^{-1}]$. So $\mathcal{O}_X/\mathcal{G}(U_1 \cap U_2) = 0$. \smallskip \\
+    Now take $1 \in \mathcal{O}_X/\mathcal{G}(U_1)$ and $2 \in \mathcal{O}_X/\mathcal{G}(U_2)$. These both restrict to 0 on the intersection trivially. The gluing axiom requires us to find a global section represented by a complex number $f = c$ that restricts to $1$ and $2$ on $U_1$ and $U_2$ respectively. However the restrictions $f|_{U_1} = c$ and $f|_{U_2} = c$ are just the inclusion map and since $1 \neq 2$ there cannot exist such an $f$.
+\end{example}
+To overcome this issue we use a tool known as sheafification. This follows from the following theorem.
+\begin{theorem} (Sheafification) Given a presheaf $\mathcal{P}$ on $X$ there exists a sheaf $\tilde{\mathcal{P}}$ (called the sheafification of $\mathcal{P}$) on $X$ and a map $p : \mathcal{P} \to \tilde{\mathcal{P}}$ such that:
+\begin{enumerate}
+    \item For any sheaf $\mathcal{Q}$ on $X$ and a map $q : \mathcal{P} \to \mathcal{Q}$ there is a unique map $\tilde{q} : \tilde{\mathcal{P}} \to \mathcal{Q}$ such that the following diagram commutes
+        \[\begin{tikzcd}
+	{\mathcal{P}} && {\tilde{\mathcal{P}}} \\
+	\\
+	&& {\mathcal{Q}}
+	\arrow["p", from=1-1, to=1-3]
+	\arrow["q"', from=1-1, to=3-3]
+	\arrow["{\tilde{q}}", from=1-3, to=3-3]
+\end{tikzcd}\]
+\item For any $x \in X$, the map \(\mathcal{P} \to \tilde{\mathcal{P}}\) induces an isomorphism on stalks $\mathcal{P}_x \cong \tilde{\mathcal{P}}_x$.
+\end{enumerate}
+\end{theorem}
+\newpage 
+Considering this we can define:
+$$\mathcal{F}/\mathcal{G} := \text{Sheafification of } (U \mapsto \mathcal{F}/\mathcal{G}(U))$$
+as the quotient sheaf of abelian groups. It comes along with the following universal property:
+\[\begin{tikzcd}
+	{\mathcal{G}} && {\mathcal{F}/\mathcal{G}} \\
+	& {\mathcal{F}} \\
+	& {\mathcal{Q}}
+	\arrow["0", from=1-1, to=1-3]
+	\arrow["i", from=1-1, to=2-2]
+	\arrow["0"', from=1-1, to=3-2]
+	\arrow["{\exists!}", from=1-3, to=3-2]
+	\arrow["\pi", from=2-2, to=1-3]
+	\arrow["q"', from=2-2, to=3-2]
+\end{tikzcd}\]
+where $i$ is the inclusion map and $\pi$ is the canonical quotient map.
+That is, given a sheaf \(\mathcal{Q}\) and a map \(\mathcal{F} \to \mathcal{Q}\) such that the composite \(\mathcal{G} \to \mathcal{Q}\) is zero, there exists a unique map \(\mathcal{F}/ \mathcal{G} \to \mathcal{Q}\) as in the diagram above.
+
+Motivated by group theory we now aim to reproduce the first isomorphism theorem in terms of sheaves. In order to do this we first need to know the following definitions.
+\begin{definition} The following are definitions on maps $\mathcal{F} \to \mathcal{Q}$ between sheaves of abelian groups. 
+\begin{itemize}
+    \item (Surjectivity) The map $\mathcal{F} \to \mathcal{Q}$ is surjective is it is surjective on all stalks. 
+    \item (Kernel) The kernel sheaf $\mathcal{K}$ of the map $\mathcal{F} \to \mathcal{Q}$ is the sheaf $\mathcal{K}(U) = \ker(\phi_U)$ where $\phi_U : \mathcal{F}(U) \to \mathcal{Q}(U)$ is the induced map. 
+\end{itemize}
+\end{definition}
+\begin{example}
+    The quotient map $\mathcal{F} \to \mathcal{F}/\mathcal{G}$ is surjective sending the stalk $\mathcal{F}_x \mapsto \left[\mathcal{F}_x\right]$. 
+\end{example}
+We then get the first isomorphism equivalent for sheaves. 
+\begin{corollary} (First Isomorphism Theorem)
+    If $\mathcal{F} \to \mathcal{Q}$ surjective and $\mathcal{K}$ the kernel sheaf then $\mathcal{F}/\mathcal{K} \to \mathcal{Q}$ is an isomorphism of sheaves. 
+\end{corollary}
+\begin{exercise}
+    Any map on sheaves that is an isomorphism on the stalks is an isomorphism
+\end{exercise}
+Caution: $\mathcal{F} \to \mathcal{Q}$ surjection of sheaves does not mean $\mathcal{F}(U) \to \mathcal{Q}(U)$ is a surjection for an open set $U$. 
+\begin{nonexample}
+    $X = \mathbb{P}^1, \mathcal{F} = \mathcal{O}_X$ and $I \subset \mathcal{O}_X$ the subsheaf consisting of sections vanishing at $0$ and $\infty$ then $\mathcal{O}_X \twoheadrightarrow \mathcal{O}_{X/I}$ but $$\C = \mathcal{O}_X(X) \to \mathcal{O}_{X/I}(X) = \C^2$$ is not surjective. 
+\end{nonexample}
+We now look towards closed embeddings and closed subschemes. Let $X = \spec A$ be an affine scheme and $Y$ a scheme with $i : Y \to X$ a morphism. The following theorem illustrates the main idea given without proof. 
+\begin{theorem}
+    There exists an ideal $I \lhd A$ with $Y \cong \spec(A/I)$ if and only if the following three conditions hold:
+    \begin{enumerate}
+        \item The image $i(Y) \subset X$ is closed
+        \item $i : Y \to i(Y)$ is a homeomorphism
+        \item $i^\sharp : \mathcal{O}_X \to i_*\mathcal{O}_Y$ is surjective
+    \end{enumerate}
+    In such a case we call $Y$ a closed subscheme of $X$ and $i$ a closed embedding.
+\end{theorem}
+So in general $i : Y \to X$ is a closed embedding if it is topologically (1 \& 2) and if $i^\sharp$ is surjective (3). The following are two non-examples of this idea. The first not fulfilling (2) and the second not fulfilling (3). 
+\begin{nonexample}
+    We consider the map $\A^1 \sqcup \A^1 \to \A^2$ where $t$ from the first $\A^1$ gets sent to $(t, 0)$ and $s$ from the second gets sent to $(s, 0)$. This map is not a homeomorphism onto its image as the origin of both $\A^1$ are sent to the origin of $\A^2$ and hence not injective. 
+\end{nonexample}
+\begin{nonexample}
+    (A better non-example) We consider the map $i : \A^1_\C \to \A^2_\C$ where $a \mapsto (a^2, a^3)$. On the level of rings this is equivalent to the map $\C[x, y] \to \C[t]$ where $x \mapsto t^2$ and $y \mapsto t^3$. In this case the image of $i$ is closed and the the map from $\A^1_\C$ to its image is a homeomorphism. Now lets look at the map $i^\sharp : \mathcal{O}_{\A^2_\C} \to i_*\mathcal{O}_{\A^1_\C}$. On the level of stalks, this gives us the map $\C[x, y]_{(x, y)} \to \C[t]_{(t)}$ where $x \mapsto t^2$ and $y \mapsto t^3$. On this stalk however the map is not surjective as $t$ is not in the image. 
+\end{nonexample}
+We finish of this segment of the notes with the following equivalence stated without proof. 
+\begin{proposition}
+    TFAE
+    \begin{enumerate}
+        \item $i : Y \to X$ is a closed embedding
+        \item For some open cover $\{U_i\}$ of $X$ we have that $i^{-1}(U_i) \to U_i$ are all closed embeddings
+        \item For every open cover $\{U_i\}$ of $X$ we have that $i^{-1}(U_i) \to U_i$ are all closed embeddings
+    \end{enumerate}
+\end{proposition}
