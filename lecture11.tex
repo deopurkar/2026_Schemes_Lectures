@@ -1,0 +1,149 @@
+\stepcounter{section}
+\newpage	
+\section*{Lecture 11: Morphisms to Projective Space and Picard Group}
+
+% Date: 1st September
+% Note: ``Lecture 12'' (3rd September) was replaced with midsemester exam.
+
+Previously, we have described scheme morphisms $X \to \P^n_k$, where projective space is taken over a field $k$. We also briefly saw what morphisms $X \to {\P_\Z^n}$ might look like. In this lecture we will explore this idea further, and see how it can extend to morphisms $X \to Y$ for any scheme $Y$. For this lecture, we use the shorthand $\P^n = \P_\Z^n$.
+
+First, recall the case when $X = \spec \; k$. Then a morphism $X \to \P^n$ is the same as the following data:
+\begin{enumerate}
+	\item A 1-dimensional $k$-vector space $\mathcal{L}$, where $\mathcal{L}$ stands for `line', and
+	\item An injection $\mathcal{L} \hookrightarrow k^{n+1}$.
+\end{enumerate}
+
+To generalise different $X$, we need to consider how these requirements can be formulated for objects which are not as nice as vector spaces and fields. The construction that works is:
+\textcolor{red}{This was given in lecture 10, but I want to have it rewritten here for reference with extra comments, how best to do that? Also, seems like $\mathcal{O}_X$-module is shorthand for sheaf of such modules, should we clarify this?}
+\begin{theorem}
+	A morphism of schemes $X \to \P^n$ is the same as the following data:
+	\begin{enumerate}
+		\item An $\mathcal{O}_X$-module $\mathcal{L}$ which is locally free of rank 1, where $\mathcal{L}$ stands for `line bundle', and
+		\item A locally split injection $\mathcal{L} \hookrightarrow \mathcal{O}_X^{n+1} = \bigoplus^{n+1} \mathcal{O}_X$
+	\end{enumerate}
+\end{theorem}
+
+First, we should ask what a locally free, rank 1 $\mathcal{O}_X$-module actually looks like for a given scheme $X$. In fact, the set of such modules has a nice group structure called the Picard group.
+
+\begin{definition}[Picard group]
+	Given a scheme $X$, its \emph{Picard group} is denoted $\operatorname{Pic}(X)$, and is defined as the isomorphism classes:
+	\begin{align*}
+		\operatorname{Pic}(X) := \{ \mathcal{L} \; \vert \;  \text{$\mathcal{L}$ is a locally free, rank 1 $\mathcal{O}_X$-module.}  \}
+	\end{align*}
+	with multiplication given by the tensor product $\otimes$ of modules; the identity being the globally free module $\mathcal{O}_X$; and the inverse being the dual module $\mathcal{L}^* = \hom_{\mathcal{O}_X} (\mathcal{L}, \mathcal{O}_X)$, which satisfies $\mathcal{L} \otimes \mathcal{L}^* \cong \mathcal{O}_X$ in analogy to the vector space identity $V \otimes V^* \cong k$.
+\end{definition}
+
+
+
+\begin{example}
+	We now see some examples of the Picard group.
+	\begin{enumerate}
+		\item Let $X = \spec \; k = \{ \bullet \}$. A rank 1 $k$-module is just a 1 dimensional vector space, which is always globally free and unique up to isomorphism. So $\operatorname{Pic}(X) = \{\mathcal{O}_X\} \cong \{e\}$.
+		\item In fact, whenever the underlying space $X = \{\bullet\}$ is a single point, then `local' and `global' are the same. So the only line bundle (locally free rank 1 module) is $\mathcal{O}_X$ itself, meaning $\operatorname{Pic}(X) = \{\mathcal{O}_X\} \cong \{e\}$. Geometrically, this corresponds to there being no room for a line to twist or change behaviour between open covers, because there is only one open cover.
+		\item Let $R$ be a local ring, with the unique maximal ideal $m$. Then $X = \spec \; R$ has a single closed point, $m$. Every non-empty open subset of $X$ must contain $m$, so $X$ cannot split into disjoint open pieces. Because $m$ is in all parts of any open cover, the local properties around $m$ extend to global properties. So again, there is no distinction between `local' and `global' and $\operatorname{Pic}(X)$ is trivial.
+		\item $\operatorname{Pic}(\spec \; \Z) = \{\mathcal{O}_X\} \cong \{e\}$
+	\end{enumerate}
+\end{example}
+
+In fact, most of the affine schemes that we care about have trivial Picard group, due to the following theorem.
+
+\begin{theorem} \label{prop: pic trivial on ufd}
+	Let $R$ be a ring which is a unique factorisation domain (for example, a PID), and let $X = \spec \; R$. Then $\operatorname{Pic}(X) = \{\mathcal{O}_X\}$ is trivial.
+\end{theorem}
+
+\begin{remark}
+	In number theory, the group $\operatorname{Pic}(\spec \; R)$ is often called the \emph{class group} of $R$, and it measures the failure of unique factorisation in the ring $R$.
+\end{remark}
+
+We now know what (sheaves of) locally free, rank 1 $\mathcal{O}_X$-modules look like abstractly. But how do we construct them explicitly? 
+
+\begin{definition}[Localisation of a module.]
+	Let $R$ be a ring and $S \subseteq R$ be multiplicatively closed. The localisation of an $R$-module $M$ at $S$ is constructed the same way as the localisation of $R$ itself, namely:
+	\begin{align*}
+		S^{-1} M = \left\{ \frac{m}{s} \; \Big\vert \; m\in M, s \in S  \right\}
+	\end{align*}
+	with the appropriate equivalences.
+\end{definition}
+
+\begin{definition}[$\mathcal{O}_X$-module associated to a module.]
+	Let $R$ be a ring and $M$ an $R$-module. Consider the affine scheme $X = \spec \; R$, and write $D_f = \spec \; R_f$. To each $D_f$, assign the localised module $M_f$, which is an $R_f$-module. This glues together into a sheaf $\Tilde{M}$ of $\mathcal{O}_X$-modules.
+	
+	If $X$ is not affine, then each affine part of $X$ will be assigned its own $\Tilde{M}$, and these glue together according to the sheaf conditions.
+\end{definition}
+
+\begin{example}
+	Some simple examples of this construction include:
+	\begin{enumerate}
+		\item If $M = R$, then $\Tilde{M} = \mathcal{O}_X$. 
+		\item If $M = R \oplus \cdots \oplus R$, then $\Tilde{M} = \mathcal{O}_X \oplus \cdots \oplus \mathcal{O}_X$.
+	\end{enumerate}
+\end{example}
+
+This construction can also be used to see explicit examples of schemes with non-trivial Picard group. \textcolor{red}{how to make the use of this construction explicit in below example?}
+
+\begin{example}
+	Let $X = \spec \; R$ where $R = \Z[\sqrt{-5}]$. This is not a UFD, and the failure of unique factorisation is where we will find a nontrivial element of $\operatorname{Pic}(X)$, due to \Cref{prop: pic trivial on ufd}. In particular, UFD fails at $6 \in R$, because
+	\begin{align*}
+		6 = 2 \cdot 3 = (1 + \sqrt{-5}) (1 - \sqrt{-5})
+	\end{align*}
+	\textcolor{red}{why choose the ideal $(2, 1+\sqrt[]{-5})$?}
+	
+	The ideal $(2,3)$ is the unit ideal, so there is a partition of unity given by the principal open sets $D_2$ (where 2 is invertible) and $D_3$ (where 3 is invertible) which forms an open cover. 
+	
+	Consider the ideal $I = (2, 1 + \sqrt[]{-5}) \subset R$. On $D_2$, the localisation $I_2 \subset R_2$ contains the unit 2, meaning we must have $1 \in I_2$ as well, and hence $I_2 = R_2$. This is a free module of rank 1. 
+	
+	On $D_3$, the localisation is $I_3 \subset R_3$. We can compute
+	\begin{align*}
+		\frac{1 - \sqrt{-5}}{3} (1 + \sqrt[]{-5}) = \frac{1 - (-5)}{3} = \frac{6}{3} = 2
+	\end{align*}
+	Since $\frac{1 - \sqrt{-5}}{3} \in R_3$, this shows that 2 is a multiple of $1 + \sqrt{-5}$ in $R_3$, and hence $I_3 = (1 + \sqrt{-5})$. Since $1 + \sqrt{-5}$ is not a zero divisor, $R_3$ is a free module of rank 1. 
+	
+	Since $I$ has different local descriptions, it cannot correspond to a globally free module. Thus it must correspond to some non-identity element of the Picard group.
+\end{example}
+
+
+\begin{nonexample}
+	For $X = \spec \; \C[x,y]$, consider the ideal $I = (x,y)$. Its corresponding $\mathcal{O}_X$-module $\Tilde{I}$ is not locally free of rank 1.
+\end{nonexample}
+
+
+\begin{proposition}
+	If an $\mathcal{O}_X$ module $\mathcal{F}$ is locally free of rank $r$, then all stalks are locally free of rank $r$. In particular, for all $x \in X$, we have $\mathcal{O}_{X,x}^{\oplus r} \cong \mathcal{F}_x$.
+\end{proposition}
+\begin{proof}
+	If $\mathcal{F}$ is a locally free $\mathcal{O}_X$-module of rank $r$, then there is an open cover of $X$ such that for each open $U$, we have $\mathcal{F}|_U \cong \mathcal{O}_U^{\oplus r}$. Taking stalks is compatible with direct sums, so for any point $x \in X$, this local isomorphism becomes $\mathcal{F}_x \cong \left( \mathcal{O}_X^{\oplus r} \right)_x \cong \mathcal{O}_{X,x}^{\oplus r}$, as an $\mathcal{O}_X$-module isomorphism. 
+\end{proof}
+
+\begin{proposition}
+	\begin{align*}
+		\operatorname{Pic}(\P^n_k) = \Z
+	\end{align*}
+\end{proposition}
+
+\begin{proof}[Proof for $n=1$.]
+	We can construct the locally free $\mathcal{O}_X$-modules of rank 1 for $X = \P^1_k$, which are the elements of the Picard group. 
+	
+	$X$ is open covered by $U_1 = \spec \; k[t]$ and $U_2 = \spec \; k[s]$ with transition map $t = s^{-1}$. On $U_1$, we have $\mathcal{L}$ being a free $k[t]$-module of rank 1, generated by some $e_1$. And on $U_2$, it is a free $k[t^{-1}]$-module of rank 1, generated by some $e_2$. 
+	
+	On the intersection, we need an isomorphism $\varphi: k[t,t^{-1}] \cdot e_1 \to k[t, t^{-1}] \cdot e_2$ of $k[t, t^{-1}]$-modules. If we make the forwards map be $\varphi(e_0) = f(t) e_1$ for some $f \in k[t, t^{-1}]$, then in order to have an inverse map, we require $f$ to be a unit, so that there is some $g$ such that $f(t) g(t) = 1$. With this, the inverse is $\varphi(e_1) = g(t) e_0$.
+	
+	Our choices for the isomorphism are entirely determined by the choice $f \in k[t, t^{-1}]$. The only units (and hence the only valid choices) are nonzero monomials $f(t) = a \cdot t^n$ for some $a \in k^\times$ and $n \in \Z$.
+	
+	Notice that the choice of $a \in k^\times$ does not matter, up to sheaf isomorphism. Consider constructing two sheaves: $\mathcal{F}$ using the isomorphism given by $at^n$, and $\mathcal{G}$ using the isomorphism given by $t^n$. Then the following diagram commutes, so $\mathcal{F} \cong \mathcal{G}$.
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7Rn0oVV8xKSJdLFswLDIsIlxcbWF0aGNhbHtGfShVXzIpIl0sWzIsMiwiXFxtYXRoY2Fse0d9KFVfMikiXSxbMiwwLCJcXG1hdGhjYWx7R30oVV8xKSJdLFswLDMsIjEiXSxbMSwyLCJhXnstMX0iXSxbMCwxLCJhIHRebiIsMV0sWzMsMiwidF5uIiwxXV0=
+	\[\begin{tikzcd}
+		{\mathcal{F}(U_1)} && {\mathcal{G}(U_1)} \\
+		\\
+		{\mathcal{F}(U_2)} && {\mathcal{G}(U_2)}
+		\arrow["{\times 1}", from=1-1, to=1-3]
+		\arrow["{a t^n}"{description}, from=1-1, to=3-1]
+		\arrow["{t^n}"{description}, from=1-3, to=3-3]
+		\arrow["{\times a^{-1}}", from=3-1, to=3-3]
+	\end{tikzcd}\]
+	
+	However, the choice of $n \in \Z$ \textit{does} matter, because it is not possible to glue different powers of $t$ in a way that retains the sheaf structure. 
+	
+	So up to sheaf isomorphism, there are $n \in \Z$ choices of the $k[t,t^{-1}]$-module isomorphism, and hence an element of the Picard group corresponding to every such $n$. Thus $\operatorname{Pic}(X) = \Z$. 
+\end{proof}
+
+
