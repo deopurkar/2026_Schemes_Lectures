@@ -1,0 +1,74 @@
+\newpage
+
+\stepcounter{section}
+\section*{Lecture 13: Line bundles and the Picard group}
+Recall that morphisms from a locally ringed space $(X, \mathcal{O}_X)$ to projective space $\P^n$ are in bijection with locally free $\mathcal{O}_X$-modules $\mathcal{L}$ of rank 1 (also known as line bundles), along with a locally split injection of $\mathcal{O}_X$-modules $\mathcal{L} \hookrightarrow \mathcal{O}_X^{n+1}$, up to isomorphism. In this context, an isomorphism between $\mathcal{L}_1 \hookrightarrow \mathcal{O}_X^{n+1}$ and $\mathcal{L}_2 \hookrightarrow \mathcal{O}_X^{n+1}$ is an $\mathcal{O}_X$-module isomorphism between $\mathcal{L}_1$ and $\mathcal{L}_2$ such that the following diagram commutes: 
+\[
+\begin{tikzcd}
+    \mathcal{L}_1  && \mathcal{O}_X^{n+1} \\
+    \\
+    \mathcal{L}_2 && \mathcal{O}_X^{n+1}
+    \arrow[hook, from=1-1, to=1-3]
+    \arrow[hook, from=3-1, to=3-3]
+    \arrow["\cong"{description}, from=1-1, to=3-1]
+    \arrow[shift right, no head, from=1-3, to=3-3]
+	\arrow[shift left, no head, from=1-3, to=3-3]
+\end{tikzcd}
+\]
+
+We now look at maps between line bundles. Let $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}_1, \mathcal{L}_2)$ denote the $\mathcal{O}_X$-linear maps of sheaves from $\mathcal{L}_1$ to $\mathcal{L}_2$. The simplest case is when both $\mathcal{L}_1$ and $\mathcal{L}_2$ are just $\mathcal{O}_X$. On global sections, the map $\mathcal{O}_X(X) \to \mathcal{O}_X(X)$ is uniquely determined by what $1 \in \mathcal{O}_X(X)$ is mapped to, as the maps must be $\mathcal{O}_X$-linear. The map on global sections then induces maps $\mathcal{O}_X(U) \to \mathcal{O}_X(U)$ for open sets $U \in X$ by restriction. Hence $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{O}_X) \simeq \mathcal{O}_X(X)$, where we can think of maps as multiplication by an element of $\mathcal{O}_X(X)$. 
+
+By similar reasoning, we see that $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{L}) \simeq \mathcal{L}(X)$. We now consider $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L})$. Let $\{U_i\}$ be an open cover of $X$ such that $\mathcal{L}|_{U_i} \cong O_{U_i}$ for each $i$, also known as a trivialisation of $\mathcal{L}$. A map $\alpha: \mathcal{L} \to \mathcal{L}$ restricts to maps $\alpha_i: \mathcal{L}|_{U_i} \to \mathcal{L}|_{U_i}$. Furthermore, on overlaps $U_{ij} := U_i \cap U_j$, we see that the restrictions of $\alpha_i$ and $\alpha_j$ to $U_{ij}$ must agree. As $\mathcal{L}|_{U_i} \cong \mathcal{O}_{U_i}$, we see that each $\alpha_i$ is multiplication by an element of $\mathcal{O}_X(U_i)$, and by our ``gluing condition" on $\alpha_i$'s we know that the multiplication has to be by an element that agrees on overlaps. Hence every element of $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L})$ is just multiplication by a $\lambda \in \mathcal{O}_X(X)$, and we have $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L}) \simeq \mathcal{O}_X(X)$ along with $\mathrm{Iso}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L}) \simeq \mathcal{O}_X(X)^\times$. 
+
+\begin{remark}
+    Given $\{\alpha_i\}$ such that the restrictions agree on overlaps, there exists a unique $\alpha$ such that $\alpha$ restricted to each $U_i$ is precisely $\alpha_i$. In other words, given sheaves $\mathcal{F}, \mathcal{G}$ on $X$, $U \mapsto \mathrm{Hom}(\mathcal{F}|_U, \mathcal{G}|_U)$ is also a sheaf. 
+\end{remark}
+
+Recall that the Picard group of $X$, denoted $\mathrm{Pic}(X)$, is the group of isomorphism classes of line bundles on $X$. Fix an open covering $\{U_i\}$ of $X$, and let $\mathrm{Pic}^{\{U_i\}}(X)$ denote the subgroup of line bundles trivialised by $\{U_i\}$. For some $\mathcal{L} \in \mathrm{Pic}^{\{U_i\}}(X)$, we choose isomorphisms $\alpha_i: \mathcal{O}_{U_i} \to \mathcal{L}|_{U_i}$. Then by above, the restrictions of $\alpha_i$ and $\alpha_j$ to $U_{ij}$ differ by an element of $\mathcal{O}_X(U_{ij})^\times$; that is, $\alpha_j = \lambda_{ij} \cdot \alpha_i$, where $\lambda_{ij} \in \mathcal{O}_X(U_{ij})^\times$. On triple overlaps $U_{ijk}$, the previous identity then tells us that $\lambda_{ij} \cdot \lambda_{jk} \cdot \lambda_{ki} = 1$. 
+
+So far we have characterised $\mathcal{L}$ by a choice of isomorphisms $\alpha_i: \mathcal{O}_{U_i} \to \mathcal{L}|_{U_i}$ along with elements $\lambda_{ij} \in \mathcal{O}_X(U_{ij})$ satisfying $\lambda_{ij} \cdot \lambda_{jk} \cdot \lambda_{ki} = 1$. What happens if we change $\alpha_i$? Let $\alpha_i'$ be another isomorphism between $\mathcal{O}_{U_i}$ and $\mathcal{L}|_{U_i}$. We know that $\alpha_i' = \alpha_i \cdot \mu_i$ for some $\mu_i \in \mathcal{O}_X(U_i)^\times$, which in turn tells us that $\lambda_{ij}' = \lambda \cdot \mu_j\mu_i^{-1}$. This motivates us to construct the following maps between abelian groups:
+\[
+\begin{tikzcd}
+    \overbrace{\prod_i \mathcal{O}_X(U_i)^\times}^{C_0} && \overbrace{\prod_{i<j} \mathcal{O}_X(U_{ij})^\times}^{C_1} && \overbrace{\prod_{i<j<k} \mathcal{O}_X(U_{ijk})^\times}^{C_2} \\
+    (\mu_i) && (\mu_j \mu_i^{-1}) && \\
+    && (\lambda_{ij}) && (\lambda_{ij} \cdot \lambda_{jk} \cdot \lambda_{ik}^{-1})
+    \arrow[maps to, from=2-1, to=2-3]
+	\arrow[maps to, from=3-3, to=3-5]
+    \arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+\end{tikzcd}
+\]
+We note that the image of the first map lies in the kernel of the second map, so we have a (co)chain complex. Now, a line bundle $\mathcal{L} \in \mathrm{Pic}^{\{U_i\}}(X)$ can be characterised by an element of $\ker(C_1 \to C_2)$ (representing the elements $\lambda_{ij} \in \mathcal{O}_X(U_{ij})$ satisfying $\lambda_{ij} \cdot \lambda_{jk} \cdot \lambda_{ki} = 1$) modulo the image of $C_0 \to C_1$ (as the choices of isomorphisms $\alpha_i: \mathcal{O}_{U_i} \to \mathcal{L}|_{U_i}$ should not matter). Hence $\mathrm{Pic}^{\{U_i\}}(X)$ is isormophic to $\ker(C_1 \to C_2)/\mathrm{im}(C_0 \to C_1) = H^1(C_*(\{U_i\}))$, the first cohomology group of our complex. 
+
+For a refinement $\{V_i\}$ of $\{U_i\}$, we have the inclusion $\mathrm{Pic}^{\{U_i\}}(X) \subset \mathrm{Pic}^{\{V_i\}}(X)$, which induces a map $H^1(C_*(\{U_i\})) \to  H^1(C_*(\{V_i\}))$. Thus we may take 
+\[
+\mathrm{Pic}(X) = \varinjlim_{\mathrm{refinement}} H^1(C_*(\{U_i\}))
+\]
+as a definition of the Picard group. Furthermore, if we can find an open cover $\{U_i\}$ of $X$ such that $\mathrm{Pic}(U_i)$ is trivial for each $i$, then we can claim that $\mathrm{Pic}(X) = \mathrm{Pic}^{\{U_i\}}(X)$, as further refinements will not change $\mathrm{Pic}^{\{U_i\}}(X)$. 
+\begin{example}
+    We compute the Picard group of projective space $\P^n_k$ for a field $k$, using the standard cover of $\P^n_k$ by affine spaces (since $\mathrm{Pic}(\A^n_k)$ is trivial).
+
+    For $n=1$, as there are no triple intersections, $C_2 = \{1\}$. Then $C_1$ are the units of $k[t, t^{-1}]$, which is given by $\{a \cdot t^n \mid a \in k^\times, n \in \Z\}$. Finally, the units of $k[x]$ are just $k^\times$, so $C_0 = k^\times \times k^\times$. Hence we have
+    \[
+    \begin{tikzcd}
+    k^\times \times k^\times && \{a \cdot t^n \mid a \in k^\times, n \in \Z\} \cong k^\times \times (\Z, +) && \{1\} \\
+    (\lambda_1, \lambda_2) && \lambda_2 \lambda_1^{-1} \cdot t^0 && 
+    \arrow[maps to, from=2-1, to=2-3]
+    \arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+    \end{tikzcd}
+    \]
+    As everything in $C_1$ is in the kernel, we see that $\mathrm{ker}/\mathrm{im} \cong \Z$. 
+
+    For $n = 2$, for clarity of notation let $U_1 = \mathrm{Spec} \, k[\frac{x_2}{x_1}, \frac{x_3}{x_1}]$, $U_2 = \mathrm{Spec} \, k[\frac{x_1}{x_2}, \frac{x_3}{x_2}]$ and $U_3 = \mathrm{Spec} \, k[\frac{x_1}{x_3}, \frac{x_2}{x_3}]$. Then $U_1 \cap U_2$ can be seen as $\mathrm{Spec} \, k[\frac{x_2}{x_1}, \frac{x_3}{x_1}, \frac{x_1}{x_2}]$, so as before the units are given by $\{a \cdot (\frac{x_1}{x_2})^n\}$. In the triple overlap, all variables become invertible, so the units are of the form $\{a \cdot (\frac{x_1}{x_2})^n(\frac{x_1}{x_3})^m\}$. Then we have
+    \[
+    \begin{tikzcd}
+    (k^\times)^3 & \{a \cdot (\frac{x_1}{x_2})^n\} \times \{b \cdot (\frac{x_2}{x_3})^m\} \times \{c \cdot (\frac{x_3}{x_1})^l\} & \{a \cdot (\frac{x_1}{x_2})^n(\frac{x_1}{x_3})^m\}
+    \arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+    \end{tikzcd}
+    \]
+    For an element of $C_1$ to be in the kernel, we must have $(\frac{x_1}{x_2})^n(\frac{x_2}{x_3})^m(\frac{x_3}{x_1})^l = 1$, as well as $abc = 1$. A choice of $n$ determines both $m$ and $l$, so the Picard group is once again $\Z$, since changing $a, b, c$ is equivalent to changing by some element in the image from $C_0$.
+
+    Larger values of $n$ follow similarly to $\P^2_k$.  
+\end{example}

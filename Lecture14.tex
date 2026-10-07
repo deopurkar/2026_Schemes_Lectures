@@ -1,0 +1,186 @@
+\newpage
+
+\stepcounter{section}
+\section*{Lecture 14: Products and Fibre Products}
+Let $X,Y$ be schemes. In the same we can take the product of two sets or groups we want to define a product scheme $X\times Y$. This could mean taking the set of points $X\times Y$ and putting a scheme structure on it, i.e. topologising the set and providing a sheaf of rings. However this turns out to not be "the right thing" to do, to see why we must first pin down what we mean by "the right thing" in this context.
+
+To determine the correct definition we must specify the properties we want the product to satisfy. Our intuition tells us that we should have maps $\pi_X\colon X\times Y \to X$ and $\pi_Y\colon X\times Y \to Y$ such that for any scheme $Z$ we have
+\[
+\text{Maps}(Z, X\times Y)\to \text{Maps}(Z,X) \times \text{Maps}(Z,Y),
+\]
+\[
+\varphi\mapsto (\pi_X\circ \varphi, \pi_Y\circ \varphi),
+\]
+and this assignment is a bijection. This leads us to define the product as the triple $(X\times Y, \pi_X, \pi_Y)$ that satisfies the following commutative diagram.
+\[\begin{tikzcd}
+	&&& X \\
+	Z && {X\times Y} \\
+	&&& Y
+	\arrow[curve={height=-6pt}, from=2-1, to=1-4]
+	\arrow["{\exists!}", dashed, from=2-1, to=2-3]
+	\arrow[curve={height=6pt}, from=2-1, to=3-4]
+	\arrow["{\pi_X}"', from=2-3, to=1-4]
+	\arrow["{\pi_Y}", from=2-3, to=3-4]
+\end{tikzcd}\]
+We then ask two questions,
+\begin{enumerate}
+    \item Does such an object exist?
+    \item Is such an object unique?
+\end{enumerate}
+The answer to the second one is typically false, as any object satisfying the diagram can be relabelled, so we instead ask if such an object is unique up to unique isomorphism. That is, if $\square$ and $\bigcirc$ are two such specified objects there exists a unique isomorphism $\square\to\bigcirc$.
+
+Suppose $\square$ and $\bigcirc$ are two objects that fit the commutative diagram. Then we can let $Z = \square$ to obtain that the identity $id_\square$ is the unique map which makes the diagram commute. We then use the fact that $\bigcirc$ is also a product to obtain the following diagram,
+\[\begin{tikzcd}
+	&&&&& X \\
+	\square && \bigcirc && \square \\
+	&&&&& Y
+	\arrow[curve={height=-18pt}, from=2-1, to=1-6]
+	\arrow["{\exists! f}", dashed, from=2-1, to=2-3]
+	\arrow[curve={height=18pt}, from=2-1, to=3-6]
+	\arrow[curve={height=-6pt}, from=2-3, to=1-6]
+	\arrow["{\exists! g}", dashed, from=2-3, to=2-5]
+	\arrow[curve={height=6pt}, from=2-3, to=3-6]
+	\arrow[from=2-5, to=1-6]
+	\arrow[from=2-5, to=3-6]
+\end{tikzcd}\]
+so $g\circ f$ is also a map which works. By uniqueness of the map we obtain $id_\square = g\circ f$, and similarly by swapping $\square$ and $\bigcirc$ we obtain $id_\bigcirc = f\circ g$. Thus $f$ is the unique isomorphism from $\square$ to $\bigcirc$ as desired.
+
+We have shown that if a product exists then it is unique up to unique isomorphism, so we denote the product by $X\times Y$. We now consider the question of existence.
+
+\begin{example}
+(Sets)
+Let $X,Y$ be sets, we want to define the product $(X\times Y, \pi_X, \pi_Y)$. We claim that the Cartesian product
+\[
+X\times Y \colonequals \{ (x,y) \times x\in X, y\in Y\},
+\]
+with $\pi_X,\pi_Y$ the projection maps to the first and second coordinate respectively, satisfies the specification. For any test set $T$ with maps $f,g$ we obtain the diagram,
+\[\begin{tikzcd}
+	&&& X \\
+	T && {X\times Y} \\
+	&&& Y
+	\arrow["f", curve={height=-30pt}, from=2-1, to=1-4]
+	\arrow["{t\mapsto(f(t),g(t))}", from=2-1, to=2-3]
+	\arrow["g"', curve={height=30pt}, from=2-1, to=3-4]
+	\arrow[from=2-3, to=1-4]
+	\arrow[from=2-3, to=3-4]
+\end{tikzcd}\]
+where the uniqueness of the middle arrow is because for any $\varphi\colon T \to X\times Y$ satisfying the diagram we must have $\pi_X\circ \varphi = f$ and $\pi_Y\circ \varphi = g$, so $\varphi(t) = (f(t),g(t))$.
+\end{example}
+
+\begin{example}\hfill
+\begin{itemize}
+    \item (Topological spaces) Let $X,Y$ be topological spaces. Then $X\times Y$ is the Cartesian product with the product topology.
+    \item (Groups) Let $G,H$ be groups. The $G\times H$ is the Cartesian product with component-wise multiplication.
+\end{itemize}
+\end{example}
+
+In all the examples we have done thus far the product is the Cartesian product with some additional structure imposed on it. We will now construct some examples of the products of affine schemes.
+
+\begin{example}
+    Let $X=Y=\Spec \Z$. Then the data of a test scheme $Z$ with maps $f\colon Z\to X$, $g\colon Z\to Y$ is equivalent to ring maps $\varphi\colon \Z\to \mathcal{O}_Z(Z)$, $\rho\colon \Z\to \mathcal{O}_Z(Z)$. However there is a unique ring map from $\Z$ to any ring, so $\rho=\varphi$ and the data of the map from $Z$ to $X\times Y$ is equivalent to the ring map $\varphi$. Thus we obtain that $X\times Y = \Spec \Z$, which satisfies the commutative diagram
+    \[\begin{tikzcd}
+	&&& {\Spec \Z} \\
+	Z && {\Spec \Z} \\
+	&&& {\Spec \Z}
+	\arrow["f", from=2-1, to=1-4]
+	\arrow[dashed, from=2-1, to=2-3]
+	\arrow["g"', from=2-1, to=3-4]
+	\arrow[from=2-3, to=1-4]
+	\arrow[from=2-3, to=3-4]
+\end{tikzcd}\]
+\end{example}
+
+\begin{example}
+    Let $X = \Spec (\Z/2\Z)$ and $Y = \Spec (\Z/3/\Z)$. Then $X\times Y = \emptyset$ is the empty scheme. This is because a scheme $Z$ with maps $f\colon Z\to X$, $g\colon Z\to Y$ is equivalent to ring maps $\varphi\colon \F_2\to \mathcal{O}_Z(Z)$, $\rho\colon \F_3\to \mathcal{O}_Z(Z)$. However we observe that
+    \[
+    1_Z = 3\rho(1) - 2\varphi(1) = \rho(3) - \varphi(2) = 0_Z,
+    \]
+    so $\mathcal{O}_Z(Z)$ must be the zero ring. The product must then be the empty scheme, so we obtain the diagram
+    \[\begin{tikzcd}
+	&&& {\Spec \F_2} \\
+	\emptyset && \emptyset \\
+	&&& {\Spec \F_3}
+	\arrow["f", from=2-1, to=1-4]
+	\arrow[dashed, from=2-1, to=2-3]
+	\arrow["g"', from=2-1, to=3-4]
+	\arrow[from=2-3, to=1-4]
+	\arrow[from=2-3, to=3-4]
+\end{tikzcd}\]
+\end{example}
+
+\begin{example}
+    Let $X = \Spec \Z[x] $ and $Y = \Spec \Z[y]$ be two copies of $\A^1_\Z $. Then $X\times Y = \Spec \Z[x,y] = \A_\Z^2$. To see why let $T$ be a test scheme with maps $ T\to X$, $T\to Y$, then this data is equivalent to ring maps $\varphi\colon \Z[x] \to \mathcal{O}_T(T)$, $\rho\colon \Z[y]\to \mathcal{O}_T(T)$. However the data of $(\varphi,\rho)$ is the same as choosing $x\mapsto f\in \mathcal{O}_T(T)$ and $y\mapsto g\in \mathcal{O}_T(T)$, which uniquely specifies a map $\Z[x,y] \to\mathcal{O}_T(T)$. All this information is then captured by the following diagram.
+    \[\begin{tikzcd}
+	&&& {\Spec \Z[x]} \\
+	T && {\Spec \Z[x,y]} \\
+	&&& {\Spec \Z[y]}
+	\arrow["{x\mapsto f}", curve={height=-24pt}, from=2-1, to=1-4]
+	\arrow["{(x,y)\mapsto(f,g)}", dashed, from=2-1, to=2-3]
+	\arrow["{y\mapsto g}"', curve={height=24pt}, from=2-1, to=3-4]
+	\arrow[from=2-3, to=1-4]
+	\arrow[from=2-3, to=3-4]
+\end{tikzcd}\]
+
+By the same argument we also have for $\A^n_\Z = \Spec \Z[x_1,\dots, x_n]$ and $\A^m_\Z = \Spec \Z[y_1,\dots, x_m]$ that $\A^n_\Z\times \A^m_\Z = \A^{n+m}_\Z$.
+\end{example}
+
+We now note that 
+\[
+\text{set of prime ideals of } \Z[x,y] \neq \text{set of prime ideals of } \Z[x] \times \text{set of prime ideals of } \Z[y].
+\]
+Which contradicts our intuition that the points of a product should be the product of the points of the parts. To explore this in further detail we recall the two notions of points of a scheme $X$ we have defined,
+\begin{enumerate}
+    \item The actual points of $X$,
+    \item $k$-points for a field $k$ (or $r$-points for a ring $r$) = Maps$(\Spec K , X)$
+\end{enumerate}
+We often think of the first type of points as an implementation detail, defined purely to get a topology that admits a good sheaf of rings. So by considerig the second type of points we can use the bijection between maps to the product and the product of maps to each part to obtain
+\[
+k\text{-points of } X\times Y = (k\text{-points of } X)\times (k\text{-points of } Y),
+\]
+which has the desired behaviour. For many purposes it suffices to consider the $k$-points of a scheme, so in this sense the product behaves as expected.
+
+We now turn our attention to the more general question. Let $X= \Spec A$ and $Y =\Spec B$, then does $X\times Y$ exist? This is asking whether there is a scheme $\square$ which satisfies the diagram,
+\[\begin{tikzcd}
+	&&& {\Spec A} \\
+	T && \square \\
+	&&& {\Spec B}
+	\arrow["{A\to \mathcal{O}_T(T)}", curve={height=-0pt}, from=2-1, to=1-4]
+	\arrow[dashed, from=2-1, to=2-3]
+	\arrow["{B\to \mathcal{O}_T(T)}"', curve={height=0pt}, from=2-1, to=3-4]
+	\arrow[from=2-3, to=1-4]
+	\arrow[from=2-3, to=3-4]
+\end{tikzcd}\]
+This question is equivalent to asking if there is a ring $R$ with maps $A\to R$ and $B\to R$ such that
+\[\begin{tikzcd}
+	&&& A \\
+	S && R \\
+	&&& B
+	\arrow[from=1-4, to=2-1]
+	\arrow[from=1-4, to=2-3]
+	\arrow[dashed, from=2-3, to=2-1]
+	\arrow[from=3-4, to=2-1]
+	\arrow[from=3-4, to=2-3]
+\end{tikzcd}\]
+
+Such a ring does exist and we will now construct it. Let our set of generators be
+\[
+G \colonequals \{ a\otimes b \mid a\in A, b\in B\},
+\]
+and let our relations be generated by
+\[
+R \colonequals \langle a_1 \otimes b + a_2\otimes b - (a_1 +a_2)\otimes b, \quad a\otimes b_1 + a\otimes b_2 - a \otimes (b_1 + b_2)\rangle.
+\]
+Then the desired ring is
+\[
+A\otimes B \colonequals \text{ free abelian group generated by } G\mod R,
+\]
+with the ring structure given by $(a_1\otimes b_1) \cdot (a_2\otimes b_2) = a_1a_2\otimes b_1b_2$. It is easy to check that this is a well-defined ring, and we define maps $A \to A\otimes B$ and $B \to A\otimes B$ by $a\mapsto a\otimes 1$ and $b\mapsto b\otimes 1$ respectively.
+
+Then, given maps $f\colon A \to S$ and $g\colon B \to S$, the only way to define a map $A\otimes B \to S$ such that the desired diagram commutes is by defining,
+\[
+a\otimes 1 \mapsto f(a),
+\]
+\[
+1\otimes b \mapsto g(b),
+\]
+which then forces $a\otimes b \mapsto f(a)g(b)$. It is easy to check that this is a well-defined homomorphism, thus we conclude that $\Spec A \times \Spec B$ exists and it equal to $\Spec(A\otimes B)$. As an exercise show that $\F_2\otimes \F_3 = 0$, which agrees with what we expected from before.
