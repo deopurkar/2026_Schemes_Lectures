@@ -5,21 +5,21 @@
 % Date: 1st September
 % Note: ``Lecture 12'' (3rd September) was replaced with midsemester exam.
 
-Previously, we have described scheme morphisms $X \to \P^n_k$, where projective space is taken over a field $k$. We also briefly saw what morphisms $X \to {\P_\Z^n}$ might look like. In this lecture we will explore this idea further, and see how it can extend to morphisms $X \to Y$ for any scheme $Y$. For this lecture, we use the shorthand $\P^n = \P_\Z^n$.
+Let \(k\) be a field.
+Previously, we have described morphisms $\spec\ k \to \P^n_k$. We also briefly saw what morphisms $X \to {\P_\Z^n}$ might look like. In this lecture we will explore this idea further, and see how it can extend to morphisms $X \to \P^n$ for any scheme $X$. For this lecture, we use the shorthand $\P^n = \P_\Z^n$.
 
 First, recall the case when $X = \spec \; k$. Then a morphism $X \to \P^n$ is the same as the following data:
 \begin{enumerate}
-	\item A 1-dimensional $k$-vector space $\mathcal{L}$, where $\mathcal{L}$ stands for `line', and
+	\item A 1-dimensional $k$-vector space $\mathcal{L}$ (we use the letter $\mathcal{L}$ to remind ourselves that we are looking at one-dimensional vector spaces, or ``lines'').
 	\item An injection $\mathcal{L} \hookrightarrow k^{n+1}$.
 \end{enumerate}
 
-To generalise different $X$, we need to consider how these requirements can be formulated for objects which are not as nice as vector spaces and fields. The construction that works is:
-\textcolor{red}{This was given in lecture 10, but I want to have it rewritten here for reference with extra comments, how best to do that? Also, seems like $\mathcal{O}_X$-module is shorthand for sheaf of such modules, should we clarify this?}
+To generalise different $X$, we need to consider how these requirements can be formulated for objects which are not as nice as vector spaces over fields. The construction that works is given by the following theorem.
 \begin{theorem}
 	A morphism of schemes $X \to \P^n$ is the same as the following data:
 	\begin{enumerate}
-		\item An $\mathcal{O}_X$-module $\mathcal{L}$ which is locally free of rank 1, where $\mathcal{L}$ stands for `line bundle', and
-		\item A locally split injection $\mathcal{L} \hookrightarrow \mathcal{O}_X^{n+1} = \bigoplus^{n+1} \mathcal{O}_X$
+		\item an $\mathcal{O}_X$-module $\mathcal{L}$ which is locally free of rank 1 (also called a ``line bundle''), and
+		\item a locally split injection $\mathcal{L} \hookrightarrow \mathcal{O}_X^{n+1} = \bigoplus^{n+1} \mathcal{O}_X$
 	\end{enumerate}
 \end{theorem}
 
@@ -40,12 +40,12 @@ First, we should ask what a locally free, rank 1 $\mathcal{O}_X$-module actually
 	\begin{enumerate}
 		\item Let $X = \spec \; k = \{ \bullet \}$. A rank 1 $k$-module is just a 1 dimensional vector space, which is always globally free and unique up to isomorphism. So $\operatorname{Pic}(X) = \{\mathcal{O}_X\} \cong \{e\}$.
 		\item In fact, whenever the underlying space $X = \{\bullet\}$ is a single point, then `local' and `global' are the same. So the only line bundle (locally free rank 1 module) is $\mathcal{O}_X$ itself, meaning $\operatorname{Pic}(X) = \{\mathcal{O}_X\} \cong \{e\}$. Geometrically, this corresponds to there being no room for a line to twist or change behaviour between open covers, because there is only one open cover.
-		\item Let $R$ be a local ring, with the unique maximal ideal $m$. Then $X = \spec \; R$ has a single closed point, $m$. Every non-empty open subset of $X$ must contain $m$, so $X$ cannot split into disjoint open pieces. Because $m$ is in all parts of any open cover, the local properties around $m$ extend to global properties. So again, there is no distinction between `local' and `global' and $\operatorname{Pic}(X)$ is trivial.
-		\item $\operatorname{Pic}(\spec \; \Z) = \{\mathcal{O}_X\} \cong \{e\}$
+		\item Let $R$ be a local ring, with the unique maximal ideal $m$. Then $X = \spec \; R$ has a single closed point, $m$. Every non-empty open subset of $X$ must contain $m$. Because $m$ is in all parts of any open cover, the local properties around $m$ extend to global properties. So again, there is no distinction between `local' and `global' and $\operatorname{Pic}(X)$ is trivial.
+		\item $\operatorname{Pic}(\spec \; \Z) = \{\mathcal{O}_X\} \cong \{e\}$ (this is a consequence of the following theorem).
 	\end{enumerate}
 \end{example}
 
-In fact, most of the affine schemes that we care about have trivial Picard group, due to the following theorem.
+In fact, most of the affine schemes that we care about have trivial Picard group, due to the following theorem, which we state without proof.
 
 \begin{theorem} \label{prop: pic trivial on ufd}
 	Let $R$ be a ring which is a unique factorisation domain (for example, a PID), and let $X = \spec \; R$. Then $\operatorname{Pic}(X) = \{\mathcal{O}_X\}$ is trivial.
@@ -66,9 +66,10 @@ We now know what (sheaves of) locally free, rank 1 $\mathcal{O}_X$-modules look 
 \end{definition}
 
 \begin{definition}[$\mathcal{O}_X$-module associated to a module.]
-	Let $R$ be a ring and $M$ an $R$-module. Consider the affine scheme $X = \spec \; R$, and write $D_f = \spec \; R_f$. To each $D_f$, assign the localised module $M_f$, which is an $R_f$-module. This glues together into a sheaf $\Tilde{M}$ of $\mathcal{O}_X$-modules.
-	
-	If $X$ is not affine, then each affine part of $X$ will be assigned its own $\Tilde{M}$, and these glue together according to the sheaf conditions.
+  Let $R$ be a ring and $M$ an $R$-module. Consider the affine scheme $X = \spec \; R$, and write $D_f = \spec \; R_f$. To each $D_f$, assign the localised module $M_f$, which is an $R_f$-module.  We can check that \(D_f \mapsto M_f\) defines a sheaf on the set of distinguished open, and hence extends uniquely to a sheaf on \(X\).
+  We denote this extension by by $\Tilde{M}$.  It is a sheaf of $\mathcal{O}_X$-modules.
+
+  For non-affine \(X\), we can construct \(O_X\)-modules by gluing together various \(\widetilde M\) on affine open patches and gluing.
 \end{definition}
 
 \begin{example}
@@ -79,26 +80,28 @@ We now know what (sheaves of) locally free, rank 1 $\mathcal{O}_X$-modules look 
 	\end{enumerate}
 \end{example}
 
-This construction can also be used to see explicit examples of schemes with non-trivial Picard group. \textcolor{red}{how to make the use of this construction explicit in below example?}
+The tilde construction can also be used to see explicit examples of schemes with non-trivial Picard group.
 
 \begin{example}
-	Let $X = \spec \; R$ where $R = \Z[\sqrt{-5}]$. This is not a UFD, and the failure of unique factorisation is where we will find a nontrivial element of $\operatorname{Pic}(X)$, due to \Cref{prop: pic trivial on ufd}. In particular, UFD fails at $6 \in R$, because
-	\begin{align*}
-		6 = 2 \cdot 3 = (1 + \sqrt{-5}) (1 - \sqrt{-5})
+  Let $R = \Z[\sqrt{-5}]$ and let $X = \spec \; R$.  Then \(R\) is not a UFD, and the failure of unique factorisation is where we will find a nontrivial element of $\operatorname{Pic}(X)$, due to \Cref{prop: pic trivial on ufd}.
+  The non-trivial element of the Picard group will come from a place where unique factorisation fails:
+  	\begin{align*}
+		6 = 2 \cdot 3 = (1 + \sqrt{-5}) (1 - \sqrt{-5}).
 	\end{align*}
-	\textcolor{red}{why choose the ideal $(2, 1+\sqrt[]{-5})$?}
-	
-	The ideal $(2,3)$ is the unit ideal, so there is a partition of unity given by the principal open sets $D_2$ (where 2 is invertible) and $D_3$ (where 3 is invertible) which forms an open cover. 
-	
-	Consider the ideal $I = (2, 1 + \sqrt[]{-5}) \subset R$. On $D_2$, the localisation $I_2 \subset R_2$ contains the unit 2, meaning we must have $1 \in I_2$ as well, and hence $I_2 = R_2$. This is a free module of rank 1. 
-	
-	On $D_3$, the localisation is $I_3 \subset R_3$. We can compute
+	Consider the ideal $I = (2, 1 + \sqrt[]{-5}) \subset R$.
+        We show that \(\widetilde I\) is locally free of rank 1, but \(I\) is not globally free of rank 1.
+        To show local freeness, we take the open cover \(\spec\ R = D_2 \cup D_3\).
+        On $D_2$, the localisation $I_2 \subset R_2$ contains the unit 2, meaning we must have $1 \in I_2$ as well, and hence $I_2 = R_2$. This is a free module of rank 1. 
+       On $D_3$, the localisation is $I_3 \subset R_3$. We can compute
 	\begin{align*}
 		\frac{1 - \sqrt{-5}}{3} (1 + \sqrt[]{-5}) = \frac{1 - (-5)}{3} = \frac{6}{3} = 2
 	\end{align*}
-	Since $\frac{1 - \sqrt{-5}}{3} \in R_3$, this shows that 2 is a multiple of $1 + \sqrt{-5}$ in $R_3$, and hence $I_3 = (1 + \sqrt{-5})$. Since $1 + \sqrt{-5}$ is not a zero divisor, $R_3$ is a free module of rank 1. 
-	
-	Since $I$ has different local descriptions, it cannot correspond to a globally free module. Thus it must correspond to some non-identity element of the Picard group.
+	Since $\frac{1 - \sqrt{-5}}{3} \in R_3$, this shows that 2 is a multiple of $1 + \sqrt{-5}$ in $R_3$, and hence $I_3 = (1 + \sqrt{-5})$. Since $1 + \sqrt{-5}$ is not a zero divisor, $I_3$ is a free module of rank 1.
+        Therefore, \(I\) is locally free of rank 1.
+
+        To show that \(I\) not globally free, we need to show that \(I \subset R\) is not a principal ideal.
+        Since \(2\) and \(1+\sqrt{-5}\) are both irreducible in \(R\), they have no non-unit common factor.
+        But \(I\) is not the unit ideal; so it can't be principal. 
 \end{example}
 
 
@@ -108,7 +111,7 @@ This construction can also be used to see explicit examples of schemes with non-
 
 
 \begin{proposition}
-	If an $\mathcal{O}_X$ module $\mathcal{F}$ is locally free of rank $r$, then all stalks are locally free of rank $r$. In particular, for all $x \in X$, we have $\mathcal{O}_{X,x}^{\oplus r} \cong \mathcal{F}_x$.
+	If an $\mathcal{O}_X$ module $\mathcal{F}$ is locally free of rank $r$, then all stalks are free \(\mathcal{O}_{X,x}\)-modules of rank $r$.  That is, for all $x \in X$, we have isomorphisms $\mathcal{O}_{X,x}^{\oplus r} \cong \mathcal{F}_x$.
 \end{proposition}
 \begin{proof}
 	If $\mathcal{F}$ is a locally free $\mathcal{O}_X$-module of rank $r$, then there is an open cover of $X$ such that for each open $U$, we have $\mathcal{F}|_U \cong \mathcal{O}_U^{\oplus r}$. Taking stalks is compatible with direct sums, so for any point $x \in X$, this local isomorphism becomes $\mathcal{F}_x \cong \left( \mathcal{O}_X^{\oplus r} \right)_x \cong \mathcal{O}_{X,x}^{\oplus r}$, as an $\mathcal{O}_X$-module isomorphism. 
@@ -144,6 +147,15 @@ This construction can also be used to see explicit examples of schemes with non-
 	However, the choice of $n \in \Z$ \textit{does} matter, because it is not possible to glue different powers of $t$ in a way that retains the sheaf structure. 
 	
 	So up to sheaf isomorphism, there are $n \in \Z$ choices of the $k[t,t^{-1}]$-module isomorphism, and hence an element of the Picard group corresponding to every such $n$. Thus $\operatorname{Pic}(X) = \Z$. 
-\end{proof}
+      \end{proof}
+
+      \begin{remark}
+        We will later introduce the Cech complex that will make the procedure above more systematic.
+      \end{remark}
 
 
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

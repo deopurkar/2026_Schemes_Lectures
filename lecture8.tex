@@ -1,0 +1,351 @@
+\documentclass[a4,12pt]{article}
+
+%\usepackage{amsmath}
+\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{amscd}
+%\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{units}
+%\usepackage{graphicx}
+%\usepackage{cancel}
+\usepackage{tikz-cd}
+\usepackage{xcolor}
+
+%\usepackage[style=numeric]{biblatex}
+%\addbibresource{}
+
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+    \newtheorem{example}{Example}[section]
+    \newtheorem{nonexample}{Non-Example}[section]
+    \newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+    \newtheorem{remark}{Remark}[section]
+
+\theoremstyle{plain}
+    \newtheorem{proposition}{Proposition}[section]
+    \newtheorem{theorem}{Theorem}[section]
+	\newtheorem{lemma}{Lemma}[section]
+	\newtheorem{conjecture}{Conjecture}[section]
+	\newtheorem{corollary}{Corollary}[section]
+
+\numberwithin{equation}{section}
+
+\setlength{\parskip}{4pt}
+\allowdisplaybreaks[1]
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\RP}{\mathbb{RP}}
+\newcommand{\CP}{\mathbb{CP}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Spec}{\textnormal{Spec}\,}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} %Partial Derivative
+\newcommand{\2}[4]{\begin{bmatrix}#1 & #2 \\ #3 & #4 \end{bmatrix}} %2x2 matrix w/ square brackets
+\newcommand{\3}[9]{\begin{bmatrix}#1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}} %3x3 matrix w/ square brackets
+\newcommand{\bv}[1]{\mathbf{#1}}
+
+\begin{document}
+
+\section{The Zariski tangent space}
+
+We recall two definitions from the previous lecture.
+
+\begin{definition}
+For a ring $R$ and a scheme $X$, an \emph{$R$-point} of $X$ is a map $\Spec R \to X$.
+\end{definition}
+
+The motivation for the definition above comes from the case of affine schemes.
+Suppose \(X = \Spec \Z[x_1,\dots,x_n]/(f_1,\dots,f_m)\).
+Then an \(R\)-point of \(X\) is equivalent to a ring homomorphism
+\[ \Z[x_1,\dots,x_n]/(f_1,\dots,f_m) \to R.\]
+Such a morphism is given by choosing images \(r_i\) of \(x_i\) such that for all \(j\), we have \(f_j(r_1,\dots,r_n) = 0\).
+In other words, such a morphism is just an \(R\)-valued solution to the system of equations \(f_j(x_1,\dots,x_n) = 0\).
+In this way, the notion of an \(R\)-point generalises the notion of an \(R\)-valued solution of a system of equations.
+
+\begin{definition}
+  For a ring $R$, an \emph{$R$-scheme} is a scheme \(X\) together with a map $\phi \colon X \to \Spec R$.
+  A \emph{map of $R$-schemes} is a morphism of locally ringed spaces which is compatible with the map to $\Spec R$.
+  That is, if $(X_1,\phi_1)$ and $(X_2,\phi_2)$ are $R$-schemes, then a morphism of \(R\)-schemes between them is a morphism of locally ringed spaces $\theta : X_1 \to X_2$ such that $\phi_1 = \phi_2 \circ \theta$ (that is, the following diagram commutes):
+  \[
+    \begin{tikzcd}
+      X_1\ar{r}{\theta}\ar{d}{\phi_1} & X_2 \ar{d}{\phi_2}\\
+      \Spec R \ar[equal]{r}& \Spec R
+    \end{tikzcd}
+  \]
+  We often drop the map \(\phi\) if it is clear from the context.
+  \end{definition}
+  
+  
+  Again, the motivation for the definition above comes from affine schemes.
+  In commutative algebra, we often work with \(R\)-algebras for a fixed ring \(R\).
+  An \(R\)-algebra is just a ring \(S\) together with a homomorphism \(R \to S\).
+  A map of \(R\)-algebras is a ring homomorphism that commutes with the homomorphism from \(R\).
+  By taking \(\Spec\), we get the notion of an \(R\)-scheme.
+
+  An \(R\)-algebra \(S\) gives an \(R\)-scheme \(\Spec S\) together with the map \(\Spec S \to \Spec R\) induced by \(R \to S\).
+  Let \(X\) an \(R\)-scheme.
+  An \(S\)-point of \(X\) is a map of \(R\)-schemes \(\Spec S \to X\).
+
+%We recall that we interpret maps $\Spec{\nicefrac{k[\epsilon]}{\epsilon^2}} \to X$ as a $k$-point of $X$ with a ``tangent vector".
+
+  We have encountered solutions of systems of equations in various rings like \(\Z\) or \(\Q\) or \(\C\).
+  So we know that \(\Spec \Z\), \(\Spec \Q\), or \(\Spec \C\) points of schemes are significant.
+  But points of schemes valued in more exotic rings can also have geometric significance.
+  For example, let us illustrate how \(k[\esplion]/\epsilon^2\)-points of a scheme recover tangent vectors.
+
+  Fix some $n \in \N$, variables $\{a_{ij}\}$ for $1 \le i,j \le n$, and a field \(k\).
+  Consider the spectrum of the ring $k[a_{ij}]/(\det a_{ij} - 1)$.
+  Note that this ring is naturally a \(k\)-algebra.
+  So its spectrum is a \(k\)-scheme.
+  Using the correspondence theorem we see that \(k\)-points of this spectrum (as a \(k\)-scheme) agree with $\text{SL}_n(k)$.
+
+  \begin{remark}
+  We can give this set the topology induced by the Zariski topology.
+  If \(k\) is a topological field, like \(\R\), then this set will also have another topology.
+  These two topologies are not the same.
+  The Zariski topology is weaker (fewer open sets).  
+  \end{remark}
+  
+\begin{proposition} \label{SL LieAlg}
+Consider the $k$-point corresponding to the identity matrix, that is, the map $f \colon \Spec k \to \Spec k[a_{ij}]/(\det(a_{ij}) - 1)$ induced by the ring homomorphism $k[a_{ij}]/(\det (a_{ij}) - 1) \to k$ given by $a_{ij} \mapsto \delta_{ij}$. The morphisms of \(k\)-schemes $\Spec k[\epsilon]/\epsilon^2 \to \Spec k[a_{ij}]/(\det (a_{ij}) - 1)$ that extend $f$ are the maps induced by $(a_{ij}) \mapsto I_n + \epsilon M$, where $M$ is a traceless matrix.
+\end{proposition}
+
+\begin{remark}
+This should be directly compared with the Lie Algebra $\mathfrak{sl}_n(k)$, which consists of the subspace of traceless matrices in $M_n(k)$.
+\end{remark}
+
+\begin{proof}
+We are looking for a morphism $\Spec k[\epsilon]/\epsilon^2 \to \Spec k[a_{ij}]/(\det (a_{ij}) - 1)$ of \(k\)-schemes that makes the following diagram commute:
+\begin{center}
+\begin{tikzcd}
+\Spec{k} \arrow[d] \arrow[dr] & \\
+\Spec{k[\epsilon]/\epsilon^2} \arrow[r] & \Spec{k[a_{ij}]/(\det (a_{ij}) - 1)}
+\end{tikzcd}.
+\end{center}
+Recalling that all maps on spectra are induced by \(k\)-algebra homomorphisms in the other direction, we consider the diagram
+\begin{center}
+\begin{tikzcd}
+k & \\
+k[\epsilon]/\epsilon^2 \arrow[u, "\pi"] & k[a_{ij}]/(\det (a_{ij}) - 1) \arrow[l, "\theta"'] \arrow[lu, "a_{ij} \mapsto \delta_{ij}"']
+\end{tikzcd}
+\end{center}
+where we want maps $\theta$ and $\pi$ for which the diagram commutes.
+There is exactly one choice of $\pi$, given by $\epsilon \mapsto 0$, so if $\theta(a_{ij}) = b_{ij} + \epsilon m_{ij}$ for some $b_{ij}, m_{ij} \in k$ we have
+\begin{align*}
+\pi \theta (a_{ij})
+&=
+\pi(b_{ij} + \epsilon m_{ij})\\
+&=
+\delta_{ij}
+\end{align*}
+and because $\pi$ fixes $k$ we have $b_{ij} = \delta_{ij}$. Collecting these terms into a matrix $A = (a_{ij})$, we have $\theta(A) = I + \epsilon M$. As $\theta(\det A - 1) = \det \theta(A) - 1 = 0$ in $k$, then $\det(I + \epsilon M) = 1$. Considering an upper-triangular matrix conjugate with $M$, we see that $\det(I + \epsilon M) = 1 + \epsilon \text{tr}\, M$. This implies that $M$ is traceless.
+\end{proof}
+
+Retrieving the Lie Algebra in this way is not a coincidence, for instance we can also recover the Lie Algebra $\mathfrak{so}_n(k)$.
+
+\begin{proposition}
+Consider the setwise identification
+\[
+O_n(k) = \Spec k[a_{ij}]/((a_{ij})(a_{ij})^t - 1)
+\]
+and consider the $k$-point corresponding to the identity matrix as defined in Proposition \ref{SL LieAlg}. The morphisms $\Spec k[\epsilon]/\epsilon^2 \to \Spec k[a_{ij}]/(\det (a_{ij}) - 1)$ which factor through $f$ are the maps induced by $A \mapsto I_n + \epsilon M$, where $M$ is a skew-symmetric matrix.
+\end{proposition}
+
+It is possible to also retrieve the Lie bracket, but we need to consider points valued in larger infinitesimal rings like \(k[\epsilon,\delta]/(\epsilon^2,\delta^2)\).
+
+\section{Maps into spectra}
+
+Before introducing the general definition of a scheme, we will begin by proving a useful property, the morphisms from any scheme into a spectrum are given by the ring homomorphisms on global sections. This generalises an earlier result in the notes which established such a bijection for morphisms between spectra.
+
+%We begin by generalising the bijection between maps of spectra and ring homomorphisms on their global sections.
+
+\begin{theorem}
+For a ring $R$ and a scheme $X$, we have a bijection between morphisms of locally ringed spaces from a scheme $X$ to $\Spec R$ and ring homomorphisms between $R$ and the global sections of $X$, that is,
+\begin{equation}
+\textnormal{Mor}(X, \Spec R) \xrightarrow{\sim} \textnormal{Hom}(R, \mathcal{O}_X(X)).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The forward direction is immediate, as a morphism of locally ringed spaces contains a ring homomorphism on global sections. 
+
+Given a ring homomorphism $f \colon R \to \mathcal{O}_X(X)$, we need to create two maps: a continuous map $X \to \Spec R$ and ring homomorphisms on local sections. The construction of local sections is similar to the case between maps of spectra, so we only show how to construct the continuous map.
+
+Given a ring homomorphism $f \colon R \to \mathcal{O}_X(X)$, define a map $X \to \Spec R$ given by
+\begin{equation}
+x \mapsto \{r \in R \colon f(r) = 0 \text{ at } x\}
+\end{equation}
+where the notation $f(x)$ denotes the evaluation of $f$ at a point $x \in X$. To show this is indeed a map into $\Spec R$, this set is the preimage of the zero ideal in the field under the composition $R \to \mathcal{O}_{X,x}/\mathfrak{m}_x$, and the zero ideal is prime because $\mathcal{O}_{X,x}/\mathfrak{m}_x$ is a field.
+
+%\begin{center}
+%\begin{tikzcd}
+%R \arrow[r] \arrow[dr, dotted] 	& \mathcal{O}_X(X) \arrow[d] \\
+%								& \mathcal{O}_{X,x}/\mathfrak{m}_x
+%\end{tikzcd}
+%\end{center}
+
+We have to check that the map is continuous.
+We also have to then define the map of sheaves from \(O_{\Spec R}\) to the push-forward of \(O_X\).
+These are similar to our construction of a map from \(\Spec S \to \Spec R\) from a map \(R \to S\).
+\end{proof}
+
+\begin{remark}
+  Let \(R = O_X(X)\).
+  The identity map \(R \to O_X(X)\) gives a map \(X \to \Spec R\).
+  The scheme \(X\) is affine if and only if this map is an isomorphism.  This is a useful criterion in determining if a scheme is affine, as we now have only one possible choice of ring $R$ for which $X$ can be the spectrum: the ring of global sections and moreover there is only one possible map \(X \to \Spec R\) that can be the isomorphism: the map induced by the identity on global sections.
+\end{remark}
+
+As of yet, we have not discussed schemes which are not affine. This will be taken up in the next section.
+
+\section{Gluing schemes together}
+
+At long last, we introduce the general definition of a scheme. Recall that for a sheaf \(F\), the \emph{restriction} \(F|_U\) is defined as $F|_U(V) = F(V)$ for all open $V \subseteq U$.
+
+\begin{definition}
+An \emph{affine scheme} is a locally ringed space $(X, \mathcal{O}_X)$ which is isomorphic to the spectrum of a ring.
+\end{definition}
+
+\begin{definition}
+A \emph{scheme} is a locally ringed space $(X, \mathcal{O}_X)$ for which there is a open cover $U_i$ of $X$ such that each $(U_i, \mathcal{O}_X|_{U_i})$ is an affine scheme.
+\end{definition}
+
+\begin{example}
+A simple example of a scheme which is not affine is given by ${U = \A^2 \setminus (0,0)}$. We have previously shown that the global sections of this scheme are polynomials $k[x,y]$, and ${U \ne \Spec k[x,y] = \A^2}$ so $U$ is not affine. However, $U$ has an open cover of affine schemes $D(x)$ and $D(y)$, where $(D(x), \mathcal{O}_U|_{D(x)})$ and $(D(y), \mathcal{O}_U|_{D(y)})$ are isomorphic to $\Spec k[x,y]_x$ and $\Spec k[x,y]_y$ respectively.
+\end{example}
+
+We can generalise this example.
+
+\begin{proposition}
+Any open subset of an affine scheme is itself a scheme.
+\end{proposition}
+
+\begin{proof}
+As the open sets $D(f)$ form a basis of $\Spec R$ for $f \in R$, any open $U \subseteq \Spec R$ is expressable as the union of $D(f)$s. As $\mathcal{O}_{\Spec R}|_{D(f)} \cong R_f$, then $(D(f), \mathcal{O}_{\Spec R}|_{D(f)}) \cong \Spec R_f$ which is an affine cover. \end{proof}
+
+In general, most schemes we care about are not achieved as subschemes of affine schemes. Because of this, we introduce a general way or producing schemes: gluing already existing schemes together. 
+Let $X$ be a scheme with an open cover $U_i$ such that each $(U_i, \mathcal{O}_X|_{U_i})$ is affine. With the aim of describing how to glue affine schemes together to get new schemes, we describe some properties of the affines which they  satisfy on account of forming an open cover of $X$.
+\begin{enumerate}
+\item We can consider \(U_{i} \cap U_j\) as an open subscheme of \(U_i\) and as an open subscheme of \(U_j\).
+  Let us denote the first by \(U_{ij}\) and the second by \(U_{ji}\).
+  The the identity map gives an isomorphism of schemes \(\phi_{ij} \colon U_{ij} \to U_{ji}\).
+  If $i = j$, then $U_{ii} = U_i$ and $\phi_{ii}$ is the identity map.
+  The map \(\phi_{ji}\) is the inverse of \(\phi_{ij}\).
+  
+\item Consider the triple intersection $V = U_i \cap U_j \cap U_k$.
+  We can consider this as an open subscheme of \(U_i\) or an open subscheme of \(U_j\) (or of \(U_k\)).
+  Moreover, we have two maps taking $V \subset U_i$ to $V \subset U_j$, the map $\phi_{ij}$ or the composite $\phi_{kj} \circ \phi_{ik}$.  These maps agree; so $\phi_{ij} = \phi_{kj} \circ \phi_{ik}$ (on the appropriate domain). This property is the \emph{gluing condition}.
+\end{enumerate}
+
+It turns out that, given gluing maps satisfying the above conditions, the scheme $X$ is uniquely defined up to (unique) isomorphism. In the following theorem, we claim that given affine schemes and gluing maps, we can construct a scheme $X$.
+
+\begin{theorem}[Gluing Lemma]
+  Suppose we are given
+  \begin{enumerate}
+  \item a family of affine schemes $(U_i, \mathcal{O}_{U_i})$, and
+  \item for (possibly empty) open subsets $U_{ij} \subseteq U_i$, an isomorphism of schemes $\phi_{ij} \colon U_{ij} \xrightarrow{\sim} U_{ji}$, 
+  \end{enumerate}
+  such that \(\phi_{ii}\) is the identity; \(\phi_{ij}\) is the inverse of \(\phi_{ji}\); and the gluing condition is satisfied:
+  \[ \phi_{ij} = \phi_{kj} \circ \phi_{ik}\]
+  (on the appropriate domain).
+  Then, up to a unique isomorphism, there exists a scheme $X$ for which the affine schemes $(U_i, \mathcal{O}_{U_i})$ form an open cover of $X$.
+\end{theorem}
+
+\begin{proof}
+Exercise. Like Anand said the only person who can convince you of this is you.
+\end{proof}
+
+\subsection{Constructing $\P_k^1$}
+
+Putting the above gluing lemma into practice, here we outline the construction of $\mathbb{P}_k^1$ --- the projective line --- by giving two copies of $\Spec k[x]$ with appropriate attaching maps. This construction will circumvent the construction of $\textnormal{Proj}\; S$ for graded rings $S$, the details of which can be found in Eisenbud and Harris, \S III.2.
+
+As a set let $\P_k^1$ consist of dimension 1 subspaces of $\A_k^2$, that is, lines through the origin. Denote these subspaces as $[a,b] := \text{span}\, \{(a,b)\}$. Let $U_1 = \P_k^1 \setminus [0,1]$, then we may classify subspaces in $U_1$ by their gradient, that is, we have a map 
+\begin{align*}
+f_1 \colon U_1 &\to k\\
+[x_1, x_2] &\mapsto x_1/x_2.
+\end{align*}
+Alternatively, if $U_2 = \P_k^1 \setminus [0,1]$ we could have given a map $f_2 \colon U_2 \to k$ by $[x_1, x_2] \mapsto x_2/x_1$. As both of these maps are bijective, let us endow $U_1$ and $U_2$ with a Zariski topology of $k$ and a sheaf of rings $k[x]$ and $k[y]$ respectively, where $x = x_1/x_2$ and $y = x_2/x_1$. This implies that $U_1$ and $U_2$ are isomorphic to $\Spec k[x]$ and $\Spec k[y]$ respectively. As $U_1 \cup U_2 = \P_k^1$, we will have completed our construction of the scheme $\P_k^1$ by providing gluing isomorphisms (the gluing condition is vacuously true).
+
+Given that the intersection of sets $U_1 \cap U_2$ consists of lines $[a,b]$ for which $a \ne 0$ and $b \ne 0$, then $U_{12} = U_1 \cap U_2$ as a subset of $U_1$ is the distinguished open $D(x_1)$, so $(U_{12}, \mathcal{O}_{U_1}|_{U_1 \cap U_2}) = \Spec k[x]_{x} = \Spec k[x, x^{-1}]$.
+Likewise $(U_{21}, \mathcal{O}_{U_2}|_{U_1 \cap U_2}) = \Spec k[y, y^{-1}]$
+and our gluing map ${\phi_{12} \colon U_{12} \to U_{21}}$ is induced by the ring homomorphism $k[y, y^{-1}] \to k[x, x^{-1}]$ given by $y \mapsto x^{-1}$. Finally, $\phi_{21} \colon U_{21} \to U_{12}$ is induced by the ring homomorphism $x \mapsto y^{-1}$ and $\phi_{21} = \phi_{12}^{-1}$.
+
+Although our method of forming an open cover of $\P_k^1$ by finding copies of $k$ is a convenient way of showing $\P_k^1$ is a scheme, we haven't yet ruled out the possibility that there is some unusual choice of ring or morphism which shows that $\P_k^1$ is affine. This is ruled out in the following proposition.
+
+\begin{proposition}
+$\mathbb{P}_k^1$ is not an affine scheme.
+\end{proposition}
+
+\begin{proof}
+We recall that if $R$ is the ring of global sections on a locally ringed space $(X, \mathcal{O}_X)$, then the $X$ is an affine scheme if and only if the canonical map $X \to \Spec R$ is an isomorphism. Hence we consider the ring of global sections on $\mathbb{P}_k^1$.
+
+Suppose some global section $f \in \mathcal{O}(\mathbb{P}_k^1)$ restricts to $f_1 \in \mathcal{O}(U_1)$ and $f_2 \in \mathcal{O}(U_2)$. Then $f_1$ and $f_2$ agree on the intersection $U_1 \cap U_2$, so we consider the following commutative diagram.
+\begin{center}
+\begin{tikzcd}
+k[x] \arrow[d] & k[y] \arrow[d]\\
+k[x,x^{-1}] \arrow[r, "\phi_{12}", shift left = 0.5ex] & k[y,y^{-1}] \arrow[l, "\phi_{21}", shift left = 0.5ex]
+\end{tikzcd}.
+\end{center}
+So $f_1$ is a polynomial in $x$, which is mapped to a polynomial in $y^{-1}$ by our gluing map defined above. For this to agree with $f_2$, a polynomial in $y$, $f_1$ must be constant. Likewise $f_2$ is constant, so by the sheaf axioms $f$ is also constant.
+
+Hence $\Gamma(\mathbb{P}_k^1, \mathcal{O}_\mathbb{P}) \cong k$, and clearly $\mathbb{P}_k^1 \to \Spec k = \{(0)\}$ is not an isomorphism.
+\end{proof}
+
+\subsection{Constructing $\P_k^2$}
+
+Our method of classifying dimension 1 subspaces generalises nicely to higher dimensional spaces. For brevity's sake we will only do this for $\P_k^2$. This construction largely follows the formulation above, with the added detail that we will verify the gluing condition.
+
+As a set let $\P_k^2$ consist of dimension 1 subspaces of $\A_k^3$. For $i = 1,2,3$ let $U_i = \{[x_1, x_2, x_3] \colon x_i \ne 0\}$, we have maps
+\begin{center}
+\begin{tikzcd}
+& (x_2/x_1, x_3/x_1)\\
+\left[x_1, x_2, x_3\right] \arrow[ru, "f_1", end anchor=south west] \arrow[r, "f_2"] \arrow[rd, "f_3", end anchor = north west]
+& (x_1/x_2, x_3/x_2)\\
+& (x_1/x_3, x_2/x_3)
+\end{tikzcd}
+\end{center}
+Again, these maps are bijections, so endow each $U_i$ with a locally ringed structure isomorphic to the spectrum of polynomials over $k$ in two variables, namely $(U_i, \mathcal{O}_{U_i}) \cong \Spec k[a_i, b_i]$.
+%Similar to classifying one-dimensional subspaces of $\A_k^2$ by their gradient, we may classify one-dimensional subspaces of $\A_k^3$ by the data $(1, x_2/x_1, x_3/x_1)$
+We now have six gluing maps to define and three gluing conditions to check. We will only check that $\phi_{13} = \phi_{23} \circ \phi_{12}$ on the triple intersection, the other conditions are similar.
+
+The map $\phi_{12} \colon (U_{12}, \mathcal{O}_{U_{12}}) \to (U_{21}, \mathcal{O}_{U_{21}})$, is defined on the intersection $U_1 \cap U_2$, which is the subspaces $[x_1, x_2, x_3]$ for which $x_1 \ne 0$ and $x_2 \ne 0$. $\phi_{12}$ is induced by the ring homomorphism $\phi_{12}^\# \colon k[a_2, b_2, a_2^{-1}] \to k[a_1, b_1, a_1^{-1}]$ defined by
+\begin{align*}
+a_2 &\mapsto a_1^{-1}\\
+b_2 &\mapsto b_1 a_1^{-1}.
+\end{align*}
+Likewise we have maps $\phi_{23}$ and $\phi_{13}$ induced by the ring homomorphisms
+\begin{align*}
+\phi_{23}^\# \colon k[a_3, b_3, b_3^{-1}] &\to k[a_2, b_2, b_2^{-1}]\\
+a_3 &\mapsto a_2 b_2^{-1}\\
+b_3 &\mapsto b_2^{-1}
+\end{align*}
+and
+\begin{align*}
+\phi_{13}^\# \colon k[a_3, a_3^{-1}, b_3] &\to k[a_1, b_1, b_1^{-1}]\\
+a_3 &\mapsto b_1^{-1}\\
+b_3 &\mapsto a_1 b_1^{-1}.
+\end{align*}
+Then we check that $\phi_{13} = \phi_{23} \circ \phi_{12}$.
+\begin{align*}
+\phi_{12}^\# \circ \phi_{23}^\# \colon k[a_3, a_3^{-1}, b_3] &\to k[a_1, b_1, b_1^{-1}]\\
+a_3 &\mapsto a_2b_2^{-1} \mapsto b_1^{-1}\\
+b_3 &\mapsto b_2^{-1} \mapsto a_1 b_1^{-1}.
+\end{align*}
+
+As with $\P_k^1$, we are able to explicitly compute the ring of global sections.
+\begin{proposition}
+$\Gamma(\P_k^n, \mathcal{O}_\P) \cong k$, so $\P_k^n$ is not affine for any $n$.
+\end{proposition}
+
+We will see that projective schemes arise naturally in algebraic geometry. There is, however, no simple classification of maps into projective schemes like there was for affine schemes. This will be taken up in future lectures.
+
+\end{document}
