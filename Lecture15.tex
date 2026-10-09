@@ -4,6 +4,80 @@
 \section*{Lecture 15: Fibered Products}
 In this lecture we turn our attention to a categorical construction which will be a sort of generalisation of the product. \\
 The setup will consist of three schemes $X,Y,Z$, together with morphisms $f:X\to Z,g:Y\to Z$. The fibered product will be a universal object that is the `closest' to this configuration, in the following sense:
-\begin{definition}
-    
+\begin{definition}[Fibered product]
+    Let $X,Y,Z$ be schemes, and $f:X\to Z,g:Y\to Z$ be morphisms. A fibered product of this configuration is a scheme $\square$, together with morphisms $p_X:\square\to X,p_Y:\square\to Y$ which make the following diagram commute:
+\[\begin{tikzcd}
+	\square & X \\
+	Y & Z
+	\arrow["{p_X}", from=1-1, to=1-2]
+	\arrow["{p_Y}"', from=1-1, to=2-1]
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["g"', from=2-1, to=2-2]
+\end{tikzcd}\]
+    Moreover, a fibered product must satisfy the following universal property. Whenever $T$ is a scheme with maps $T\to X,T\to Y$ which commute with $f,g$, we have a unique morphism $\varphi:T\to\square$ which makes the following diagram commute:
+\[\begin{tikzcd}
+	T && \\
+	& \square & X \\
+	& Y & Z
+	\arrow["{\exists!\varphi}"{description}, dashed, from=1-1, to=2-2]
+	\arrow[curve={height=-12pt}, from=1-1, to=2-3]
+	\arrow[curve={height=12pt}, from=1-1, to=3-2]
+	\arrow["{p_X}", from=2-2, to=2-3]
+	\arrow["{p_Y}"', from=2-2, to=3-2]
+	\arrow["f", from=2-3, to=3-3]
+	\arrow["g"', from=3-2, to=3-3]
+\end{tikzcd}\]
 \end{definition}
+If a fibered product exists, it is unique up to unique isomorphism by the same argument as for the product, and so we refer to it as \textit{the} fibered product, and denote it by $X\times_ZY$. As is often the case in mathematics, this notation omits the most important information: the morphisms involved. \\
+Of course this definition need not be restricted to schemes, and works for any category. Let's go through some examples in more familiar categories.
+\begin{example}[Sets]
+    Let $X,Y,Z$ be sets, and $f:X\to Y,g:X\to Z$ functions. The fibered product, if it exists, is a set with maps to $X$ and $Y$, and so by the universal property of the product, there is a unique map $\varphi :X\times_ZY\to X\times Y$ making the following diagram commute:
+\[\begin{tikzcd}
+	{X\times_ZY} && \\
+	& {X\times Y} & X \\
+	& Y
+	\arrow["\varphi"{description}, dashed, from=1-1, to=2-2]
+	\arrow["{p_X}", curve={height=-12pt}, from=1-1, to=2-3]
+	\arrow["{p_Y}"', curve={height=12pt}, from=1-1, to=3-2]
+	\arrow["{\pi_X}"', from=2-2, to=2-3]
+	\arrow["{\pi_Y}", from=2-2, to=3-2]
+\end{tikzcd}\]
+    An element $a\in X\times_ZY$ is mapped to $\varphi(a)=(x,y)\in X\times Y$, and commutativity gives us that $x=p_X(a),y=p_Y(a)$. So by definition of $p_X,p_Y$, we have that whenever $\varphi(a)=(x,y)$, 
+    \[
+    f(x)=f(p_X(a))=g(p_Y(a))=g(y)
+    \]
+    We can therefore identify $X\times_ZY$ with the subset of $X\times Y$ which makes this equality true; that is,
+    \[
+    X\times_ZY=\{(x,y)\mid f(x)=g(y)\},
+    \]
+    where $p_X,p_Y$ are given by the usual projections restricted to this set.
+\end{example}
+\begin{example}[Specific situations in sets] \text{  }
+    \begin{itemize}
+        \item When $Z=\set{*}$ is a point, the only functions $f:X\to Z,g:Y\to Z$ are the trivial ones:
+        \[\begin{tikzcd}
+	       & X \\
+	       Y & \bullet
+	       \arrow[from=1-2, to=2-2]
+	       \arrow[from=2-1, to=2-2]
+        \end{tikzcd}\]
+        So, using our characterisation above,
+        \[
+        X\times_{\set{*}}Y=\set{(x,y) \mid f(x)=g(y)}=X\times Y.
+        \]
+        That is, the fibered product over a point is the regular product.
+        \item Let $Y\subseteq Z$ so that $i:Y\to Z$ is the inclusion map, and $f:X\to Z$ be any function. Using our characterisation, we have
+        \[\begin{tikzcd}
+        {\set{(x,y) \mid f(x)=y}} & X \\
+	       Y & Z
+	       \arrow[from=1-1, to=1-2]
+	       \arrow[from=1-1, to=2-1]
+	       \arrow["f", from=1-2, to=2-2]
+	       \arrow[hook, from=2-1, to=2-2]
+        \end{tikzcd}\]
+        This set can be naturally identified with $f^{-1}(Y)$, the preimage of $Y$ under $f$. 
+    \end{itemize}
+\end{example}
+\begin{remark}
+    The universal property of the fibered product says that for any object $T$, 
+\end{remark}
