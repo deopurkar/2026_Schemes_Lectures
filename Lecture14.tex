@@ -1,8 +1,8 @@
 \newpage
 
 \stepcounter{section}
-\section*{Lecture 14: Products and Fibre Products}
-Let $X,Y$ be schemes. In the same we can take the product of two sets or groups we want to define a product scheme $X\times Y$. This could mean taking the set of points $X\times Y$ and putting a scheme structure on it, i.e. topologising the set and providing a sheaf of rings. However this turns out to not be "the right thing" to do, to see why we must first pin down what we mean by "the right thing" in this context.
+\section*{Lecture 14: Products}
+Let $X,Y$ be schemes. In the same way that we can take the product of two sets or groups we want to define a product scheme $X\times Y$. This could mean taking the set of points $X\times Y$ and putting a scheme structure on it, i.e. topologising the set and providing a sheaf of rings. However this turns out to not be "the right thing" to do, to see why we must first pin down what we mean by "the right thing" in this context.
 
 To determine the correct definition we must specify the properties we want the product to satisfy. Our intuition tells us that we should have maps $\pi_X\colon X\times Y \to X$ and $\pi_Y\colon X\times Y \to Y$ such that for any scheme $Z$ we have
 \[
@@ -27,9 +27,10 @@ We then ask two questions,
     \item Does such an object exist?
     \item Is such an object unique?
 \end{enumerate}
-The answer to the second one is typically false, as any object satisfying the diagram can be relabelled, so we instead ask if such an object is unique up to unique isomorphism. That is, if $\square$ and $\bigcirc$ are two such specified objects there exists a unique isomorphism $\square\to\bigcirc$.
+The answer to the second one is typically false, as any object satisfying the diagram can be relabelled, so we instead ask if such an object is unique up to unique isomorphism. That is, if $\square$ and $\bigcirc$ are two such specified objects there exists a unique isomorphism $\square\to\bigcirc$ compatible with the projection maps.
 
-Suppose $\square$ and $\bigcirc$ are two objects that fit the commutative diagram. Then we can let $Z = \square$ to obtain that the identity $id_\square$ is the unique map which makes the diagram commute. We then use the fact that $\bigcirc$ is also a product to obtain the following diagram,
+Suppose $\square$ and $\bigcirc$ are two objects that fit the commutative diagram. Then we can let $Z = \square$ to obtain that the identity 
+id$_\square$ is the unique map which makes the diagram commute. We then use the fact that $\bigcirc$ is also a product to obtain the following diagram,
 \[\begin{tikzcd}
 	&&&&& X \\
 	\square && \bigcirc && \square \\
@@ -43,7 +44,7 @@ Suppose $\square$ and $\bigcirc$ are two objects that fit the commutative diagra
 	\arrow[from=2-5, to=1-6]
 	\arrow[from=2-5, to=3-6]
 \end{tikzcd}\]
-so $g\circ f$ is also a map which works. By uniqueness of the map we obtain $id_\square = g\circ f$, and similarly by swapping $\square$ and $\bigcirc$ we obtain $id_\bigcirc = f\circ g$. Thus $f$ is the unique isomorphism from $\square$ to $\bigcirc$ as desired.
+so $g\circ f$ is also a map which works. By uniqueness of the map we obtain Id$_\square = g\circ f$, and similarly by swapping $\square$ and $\bigcirc$ we obtain Id$_\bigcirc = f\circ g$. Thus $f$ is the unique isomorphism from $\square$ to $\bigcirc$ as desired.
 
 We have shown that if a product exists then it is unique up to unique isomorphism, so we denote the product by $X\times Y$. We now consider the question of existence.
 
@@ -51,7 +52,7 @@ We have shown that if a product exists then it is unique up to unique isomorphis
 (Sets)
 Let $X,Y$ be sets, we want to define the product $(X\times Y, \pi_X, \pi_Y)$. We claim that the Cartesian product
 \[
-X\times Y \colonequals \{ (x,y) \times x\in X, y\in Y\},
+X\times Y \colonequals \{ (x,y) \mid x\in X, y\in Y\},
 \]
 with $\pi_X,\pi_Y$ the projection maps to the first and second coordinate respectively, satisfies the specification. For any test set $T$ with maps $f,g$ we obtain the diagram,
 \[\begin{tikzcd}
@@ -70,7 +71,7 @@ where the uniqueness of the middle arrow is because for any $\varphi\colon T \to
 \begin{example}\hfill
 \begin{itemize}
     \item (Topological spaces) Let $X,Y$ be topological spaces. Then $X\times Y$ is the Cartesian product with the product topology.
-    \item (Groups) Let $G,H$ be groups. The $G\times H$ is the Cartesian product with component-wise multiplication.
+    \item (Groups) Let $G,H$ be groups. Then $G\times H$ is the Cartesian product with component-wise multiplication.
 \end{itemize}
 \end{example}
 
@@ -91,7 +92,7 @@ In all the examples we have done thus far the product is the Cartesian product w
 \end{example}
 
 \begin{example}
-    Let $X = \Spec (\Z/2\Z)$ and $Y = \Spec (\Z/3/\Z)$. Then $X\times Y = \emptyset$ is the empty scheme. This is because a scheme $Z$ with maps $f\colon Z\to X$, $g\colon Z\to Y$ is equivalent to ring maps $\varphi\colon \F_2\to \mathcal{O}_Z(Z)$, $\rho\colon \F_3\to \mathcal{O}_Z(Z)$. However we observe that
+    Let $X = \Spec (\Z/2\Z)$ and $Y = \Spec (\Z/3\Z)$. Then $X\times Y = \emptyset$ is the empty scheme. This is because a scheme $Z$ with maps $f\colon Z\to X$, $g\colon Z\to Y$ is equivalent to ring maps $\varphi\colon \F_2\to \mathcal{O}_Z(Z)$, $\rho\colon \F_3\to \mathcal{O}_Z(Z)$. However we observe that
     \[
     1_Z = 3\rho(1) - 2\varphi(1) = \rho(3) - \varphi(2) = 0_Z,
     \]
@@ -128,12 +129,12 @@ We now note that
 \[
 \text{set of prime ideals of } \Z[x,y] \neq \text{set of prime ideals of } \Z[x] \times \text{set of prime ideals of } \Z[y].
 \]
-Which contradicts our intuition that the points of a product should be the product of the points of the parts. To explore this in further detail we recall the two notions of points of a scheme $X$ we have defined,
+Which contradicts our intuition that the points of a product should be the product of the points of the parts. To explore this in further detail we recall the two notions of points of a scheme $X$,
 \begin{enumerate}
     \item The actual points of $X$,
-    \item $k$-points for a field $k$ (or $r$-points for a ring $r$) = Maps$(\Spec K , X)$
+    \item $k$-points for a field $k$ = Maps$(\Spec k , X)$, or more generally $R$-points for a ring $R$.
 \end{enumerate}
-We often think of the first type of points as an implementation detail, defined purely to get a topology that admits a good sheaf of rings. So by considerig the second type of points we can use the bijection between maps to the product and the product of maps to each part to obtain
+We often think of the first type of points as an implementation detail, defined purely to get a topology that admits a good sheaf of rings. So by considering the second type of points we can use the bijection between maps to the product and the product of maps to each part to obtain
 \[
 k\text{-points of } X\times Y = (k\text{-points of } X)\times (k\text{-points of } Y),
 \]
@@ -168,15 +169,15 @@ G \colonequals \{ a\otimes b \mid a\in A, b\in B\},
 \]
 and let our relations be generated by
 \[
-R \colonequals \langle a_1 \otimes b + a_2\otimes b - (a_1 +a_2)\otimes b, \quad a\otimes b_1 + a\otimes b_2 - a \otimes (b_1 + b_2)\rangle.
+N \colonequals \langle a_1 \otimes b + a_2\otimes b - (a_1 +a_2)\otimes b, \quad a\otimes b_1 + a\otimes b_2 - a \otimes (b_1 + b_2)\rangle.
 \]
 Then the desired ring is
 \[
-A\otimes B \colonequals \text{ free abelian group generated by } G\mod R,
+A\otimes B \colonequals \text{ free abelian group generated by } G\mod N,
 \]
-with the ring structure given by $(a_1\otimes b_1) \cdot (a_2\otimes b_2) = a_1a_2\otimes b_1b_2$. It is easy to check that this is a well-defined ring, and we define maps $A \to A\otimes B$ and $B \to A\otimes B$ by $a\mapsto a\otimes 1$ and $b\mapsto b\otimes 1$ respectively.
+with the ring structure given by $(a_1\otimes b_1) \cdot (a_2\otimes b_2) = a_1a_2\otimes b_1b_2$. It is easy to check that this is a well-defined ring, and we define maps $A \to A\otimes B$ and $B \to A\otimes B$ by $a\mapsto a\otimes 1$ and $b\mapsto 1\otimes b$ respectively.
 
-Then, given maps $f\colon A \to S$ and $g\colon B \to S$, the only way to define a map $A\otimes B \to S$ such that the desired diagram commutes is by defining,
+Then, given maps $f\colon A \to S$ and $g\colon B \to S$, the only way to define a map $A\otimes B \to S$ such that the diagram commutes is by defining,
 \[
 a\otimes 1 \mapsto f(a),
 \]
