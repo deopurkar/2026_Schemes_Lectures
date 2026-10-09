@@ -2,7 +2,8 @@
 
 \stepcounter{section}
 \section*{Lecture 14: Products}
-Let $X,Y$ be schemes. In the same way that we can take the product of two sets or groups we want to define a product scheme $X\times Y$. This could mean taking the set of points $X\times Y$ and putting a scheme structure on it, i.e. topologising the set and providing a sheaf of rings. However this turns out to not be "the right thing" to do, to see why we must first pin down what we mean by "the right thing" in this context.
+Let $X,Y$ be schemes. In the same way that we can take the product of two sets or groups we want to define a product scheme $X\times Y$. This could mean taking the set of points $X\times Y$ and putting a scheme structure on it, i.e. topologising the set and providing a sheaf of rings. However this turns out to not be ``the right thing'' to do.
+To see why, we must first pin down what we mean by ``the right thing'' in this context.
 
 To determine the correct definition we must specify the properties we want the product to satisfy. Our intuition tells us that we should have maps $\pi_X\colon X\times Y \to X$ and $\pi_Y\colon X\times Y \to Y$ such that for any scheme $Z$ we have
 \[
@@ -75,7 +76,9 @@ where the uniqueness of the middle arrow is because for any $\varphi\colon T \to
 \end{itemize}
 \end{example}
 
-In all the examples we have done thus far the product is the Cartesian product with some additional structure imposed on it. We will now construct some examples of the products of affine schemes.
+In all the examples we have done thus far the product is the Cartesian product with some additional structure imposed on it.
+Surprisingly, this is not the case with schemes.
+Here is the first example.
 
 \begin{example}
     Let $X=Y=\Spec \Z$. Then the data of a test scheme $Z$ with maps $f\colon Z\to X$, $g\colon Z\to Y$ is equivalent to ring maps $\varphi\colon \Z\to \mathcal{O}_Z(Z)$, $\rho\colon \Z\to \mathcal{O}_Z(Z)$. However there is a unique ring map from $\Z$ to any ring, so $\rho=\varphi$ and the data of the map from $Z$ to $X\times Y$ is equivalent to the ring map $\varphi$. Thus we obtain that $X\times Y = \Spec \Z$, which satisfies the commutative diagram
@@ -96,7 +99,9 @@ In all the examples we have done thus far the product is the Cartesian product w
     \[
     1_Z = 3\rho(1) - 2\varphi(1) = \rho(3) - \varphi(2) = 0_Z,
     \]
-    so $\mathcal{O}_Z(Z)$ must be the zero ring. The product must then be the empty scheme, so we obtain the diagram
+    so $\mathcal{O}_Z(Z)$ must be the zero ring, and therefore \(Z\) must be the empty scheme.
+    In other words, the only scheme that maps to \(X\) and \(Y\) is the empty scheme.
+    As a result, the product \(X \times Y\) must also be the empty scheme, so we obtain the diagram
     \[\begin{tikzcd}
 	&&& {\Spec \F_2} \\
 	\emptyset && \emptyset \\
@@ -125,22 +130,36 @@ In all the examples we have done thus far the product is the Cartesian product w
 By the same argument we also have for $\A^n_\Z = \Spec \Z[x_1,\dots, x_n]$ and $\A^m_\Z = \Spec \Z[y_1,\dots, x_m]$ that $\A^n_\Z\times \A^m_\Z = \A^{n+m}_\Z$.
 \end{example}
 
-We now note that 
+We now note that the set of prime ideals of \(\Z[x,y]\) is not the product of the set of prime ideals of \(\Z[x]\) and \(\Z[y]\).
+That is, we do not have the equality of sets
 \[
-\text{set of prime ideals of } \Z[x,y] \neq \text{set of prime ideals of } \Z[x] \times \text{set of prime ideals of } \Z[y].
+\Spec \Z[x,y] = \Spec \Z[x] \times \Spec \Z[y].
 \]
-Which contradicts our intuition that the points of a product should be the product of the points of the parts. To explore this in further detail we recall the two notions of points of a scheme $X$,
-\begin{enumerate}
-    \item The actual points of $X$,
-    \item $k$-points for a field $k$ = Maps$(\Spec k , X)$, or more generally $R$-points for a ring $R$.
-\end{enumerate}
-We often think of the first type of points as an implementation detail, defined purely to get a topology that admits a good sheaf of rings. So by considering the second type of points we can use the bijection between maps to the product and the product of maps to each part to obtain
-\[
-k\text{-points of } X\times Y = (k\text{-points of } X)\times (k\text{-points of } Y),
-\]
-which has the desired behaviour. For many purposes it suffices to consider the $k$-points of a scheme, so in this sense the product behaves as expected.
 
-We now turn our attention to the more general question. Let $X= \Spec A$ and $Y =\Spec B$, then does $X\times Y$ exist? This is asking whether there is a scheme $\square$ which satisfies the diagram,
+All the examples above contradict our intuition that the points of a product should be the product of the points of the parts.
+Nevertheless, the intuition is correct if we use a different notion of points than the literal points of the underlying topological space.
+
+We recall the two notions of points of a scheme $X$:
+\begin{enumerate}
+    \item The actual points of $X$ as a topological space,
+    \item Given a field (or even a ring) \(k\), the $k$-points of \(X\), namely
+      \[ \operatorname{Maps}(\Spec k, X).\]
+\end{enumerate}
+We often think of the first type of points as an implementation detail, defined purely to get a topology that admits a good sheaf of rings.
+The second notion of points is more fundamental.
+For example, suppose \(X\) is the affine scheme \(\Spec \Z[x_1,\dots,x_n]/(f_1,\dots,f_m)\).
+Then the set of \(k\)-points of \(X\) is precisely the set of \(k\)-valued solutions to the system of equations
+\[ f_1(x_1,\dots,x_n) = 0, \dots, f_m(x_1,\dots,x_n) = 0.\]
+The primary concern of algebraic geometry is understanding solutions of polynomial equations!
+
+The definition of the product scheme \(X \times Y\) behaves exactly as intended for this second, more fundamental notion of a point.
+By definition, we have
+\[ \operatorname{Maps}(\Spec k, X \times Y) = \operatorname{Maps}(\Spec k, X) \times \operatorname{Maps}(\Spec k,Y). \]
+For any \(k\), the \(k\)-valued points of \(X \times Y\) are precisely the product of the \(k\)-valued points of \(X\) and \(Y\).
+
+We now turn our attention to the general question: given \(X\) and \(Y\), does \(X \times Y\) exist?
+Let us take the simpler case where both \(X\) and \(Y\) are affine, say $\Spec A$ and $Y =\Spec B$.
+Then asking for \(X \times Y\) is asking whether there is a scheme $\square$ which satisfies the universal property in the following diagram: 
 \[\begin{tikzcd}
 	&&& {\Spec A} \\
 	T && \square \\
@@ -150,8 +169,9 @@ We now turn our attention to the more general question. Let $X= \Spec A$ and $Y 
 	\arrow["{B\to \mathcal{O}_T(T)}"', curve={height=0pt}, from=2-1, to=3-4]
 	\arrow[from=2-3, to=1-4]
 	\arrow[from=2-3, to=3-4]
-\end{tikzcd}\]
-This question is equivalent to asking if there is a ring $R$ with maps $A\to R$ and $B\to R$ such that
+      \end{tikzcd}.\]
+    We can try to find an affine scheme \(\square\) that satisfies the property.
+    Trying to find an affine \(\square\) is equivalent to trying to find a ring $R$ with maps $A\to R$ and $B\to R$ satisfying the following universal property:
 \[\begin{tikzcd}
 	&&& A \\
 	S && R \\
@@ -163,25 +183,32 @@ This question is equivalent to asking if there is a ring $R$ with maps $A\to R$ 
 	\arrow[from=3-4, to=2-3]
 \end{tikzcd}\]
 
-Such a ring does exist and we will now construct it. Let our set of generators be
+Such a ring does exist and we will now construct it.
+Consider the set 
 \[
-G \colonequals \{ a\otimes b \mid a\in A, b\in B\},
+G \colonequals \{ a\otimes b \mid a\in A, b\in B\}.
 \]
-and let our relations be generated by
+Let \(A \otimes B\) be the free abelian group generated by \(G\) modulo the following relations:
 \[
-N \colonequals \langle a_1 \otimes b + a_2\otimes b - (a_1 +a_2)\otimes b, \quad a\otimes b_1 + a\otimes b_2 - a \otimes (b_1 + b_2)\rangle.
+  \begin{split}
+    a_1 \otimes b + a_2\otimes b - (a_1 +a_2)\otimes b, \text{ for all } a_1, a_2 \in A \text{ and } b \in B,\\
+    a\otimes b_1 + a\otimes b_2 - a \otimes (b_1 + b_2), \text{ for all } a \in A \text{ and } b_1,b_2 \in B.
+  \end{split}
 \]
-Then the desired ring is
-\[
-A\otimes B \colonequals \text{ free abelian group generated by } G\mod N,
-\]
-with the ring structure given by $(a_1\otimes b_1) \cdot (a_2\otimes b_2) = a_1a_2\otimes b_1b_2$. It is easy to check that this is a well-defined ring, and we define maps $A \to A\otimes B$ and $B \to A\otimes B$ by $a\mapsto a\otimes 1$ and $b\mapsto 1\otimes b$ respectively.
+We make \(A \otimes B\) a ring by setting
+\[ (a_1 \otimes b_1) \times (a_2 \otimes b_2) = a_1a_2 \otimes b_1b_2,\]
+and extending by linearity.
+We need to check that this is well-defined modulo the relations, and satisfies the ring axioms, but we skip those checks.
+We define maps $A \to A\otimes B$ and $B \to A\otimes B$ by $a\mapsto a\otimes 1$ and $b\mapsto 1\otimes b$ respectively.
+Again, it is easy to check that these are ring homomorphisms.
 
-Then, given maps $f\colon A \to S$ and $g\colon B \to S$, the only way to define a map $A\otimes B \to S$ such that the diagram commutes is by defining,
-\[
-a\otimes 1 \mapsto f(a),
-\]
-\[
-1\otimes b \mapsto g(b),
-\]
-which then forces $a\otimes b \mapsto f(a)g(b)$. It is easy to check that this is a well-defined homomorphism, thus we conclude that $\Spec A \times \Spec B$ exists and it equal to $\Spec(A\otimes B)$. As an exercise show that $\F_2\otimes \F_3 = 0$, which agrees with what we expected from before.
+Given maps $f\colon A \to S$ and $g\colon B \to S$, there is a unique map \(h \colon A \otimes B \to S\) such that the composite \(A \to A \otimes B \to S\) is \(f\) and \(B \to A \otimes B \to S\) is \(g\).
+This map is given by
+\[ h(a \otimes b) = f(a) g(b).\]
+It is easy to check that this is a well-defined homomorphism.
+
+We conclude that $\Spec A \times \Spec B$ exists and it equal to $\Spec(A\otimes B)$. As an exercise show that $\F_2\otimes \F_3 = 0$, which agrees with what we expected from before.
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:
