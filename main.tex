@@ -1,7 +1,7 @@
 \documentclass{article}
 
 % AMS packages and theorem style setup
-\usepackage{amssymb, amsthm, amsmath}
+\usepackage{amssymb, amsthm, amsmath, stmaryrd}
 
 % Tikz
 \usepackage{tikz-cd}
@@ -17,9 +17,6 @@
     \newtheorem{nonexample}{Non-Example}[section]
 
     \newtheorem{definition}{Definition}[section]
-\theoremstyle{remark}
-    \newtheorem{remark}[section]{Remark}
-
 
 \theoremstyle{remark}
     \newtheorem{remark}{Remark}[section]
@@ -45,7 +42,7 @@
 \newcommand{\spec}{\mathrm{spec}}
 \renewcommand{\l}{\langle}
 \renewcommand{\r}{\rangle}
-
+\newcommand{\set}[1]{\{#1\}}
 
 
 % Tikz

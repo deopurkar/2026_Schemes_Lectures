@@ -7,7 +7,7 @@ Recall that morphisms from a locally ringed space $(X, \mathcal{O}_X)$ to projec
 \begin{tikzcd}
     \mathcal{L}_1  && \mathcal{O}_X^{n+1} \\
     \\
-    \mathcal{L}_2 && \mathcal{O}_X^{n+1}
+    \mathcal{L}_2 && \mathcal{O}_X^{n+1}.
     \arrow[hook, from=1-1, to=1-3]
     \arrow[hook, from=3-1, to=3-3]
     \arrow["\cong"{description}, from=1-1, to=3-1]
@@ -16,9 +16,38 @@ Recall that morphisms from a locally ringed space $(X, \mathcal{O}_X)$ to projec
 \end{tikzcd}
 \]
 
-We now look at maps between line bundles. Let $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}_1, \mathcal{L}_2)$ denote the $\mathcal{O}_X$-linear maps of sheaves from $\mathcal{L}_1$ to $\mathcal{L}_2$. The simplest case is when both $\mathcal{L}_1$ and $\mathcal{L}_2$ are just $\mathcal{O}_X$. On global sections, the map $\mathcal{O}_X(X) \to \mathcal{O}_X(X)$ is uniquely determined by what $1 \in \mathcal{O}_X(X)$ is mapped to, as the maps must be $\mathcal{O}_X$-linear. The map on global sections then induces maps $\mathcal{O}_X(U) \to \mathcal{O}_X(U)$ for open sets $U \in X$ by restriction. Hence $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{O}_X) \simeq \mathcal{O}_X(X)$, where we can think of maps as multiplication by an element of $\mathcal{O}_X(X)$. 
+We now look at maps between line bundles. Let $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}_1, \mathcal{L}_2)$ denote the set of $\mathcal{O}_X$-linear maps of sheaves from $\mathcal{L}_1$ to $\mathcal{L}_2$. The simplest case is when both $\mathcal{L}_1$ and $\mathcal{L}_2$ are just $\mathcal{O}_X$.
+\begin{proposition}
+  We have a natural bijection
+  \[ \mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{O}_X) \simeq \mathcal{O}_X(X)\]
+  defined as follows.
+  To go from the left to the right, we send a homomorphism \(\phi\) to \(\phi(1)\).
+  To go from the right to the left, we send \(f \in \mathcal{O}_X(X)\) to the homomorphism given by multiplication by \(f\).
+\end{proposition}
+\begin{proof}
+  It is clear that \(\mathcal{O}_X(X) \to \mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{O}_X) \to \mathcal{O}_X(X)\) is the identity.
+  Let us show that \(\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{O}_X) \to \mathcal{O}_X(X) \to \mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{O}_X)\) is the identity.
+  Let \(\phi \in \mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{O}_X)\) be given and let \(f = \phi(1)\).
+  On any \(U \subset X\), consider 
+  \[\phi(U) \colon \mathcal{O}_X(U) \to \mathcal{O}_X(U).\]
+  Since \(\phi\) is a map of sheaves, it must sends the restriction of \(1\) to the restriction of \(f\).
+  By \(\mathcal{O}_X\)-linearity, it must be multiplication by (the restriction of) \(f\).
+\end{proof}
 
-By similar reasoning, we see that $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{L}) \simeq \mathcal{L}(X)$. We now consider $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L})$. Let $\{U_i\}$ be an open cover of $X$ such that $\mathcal{L}|_{U_i} \cong O_{U_i}$ for each $i$, also known as a trivialisation of $\mathcal{L}$. A map $\alpha: \mathcal{L} \to \mathcal{L}$ restricts to maps $\alpha_i: \mathcal{L}|_{U_i} \to \mathcal{L}|_{U_i}$. Furthermore, on overlaps $U_{ij} := U_i \cap U_j$, we see that the restrictions of $\alpha_i$ and $\alpha_j$ to $U_{ij}$ must agree. As $\mathcal{L}|_{U_i} \cong \mathcal{O}_{U_i}$, we see that each $\alpha_i$ is multiplication by an element of $\mathcal{O}_X(U_i)$, and by our ``gluing condition" on $\alpha_i$'s we know that the multiplication has to be by an element that agrees on overlaps. Hence every element of $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L})$ is just multiplication by a $\lambda \in \mathcal{O}_X(X)$, and we have $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L}) \simeq \mathcal{O}_X(X)$ along with $\mathrm{Iso}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L}) \simeq \mathcal{O}_X(X)^\times$. 
+By similar reasoning, have
+\[ \mathrm{Hom}_{\mathcal{O}_X}(\mathcal{O}_X, \mathcal{L}) \simeq \mathcal{L}(X).\]
+We now consider $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L})$.
+\begin{proposition}\label{prop:homll}
+  The map
+  \[ \mathcal{O}_X(X) \to \mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L})\]
+  that sends \(f\) to the homomorphism given by multiplication by \(f\) is a bijection.
+\end{proposition}
+\begin{proof}
+  Let $\{U_i\}$ be an open cover of $X$ such that $\mathcal{L}|_{U_i} \cong O_{U_i}$ for each $i$, also known as a trivialisation of $\mathcal{L}$. A map $\alpha: \mathcal{L} \to \mathcal{L}$ restricts to maps $\alpha_i: \mathcal{L}|_{U_i} \to \mathcal{L}|_{U_i}$. Furthermore, on overlaps $U_{ij} := U_i \cap U_j$, we see that the restrictions of $\alpha_i$ and $\alpha_j$ to $U_{ij}$ must agree. As $\mathcal{L}|_{U_i} \cong \mathcal{O}_{U_i}$, we see that each $\alpha_i$ is multiplication by an element of $\mathcal{O}_X(U_i)$, and by our ``gluing condition" on $\alpha_i$'s we know that the multiplication has to be by an element that agrees on overlaps. Hence every element of $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L})$ is just multiplication by a $\lambda \in \mathcal{O}_X(X)$, and we have $\mathrm{Hom}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L}) \simeq \mathcal{O}_X(X)$
+\end{proof}
+A consequence of \Cref{prop:homll} is that the set of isomorphisms from \(L\) to \(L\) is the set of invertible elements of \(\mathcal{O}_X(X)\):
+\[ \mathrm{Iso}_{\mathcal{O}_X}(\mathcal{L}, \mathcal{L}) \simeq \mathcal{O}_X(X)^\times.\]
+
 
 \begin{remark}
     Given $\{\alpha_i\}$ such that the restrictions agree on overlaps, there exists a unique $\alpha$ such that $\alpha$ restricted to each $U_i$ is precisely $\alpha_i$. In other words, given sheaves $\mathcal{F}, \mathcal{G}$ on $X$, $U \mapsto \mathrm{Hom}(\mathcal{F}|_U, \mathcal{G}|_U)$ is also a sheaf. 
@@ -72,3 +101,7 @@ as a definition of the Picard group. Furthermore, if we can find an open cover $
 
     Larger values of $n$ follow similarly to $\P^2_k$.  
 \end{example}
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:
