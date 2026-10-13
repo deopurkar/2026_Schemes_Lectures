@@ -24,107 +24,142 @@ This is supposed to be the analogue of smooth or holomorphic functions, so how d
 \end{example}
 
 Consider another approach that generalises well.
-We recall that the underlying set (`points') of $\Spec{R}$ is the prime ideals of $\C[x,y]$ (consisting of $(0)$, ideals of irreducible polynomials in $\C[x,y]$ (see Hartshorne pg 7, Krull's \emph{Hauptidealsatz}, note that $\C[x,y]$ is a UFD), and the maximal ideals $(x-a,y-b)$).
-For the maximal ideals, we have that $\mathfrak{m}\leftrightarrow \A_\C^2$.
+We recall that the underlying set (`points') of $\Spec{R}$ is the prime ideals of $\C[x,y]$ (consisting of $(0)$, ideals of irreducible polynomials in $\C[x,y]$ (see Hartshorne pg 7, Krull's \emph{Hauptidealsatz}, note that $\C[x,y]$ is a UFD), and the maximal ideals $(x-a,y-b)$ by the \emph{Nullstellensatz}).
+For the maximal ideals, the map \((x-a,y-b) \mapsto (a,b)\) gives a bijection between the set of maximal ideals and \(\C^2\).
 We now consider the image of $f\in\C[x,y]$ in $\faktor{\C[x,y]}{(x-a,y-b)}$.
-As $(x-a,y-b)$ is a maximal ideal, this gives us a field, and there's a canonical isomorphism of $\C$-algebras to this ring given by $[f]\mapsto f(a,b)$.
-In this ideal, we note that $x\mapsto a$ and $y\mapsto b$ gives us what we want.
-This is how we can think of elements of $R$ as functions.
+As $(x-a,y-b)$ is a maximal ideal, this quotient gives us a field, and there's a canonical isomorphism of $\C$-algebras \(\C[x,y]/(x-a,y-b) \to \C\) given by $[f]\mapsto f(a,b)$.
+In this way, we can think of the evaluation of \(f\) at \((a,b)\) as the image of \(f\) in the quotient ring \(\C[x,y]/(x-a,y-b)\). 
+This way generalises to all rings and prime ideals, and we can think of elements of \(R\) as functions on \(\Spec R\).
 \begin{example}
     Let $R=\C[x,y]$ and let $f\in\C[x,y]$.
-    Then the evaluation at the maximal ideal $(x-a,y-b)$ corresponding to $(a,b)\in\A^2$ of $\Spec{R}$ is the image of $f$ in $\faktor{\C[x,y]}{(x-a,y-b)}$.
+    Then the evaluation at the maximal ideal $(x-a,y-b)$ corresponding to $(a,b)\in \C^2$ of $\Spec{R}$ is the image of $f$ in $\faktor{\C[x,y]}{(x-a,y-b)}$.
     As an example, consider $f=x-y$ at the points $(x-1,y-1)$ and $(x-1,y-2)$.
     Then at $(x-1,y-1)$, $f=(1-1)=[0]$ and at $(x-1,y-2)$ $f=(1-2)=[-1]$, which agrees with our intuition for evaluation.
 \end{example}
 
 \begin{example}
-    Let $R=\Z$ and let $f=67$.
-    Then evaluating $67$ at $(2)$ gives $[1]$.
-    The \emph{Vanishing Locus} of $V(67)$ is the set of all primes at which $67$ has value $[0]$, which is only $67$: $V(67)=(67)$.
-    $V(100)=\{(2),(5)\}$.
+  Let $R=\Z$ and let $f=67$.
+  Then the evaluation of \(f\) at a prime \(p\) is just the image of \(f\) in \(R/p\).
+    For example, evaluating $67$ at $(2)$ gives $[1]$.
+    The \emph{vanishing locus} of $V(67)$ is the set of all primes at which $67$ has value $[0]$, which is only $67$: $V(67)=(67)$.
+    Similarly, $V(100)=\{(2),(5)\}$.
 \end{example}
 
 \begin{remark}
     $\Spec{\Z}$ is a really funky place to do geometry: $\Spec{\Z}$ describes a non-singular curve (Vakil).
-\end{remark}
+  \end{remark}
 
-The traditional examples of these rings are things like:
+  \begin{proposition}
+    Let \(R\) be a ring.
+    The closed points of \(\Spec R\) are the maximal ideals of \(R\).
+  \end{proposition}
+  \begin{proof}
+    Recall that the prime ideals are the points of $\Spec{R}$ and that a maximal ideal is prime.
+    Let \(\mathfrak{p}\) be a prime ideal such that \(\{\mathfrak{p}\}\) is closed.
+    Then \(V(I) = \{\mathfrak{p}\}\) for some \(I\).
+    As result, \(I \subset \mathfrak{p}\), and therefore \(V(I) \supset V(\mathfrak{p})\).
+    So we get that \(\{\mathfrak p\} \supset V(\mathfrak{p})\).
+    But clearly \(\{\mathfrak p\} \subset V(\mathfrak{p})\).
+    So \(V(\mathfrak p) = \{\mathfrak p\}\).
+    Note that \(V(\mathfrak p)\) is the set of all prime ideals containing \(\mathfrak p\).
+    If \(V(\mathfrak p) = \{\mathfrak p\}\), then there is no prime ideal containing \(\mathfrak p\) other than \(\mathfrak p\) itself, which means that \(\mathfrak p\) is maximal.
+
+    Conversely, if \(\mathfrak p\) is maximal, then \(V(\mathfrak p) = \{\mathfrak p\}\).
+    This means that \(\{\mathfrak p\}\) is closed.
+  \end{proof}
+  
+In traditional algebraic geometry, the rings we encounter are rings like
 \begin{align*}
     &\faktor{\C[x,y]}{(y^2-x^3)}\\
-    &\faktor{\C[x,y,z]}{xy-z,zx-1}
+    &\faktor{\C[x,y,z]}{(xy-z,zx-1)},
 \end{align*}
-
-From the Nullstellensatz, we have that the maximal ideals of $\faktor{\C[x,y]}{(y^2-x^3)}$ are exactly those $(x-a,y-b)\ni (y^2-x^3)$.
-These points of the scheme are closed, and are the \emph{closed points of the scheme}.
+or more generally rings like
+\[ k[x_1,\dots,x_n]/I,\]
+where \(k\) is an algebraically closed field and \(I \subset k[x_1,\dots,x_n]\) is an ideal.
+\begin{proposition}
+  The maximal ideals of \( k[x_1,\dots,x_n]/I\) are in bijection with the points \((a_1,\dots,a_n)\) of \(k^n\) such that for all \(f \in I\), we have \(f(a_1,\dots,a_n) = 0\).
+  These are precisely the closed points of \(\Spec k[x_1,\dots,x_n]/I\).
+\end{proposition}
+For example, the maximal ideals of \(\mathbf{C}[x,y]/(y^2-x^3)\) are in bijection with the points \((a_1,a_2)\) of \(\C^2\) with \(a_2^2-a_1^3 = 0\).
 \begin{proof}
-    Recall that the prime ideals are the points of $\Spec{R}$ and that a maximal ideal is prime.
-    Then closed sets are `indexed' by the ideals: $V(\mathfrak{m})=\{\mathfrak{p}\mid \mathfrak{m}\subseteq\mathfrak{p}\}$.
-    Clearly, we are looking for those ideals $P$ such that $\mathfrak{m}\subseteq P\subseteq\Spec{R}$.
-    Note that $\mathfrak{m}$ is explicitly maximal, so $P$ is either $\mathfrak{m}$ or $R$.
-    But $R$ is not considered a prime ideal by our convention, so $V(\mathfrak{m})=\{\mathfrak{m}\}$.
+  From the correspondence theorem between a ring and its quotient, we know that taking the pre-image gives a bijection between the maximal ideals of \(k[x_1,\dots,x_n]/I\) and the maximal ideals of \(k[x_1,\dots,x_n]\) that contain \(I\).
+  From the Nullstellensatz, the maximal ideals of $k[x_1,\dots,x_n]$ are of the form \((x_1-a_1,\dots,x_n-a_n)\) for \((a_1,\dots,a_n) \in k^n\).
+  Note that \(I \subset (x_1-a_1,\dots,x_n-a_n) \) if and only if for all \(f \in I\), we have \(f(a_1,\dots,a_n) = 0\).    
 \end{proof}
 
-If $\mathfrak{m}$ is maximal, $\faktor{R}{\mathfrak{m}}$ is the residue field at a closed point of $\Spec{R}$.
-Quotienting by a maximal ideal of $\Spec{R}$ at a closed point gives us the base field of the scheme (over an algebraically closed field).
-
+We saw that we can think of elements of \(R\) as functions on \(\Spec R\).
+However, it can happen that two distinct elements of \(R\) give the same function!
 \begin{example}
     Let $R=\faktor{\Z}{24\Z}$. Take $f=12$.
     The points of $\Spec{R}$ are $(2)$ and $(3)$ because we have zero divisors (so $(0)$ is not prime).
-    $f(2)=f(3)=0$. In fact, $f$ evaluated at any point of the scheme is zero, but $f\neq 0$ (is distinct from the zero function).
+    Note that $f(2)=f(3)=0$; so $f$ evaluated at any point of the scheme is zero
+    But $f\neq 0$ (is distinct from the zero element of \(R\)).
 \end{example}
 
 This is a genuinely new feature, and can happen in a more traditional example.
 
 \begin{example}
-    Let $R=\faktor{\C[x]}{x^3}$ and $f=x$.
-    What is the value of $f$ at the point $(x)$ (a maximal ideal of $\faktor{\C[x]}{x^3})$?
-    We want to see what the image of $f$ is in $\faktor{R}{(x)}$ (which is clearly $[0]$).
-    So evaluating $f$ at a point of $\Spec{R}$ is a lossy thing.
+  Let $R=\faktor{\C[x]}{x^3}$ and $f=x$.
+  The only point of \(\Spec R\) is the maximal ideal \((x)\).
+  What is the value of $f$ at the point $(x)$?
+  It is the image of \(f\) in \(R/(x)\), which is clearly $[0]$.
+  So again a non-zero element of \(R\) gives the zero function on \(\Spec R\).
 \end{example}
 
-At this point, we have assigned the ring $R$ to the largest open subset of $\Spec{R}$.
+The previous examples show that evaluating $f$ at a point of $\Spec{R}$ is a lossy thing.
 
 \subsection{Localisation}
+At this point, we have assigned the ring $R$ to the largest open subset of $\Spec{R}$.
+We need to assign rings to all open subsets.
     We need some new algebra to continue.
 
     Take a ring $R$, and a subset $S\subset R$ which is closed under multiplication.
     We will return to the examples of $S=\{1,f,f^2,f^3,\dots\}$ and $S$ the complement of a prime ideal (for example, $R=\Z$ and $S=(2)$, and $R_{(S)}$ is thus the odd numbers).
-    Note that $S$ will always need to contain the unit; a short (but not satisfying) argument is that the product of zero elements must be $1$.
+    Note that $S$ will always need to contain the unit; a short argument is that the product of zero elements must be $1$.
+    If this is not satisfying, let us just make the convention that \(1 \in S\).
     
-    We form a new ring: $S^{-1}R$ formed by equivalence classes of $(r_1,s_1)\sim(r_2,s_2)$ if there exists $s\in S$ such that $s\cdot(r_1s_2-s_1r_2)=0$.
-    Considering $S^{-1}R$ as the fractions with denominators coming from $S$ is fine when $R$ is an integral domain, but falls apart if it is not (although it is a useful notation) via the equivalence relation.
-    Using the previous definition fixes this issue.
+    We form a new ring: $S^{-1}R$ formed by equivalence classes of pairs \((r,s)\) where \(r \in R\) and \(s \in S\) modulo the equivalence relation $(r_1,s_1)\sim(r_2,s_2)$ if there exists $s\in S$ such that $s\cdot(r_1s_2-s_1r_2)=0$.
 
-    \begin{example}[How $S^{-1}R$ breaks when $R$ not a domain]
+    If \(R\) is an integral domain and \(0 \not \in S\),  we simplify the equivalence relation as $(r_1,s_1)\sim(r_2,s_2)$ if
+    \begin{equation}\label{eqn:olddef}
+      (r_1s_2-s_1r_2)=0.
+    \end{equation}
+    In this case, it is fine to think of the elements of \(S^{-1}R\) as fractions \(r/s\).
+    But the additional \(s\) in the definition of the equivalence relation is necessary in case \(R\) has zero-divisors.
+    \begin{example}[{How the definition \eqref{eqn:olddef} breaks when $R$ not a domain}]
         We consider the equivalence relation defined by $(r_1,s_1)\sim(r_2,s_2)$ if $r_1s_2-s_1r_2=0$.
         Assume that $R$ is not an integral domain. Then there must exist zero divisors.
         We have that $(r_1,s_1)\sim(r_2,s_2)\implies r_1s_2=s_1r_2$, and $(r_2,s_2)\sim(r_3,s_3)\implies r_2s_3=s_2r_3$.
         Then we want to show that $(r_1,s_1)\sim(r_3,s_3)$.
         So we multiply through by $s_3$: $s_3r_1s_2-s_3s_1r_2=0$ and $s_1r_2s_3-s_1s_2r_3=0$.
         Note that we now have $s_3r_1s_2-s_1s_2r_3=0$, but if $s_2$ is a zero divisor, then $r_1s_3-s_1r_3$ may not be zero but may appear that way.
-    \end{example}
+      \end{example}
 
-    We note that $R\to S^{-1}R$ as $S$ contains the unit, so $R\subseteq S^{-1}R$. This is a natural map.
+      Even if \(R\) is not a domain, it is useful to think of the elements of \(S^{-1}R\) as fractions.
+      We just have to be careful when we cross-multiply!
+
+    We note that we have a homomorphism $R\to S^{-1}R$ that sends \(r\) to \((r,1)\) (recall that $S$ contains \(1\)).
     When does $a\neq0\in R\mapsto0$ in $S^{-1}R$?
     This happens if and only if $(a,1)\sim(0,1)$ and this occurs if and only if $\exists sa=0$, which implies that $S$ has got zero divisors.
     This shows that the map is not always injective.
 
     More generally, if $S$ contains no zero divisors, then the map is injective.
     This map is very rarely surjective.
-    Finally, the it can happen that the localisation is the zero ring, which occurs if and only if $0\in S$, which occurs if and only if $S$ contains a nilpotent.
+    In fact, we will see that the localisations of \(R\) are the rings of functions on open subsets of \(\Spec R\).
+    And we should not expect the map from global functions to functions on an open set to be surjective.  
+    
+    Finally, it can happen that the localisation is the zero ring, which occurs if and only if $0\in S$, which occurs if and only if $S$ contains a nilpotent.
 
-    All the elements of $S$ are sent to units: the inverse of $(s,1)$ is $(1,s)$ (consider this written as a fraction).
+    Under the natural map \(R \to S^{-1}R\), all the elements of $S$ are sent to units: the inverse of $(s,1)$ is $(1,s)$ (consider this written as a fraction).
     This is the smallest extension of $R$ such that all elements of $S$ become units.
-
-    We now consider a universal mapping property:
+    In other words, \(R \to S^{-1}R\) has the following universal property:
     \begin{equation*}
         \begin{tikzcd}
             R\ar[d]\ar[dr,"\varphi"]& \\
             S^{-1}R\ar[r,dashed,"\exists!"]&B
         \end{tikzcd}
     \end{equation*}
-
-    with $\varphi$ any ring homomorphism such that images of elements of $S$ are invertible in $B$.
+   If \(\phi \colon R \to B\) is any ring homomorphism such that images of elements of $S$ are invertible in $B$, then \(\phi\) factors uniquely through a map \(S^{-1}R \to B\).
 
     \subsection{Prime Ideals of Localisation}
         What are the prime ideals of $S^{-1}R$ and how does $\Spec{R}$ relate to $\Spec{S^{-1}R}$?
@@ -135,14 +170,20 @@ At this point, we have assigned the ring $R$ to the largest open subset of $\Spe
             \end{tikzcd}
         \end{equation*}
         We first consider the map above, and note that $i^{-1}(\mathfrak{p})$ must be a prime ideal that does not contain an element of $S$, as elements of $S$ are sent to units in $S^{-1}R$ (by the correspondence theorem).
-        Taking a prime ideal $\mathfrak{p}\in R$, $\l i(\mathfrak{p})\r=\left\{\frac{r}{s}\mid r\in\mathfrak{p}\right\}$.
+        In the other direction, let $\mathfrak{p}\in R$ be a prime ideal not containing any element of \(S\).
+        Then $\l i(\mathfrak{p})\r=\left\{\frac{r}{s}\mid r\in\mathfrak{p}\right\} \subset S^{-1}R$ is a prime ideal.
         
-        This is a bijection.
-        Note that $\frac{f_1}{s_1}\cdot\frac{f_2}{s_2}=\frac{f}{s}$ for some $f$ and $s$.
+        \begin{proposition}
+          The maps \(\mathfrak p \mapsto i^{-1}(\mathfrak p)\) and \(\mathfrak p \mapsto \langle i(\mathfrak p)\rangle\) are mutually inverse bijections between the prime ideals of \(R\) disjoint from \(S\) and the prime ideals of \(S^{-1}R\).
+        \end{proposition}
         \begin{proof}
-            By definition, $s^\prime sf_1f_2=s_1s_2fs^\prime$ (the equivalence relation), and is an equality in $R$.
+          Let $\mathfrak{p}\in R$ be a prime ideal not containing any element of \(S\).
+          Let us check that \(\langle i(\mathfrak p)\rangle\) is a prime ideal of \(S^{-1}R\).
+          Suppose \(f_1/s_1 \cdot f_2/s_2 \in \langle i(\mathfrak p)\rangle\).
+          Then \(f_1/s_1 \cdot f_2/s_2  = f/s\) for some \(f \in \mathfrak p\).
+           By definition, $s^\prime sf_1f_2=s_1s_2fs^\prime$ (the equivalence relation), and is an equality in $R$.
             The RHS is a member of $\mathfrak{p}$, which gives us that the LHS must also be a member of $\mathfrak{p}$.
-            But $s^\prime$ is not a member of $p$, which means that the other parts must be, so one of $f_1$ or $f_2$ must be in $\mathfrak{p}$
+            But $s^\prime$ and \(s\) are not a members of $\mathfrak p$, which means that the other parts must be, so one of $f_1$ or $f_2$ must be in $\mathfrak{p}$
         \end{proof}
 
         What is $\Spec{R_f}$? (recall that $R_f=(1,f,f^2,\dots)^{-1}R$, the \emph{localisation of $R$ at $f$}).
@@ -154,8 +195,10 @@ At this point, we have assigned the ring $R$ to the largest open subset of $\Spe
         If $D_f\subset D_g$, then we need to find a map $R_g\to R_f$.
         We need $(g)=(1)$ in $R_f$, otherwise we don't have a map.
 
+        To show that \((g) = (1)\) in \(R_{f}\), we show that there is no prime ideal of \(R_f\) that contains \((g)\).
+        Suppose there is.
         Take $\mathfrak{p}\subset R_f$ containing $g$ and look at the preimage $\tilde{\mathfrak{p}}\subset R$ of $\mathfrak{p}$.
-        We note that $\tilde{\mathfrak{p}}$ contains $g$, but not $f$ as we're pulled back from a place where $f$ is invertible.
+        We note that $\tilde{\mathfrak{p}}$ contains $g$, but not $f$ as we're pulled back from a place where $f$ is invertible.  But this contradicts \(D_f \subset D_g\).
 
         We now have a pre-sheaf on the distinguished open sets, and this is the natural approach here.
 
@@ -163,24 +206,33 @@ At this point, we have assigned the ring $R$ to the largest open subset of $\Spe
         \begin{enumerate}
             \item If $f,g\in\mathcal{F}$ and $\{U_i\}$ is an open cover of some open $U$, then if $f\in\mathcal{F}(U_i)=g\in\mathcal{F}(U_i)$ for all $i$, then $f=g$
             \item Given $f_i\in\mathcal{F}(U_i)$ for all $i$ such that for all $i,j$ the image of $f_i\in\mathcal{F}(U_i\cap U_j)$ equals the image of $f_j\in\mathcal{F}(U_i\cap U_j)$ then there exists $f\in\mathcal{F}(U)$ that maps to all the $f_i$.
-        \end{enumerate}
+            \end{enumerate}
 
-        If there is no prime ideal containig both $f$ and $g$, then $\Spec{R}=D_f\cup D_g$, then there are maps $R\to R_g$ and $R\to R_f$.
-        The first condition requires for every ideal that $f\neq 0$ or $g\neq 0$, as there is no ideal with $f=0$ and $g=0$.
-        Then $f\cup g=(1)$ and $(f,g)=(1)$, so we can find some $af+bg=1$.
+            It turns out that this procedure gives a ``sheaf on the base of the topology'' given by the open sets \(D_f\).
+            By a general principle, this extends uniquely to a sheaf on the whole space.
+            (This is explained in the next lecture).
 
-        Take $h_1$ and $h_2$ such that they are equal on both localisations.
-        So $(h_1-h_2)\cdot g^n=0$ and $(h_1-h_2)\cdot f^m=0$. Note that the differences are killed by powers of generators.
-        We want $h_1-h_2=0$ (but not as a function that evaluates to zero, actually zero).
-        For example, consider $n\cdot 2^m=0$ implies that $n=0$ (we don't necessarily have no nilpotents, so this is an important check).
+        % If there is no prime ideal containig both $f$ and $g$, then $\Spec{R}=D_f\cup D_g$, then there are maps $R\to R_g$ and $R\to R_f$.
+        % The first condition requires for every ideal that $f\neq 0$ or $g\neq 0$, as there is no ideal with $f=0$ and $g=0$.
+        % Then $f\cup g=(1)$ and $(f,g)=(1)$, so we can find some $af+bg=1$.
 
-        Two sections that are equal locally must be equal globally.
-        We can check that the object that we have so far satisfies the sheaf axioms (Exercise.)
+        % Take $h_1$ and $h_2$ such that they are equal on both localisations.
+        % So $(h_1-h_2)\cdot g^n=0$ and $(h_1-h_2)\cdot f^m=0$. Note that the differences are killed by powers of generators.
+        % We want $h_1-h_2=0$ (but not as a function that evaluates to zero, actually zero).
+        % For example, consider $n\cdot 2^m=0$ implies that $n=0$ (we don't necessarily have no nilpotents, so this is an important check).
 
-        We now have the structure sheaf:
-        \begin{itemize}
-            \item $\Spec{R}$ with this structure sheaf is our affine scheme
-            \item Any open set can be covered by $D_f$s as they are a basis for the topology
-            \item We need to check on double intersections
-            \item This is effectively a book-keeping exercise
-        \end{itemize}
+        % Two sections that are equal locally must be equal globally.
+        % We can check that the object that we have so far satisfies the sheaf axioms (Exercise.)
+
+        % We now have the structure sheaf:
+        % \begin{itemize}
+        %     \item $\Spec{R}$ with this structure sheaf is our affine scheme
+        %     \item Any open set can be covered by $D_f$s as they are a basis for the topology
+        %     \item We need to check on double intersections
+        %     \item This is effectively a book-keeping exercise
+        % \end{itemize}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:
