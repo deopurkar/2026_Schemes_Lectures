@@ -3,9 +3,6 @@
 % AMS packages and theorem style setup
 \usepackage{amssymb, amsthm, amsmath, amsfonts, stmaryrd}
 
-% Tikz
-\usepackage{tikz-cd}
-
 % Misc packages
 \usepackage{faktor}
 \usepackage{mathtools}
@@ -15,7 +12,7 @@
 \usepackage{cleveref}
 \theoremstyle{definition}
     \newtheorem{example}{Example}[section]
-    \newtheorem{nonexample}{Non-Example}[section]
+    \newtheorem{nonexample}[example]{Non-Example}
 
     \newtheorem{definition}{Definition}[section]
 
@@ -31,7 +28,6 @@
 
 \DeclareMathOperator{\Spec}{Spec}
 
-
 % Typesetting shortcuts
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -45,7 +41,6 @@
 \renewcommand{\l}{\langle}
 \renewcommand{\r}{\rangle}
 \newcommand{\set}[1]{\{#1\}}
-
 
 % Tikz
 \usepackage{tikz-cd}
@@ -66,6 +61,7 @@
 \input{lecture6}
 \input{lecture9}
 \input{lecture10}
+\input{lecture11}
 \input{lecture13}
 \input{lecture14}
 \input{lecture15}
