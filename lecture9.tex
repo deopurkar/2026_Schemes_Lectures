@@ -8,8 +8,8 @@ Given an abelian group \(G\) and a subgroup \(N \subset G\), we can construct th
     $$\mathcal{G}(U) = \left\{f \in \mathcal{O}_X : f(0) = 0 \text{ if } 0 \in U \text{ and } f(\infty) = 0 \text{ if } \infty \in U\right\}$$
     We consider the points $0 = [0 : 1] \in \mathbb{P}_\C^1$ and $\infty = [1 : 0] \in \mathbb{P}_\C^1$ and the open set $U = \mathbb{P}^1_\C$. Let $U_1 = U\backslash \{\infty\}$ and $U_2 = U \backslash \{0\}$ an open covering of $U$. \smallskip \\
     On $U$ we have $\mathcal{O}_X(U) = \C$ the constant functions and $\mathcal{G}(U) = \{0\}$ ie. the only constant map that evaluates to 0 at 0 and $\infty$ is the zero map. So $\mathcal{O}_X/\mathcal{G}(U) = \C$ \smallskip \\
-    On $U_1 = \spec\C[x]$ we have $\mathcal{O}_X(U_1) = \C[x]$ and $\mathcal{G}(U_1) = x\C[x]$. So $\mathcal{O}_X/\mathcal{G}(U_1) = \C$. \smallskip \\
-    On $U_2 = \spec\text{ }\C[x^{-1}]$ we have $\mathcal{O}_X(U_2) = \C[x^{-1}]$ and $\mathcal{G}(U_2) = x^{-1}\C[x^{-1}]$. So $\mathcal{O}_X/\mathcal{G}(U_2) = \C$ \smallskip \\
+    On $U_1 = \Spec\C[x]$ we have $\mathcal{O}_X(U_1) = \C[x]$ and $\mathcal{G}(U_1) = x\C[x]$. So $\mathcal{O}_X/\mathcal{G}(U_1) = \C$. \smallskip \\
+    On $U_2 = \Spec\C[x^{-1}]$ we have $\mathcal{O}_X(U_2) = \C[x^{-1}]$ and $\mathcal{G}(U_2) = x^{-1}\C[x^{-1}]$. So $\mathcal{O}_X/\mathcal{G}(U_2) = \C$ \smallskip \\
     On the intersection $U_1 \cap U_2 = \mathbb{P}^1_\C$ we have $\mathcal{O}_X(U_1 \cap U_2) = \C[x, x^{-1}]$ and $\mathcal{G}(U_1 \cap U_2) = \C[x, x^{-1}]$. So $\mathcal{O}_X/\mathcal{G}(U_1 \cap U_2) = 0$. \smallskip \\
     Now take $1 \in \mathcal{O}_X/\mathcal{G}(U_1)$ and $2 \in \mathcal{O}_X/\mathcal{G}(U_2)$. These both restrict to 0 on the intersection trivially. The gluing axiom requires us to find a global section represented by a complex number $f = c$ that restricts to $1$ and $2$ on $U_1$ and $U_2$ respectively. However the restrictions $f|_{U_1} = c$ and $f|_{U_2} = c$ are just the inclusion map and since $1 \neq 2$ there cannot exist such an $f$.
 \end{example}
@@ -67,9 +67,9 @@ Caution: $\mathcal{F} \to \mathcal{Q}$ surjection of sheaves does not mean $\mat
 \begin{nonexample}
     $X = \mathbb{P}^1, \mathcal{F} = \mathcal{O}_X$ and $I \subset \mathcal{O}_X$ the subsheaf consisting of sections vanishing at $0$ and $\infty$ then $\mathcal{O}_X \twoheadrightarrow \mathcal{O}_{X/I}$ but $$\C = \mathcal{O}_X(X) \to \mathcal{O}_{X/I}(X) = \C^2$$ is not surjective. 
 \end{nonexample}
-We now look towards closed embeddings and closed subschemes. Let $X = \spec A$ be an affine scheme and $Y$ a scheme with $i : Y \to X$ a morphism. The following theorem illustrates the main idea given without proof. 
+We now look towards closed embeddings and closed subschemes. Let $X = \Spec A$ be an affine scheme and $Y$ a scheme with $i : Y \to X$ a morphism. The following theorem illustrates the main idea given without proof. 
 \begin{theorem}
-    There exists an ideal $I \lhd A$ with $Y \cong \spec(A/I)$ if and only if the following three conditions hold:
+    There exists an ideal $I \lhd A$ with $Y \cong \Spec(A/I)$ if and only if the following three conditions hold:
     \begin{enumerate}
         \item The image $i(Y) \subset X$ is closed
         \item $i : Y \to i(Y)$ is a homeomorphism
