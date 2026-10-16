@@ -6,9 +6,9 @@
 % Note: ``Lecture 12'' (3rd September) was replaced with midsemester exam.
 
 Let \(k\) be a field.
-Previously, we have described morphisms $\spec\ k \to \P^n_k$. We also briefly saw what morphisms $X \to {\P_\Z^n}$ might look like. In this lecture we will explore this idea further, and see how it can extend to morphisms $X \to \P^n$ for any scheme $X$. For this lecture, we use the shorthand $\P^n = \P_\Z^n$.
+Previously, we have described morphisms $\Spec k \to \P^n_k$. We also briefly saw what morphisms $X \to {\P_\Z^n}$ might look like. In this lecture we will explore this idea further, and see how it can extend to morphisms $X \to \P^n$ for any scheme $X$. For this lecture, we use the shorthand $\P^n = \P_\Z^n$.
 
-First, recall the case when $X = \spec \; k$. Then a morphism $X \to \P^n$ is the same as the following data:
+First, recall the case when $X = \Spec k$. Then a morphism $X \to \P^n$ is the same as the following data:
 \begin{enumerate}
 	\item A 1-dimensional $k$-vector space $\mathcal{L}$ (we use the letter $\mathcal{L}$ to remind ourselves that we are looking at one-dimensional vector spaces, or ``lines'').
 	\item An injection $\mathcal{L} \hookrightarrow k^{n+1}$.
@@ -38,21 +38,21 @@ First, we should ask what a locally free, rank 1 $\mathcal{O}_X$-module actually
 \begin{example}
 	We now see some examples of the Picard group.
 	\begin{enumerate}
-		\item Let $X = \spec \; k = \{ \bullet \}$. A rank 1 $k$-module is just a 1 dimensional vector space, which is always globally free and unique up to isomorphism. So $\operatorname{Pic}(X) = \{\mathcal{O}_X\} \cong \{e\}$.
+		\item Let $X = \Spec k = \{ \bullet \}$. A rank 1 $k$-module is just a 1 dimensional vector space, which is always globally free and unique up to isomorphism. So $\operatorname{Pic}(X) = \{\mathcal{O}_X\} \cong \{e\}$.
 		\item In fact, whenever the underlying space $X = \{\bullet\}$ is a single point, then `local' and `global' are the same. So the only line bundle (locally free rank 1 module) is $\mathcal{O}_X$ itself, meaning $\operatorname{Pic}(X) = \{\mathcal{O}_X\} \cong \{e\}$. Geometrically, this corresponds to there being no room for a line to twist or change behaviour between open covers, because there is only one open cover.
-		\item Let $R$ be a local ring, with the unique maximal ideal $m$. Then $X = \spec \; R$ has a single closed point, $m$. Every non-empty open subset of $X$ must contain $m$. Because $m$ is in all parts of any open cover, the local properties around $m$ extend to global properties. So again, there is no distinction between `local' and `global' and $\operatorname{Pic}(X)$ is trivial.
-		\item $\operatorname{Pic}(\spec \; \Z) = \{\mathcal{O}_X\} \cong \{e\}$ (this is a consequence of the following theorem).
+		\item Let $R$ be a local ring, with the unique maximal ideal $m$. Then $X = \Spec R$ has a single closed point, $m$. Every non-empty open subset of $X$ must contain $m$. Because $m$ is in all parts of any open cover, the local properties around $m$ extend to global properties. So again, there is no distinction between `local' and `global' and $\operatorname{Pic}(X)$ is trivial.
+		\item $\operatorname{Pic}(\Spec \Z) = \{\mathcal{O}_X\} \cong \{e\}$ (this is a consequence of the following theorem).
 	\end{enumerate}
 \end{example}
 
 In fact, most of the affine schemes that we care about have trivial Picard group, due to the following theorem, which we state without proof.
 
 \begin{theorem} \label{prop: pic trivial on ufd}
-	Let $R$ be a ring which is a unique factorisation domain (for example, a PID), and let $X = \spec \; R$. Then $\operatorname{Pic}(X) = \{\mathcal{O}_X\}$ is trivial.
+	Let $R$ be a ring which is a unique factorisation domain (for example, a PID), and let $X = \Spec R$. Then $\operatorname{Pic}(X) = \{\mathcal{O}_X\}$ is trivial.
 \end{theorem}
 
 \begin{remark}
-	In number theory, the group $\operatorname{Pic}(\spec \; R)$ is often called the \emph{class group} of $R$, and it measures the failure of unique factorisation in the ring $R$.
+	In number theory, the group $\operatorname{Pic}(\Spec R)$ is often called the \emph{class group} of $R$, and it measures the failure of unique factorisation in the ring $R$.
 \end{remark}
 
 We now know what (sheaves of) locally free, rank 1 $\mathcal{O}_X$-modules look like abstractly. But how do we construct them explicitly? 
@@ -66,7 +66,7 @@ We now know what (sheaves of) locally free, rank 1 $\mathcal{O}_X$-modules look 
 \end{definition}
 
 \begin{definition}[$\mathcal{O}_X$-module associated to a module.]
-  Let $R$ be a ring and $M$ an $R$-module. Consider the affine scheme $X = \spec \; R$, and write $D_f = \spec \; R_f$. To each $D_f$, assign the localised module $M_f$, which is an $R_f$-module.  We can check that \(D_f \mapsto M_f\) defines a sheaf on the set of distinguished open, and hence extends uniquely to a sheaf on \(X\).
+  Let $R$ be a ring and $M$ an $R$-module. Consider the affine scheme $X = \Spec R$, and write $D_f = \Spec R_f$. To each $D_f$, assign the localised module $M_f$, which is an $R_f$-module.  We can check that \(D_f \mapsto M_f\) defines a sheaf on the set of distinguished open, and hence extends uniquely to a sheaf on \(X\).
   We denote this extension by by $\Tilde{M}$.  It is a sheaf of $\mathcal{O}_X$-modules.
 
   For non-affine \(X\), we can construct \(O_X\)-modules by gluing together various \(\widetilde M\) on affine open patches and gluing.
@@ -83,14 +83,14 @@ We now know what (sheaves of) locally free, rank 1 $\mathcal{O}_X$-modules look 
 The tilde construction can also be used to see explicit examples of schemes with non-trivial Picard group.
 
 \begin{example}
-  Let $R = \Z[\sqrt{-5}]$ and let $X = \spec \; R$.  Then \(R\) is not a UFD, and the failure of unique factorisation is where we will find a nontrivial element of $\operatorname{Pic}(X)$, due to \Cref{prop: pic trivial on ufd}.
+  Let $R = \Z[\sqrt{-5}]$ and let $X = \Spec R$.  Then \(R\) is not a UFD, and the failure of unique factorisation is where we will find a nontrivial element of $\operatorname{Pic}(X)$, due to \Cref{prop: pic trivial on ufd}.
   The non-trivial element of the Picard group will come from a place where unique factorisation fails:
   	\begin{align*}
 		6 = 2 \cdot 3 = (1 + \sqrt{-5}) (1 - \sqrt{-5}).
 	\end{align*}
 	Consider the ideal $I = (2, 1 + \sqrt[]{-5}) \subset R$.
         We show that \(\widetilde I\) is locally free of rank 1, but \(I\) is not globally free of rank 1.
-        To show local freeness, we take the open cover \(\spec\ R = D_2 \cup D_3\).
+        To show local freeness, we take the open cover \(\Spec R = D_2 \cup D_3\).
         On $D_2$, the localisation $I_2 \subset R_2$ contains the unit 2, meaning we must have $1 \in I_2$ as well, and hence $I_2 = R_2$. This is a free module of rank 1. 
        On $D_3$, the localisation is $I_3 \subset R_3$. We can compute
 	\begin{align*}
@@ -106,7 +106,7 @@ The tilde construction can also be used to see explicit examples of schemes with
 
 
 \begin{nonexample}
-	For $X = \spec \; \C[x,y]$, consider the ideal $I = (x,y)$. Its corresponding $\mathcal{O}_X$-module $\Tilde{I}$ is not locally free of rank 1.
+	For $X = \Spec \C[x,y]$, consider the ideal $I = (x,y)$. Its corresponding $\mathcal{O}_X$-module $\Tilde{I}$ is not locally free of rank 1.
 \end{nonexample}
 
 
@@ -126,7 +126,7 @@ The tilde construction can also be used to see explicit examples of schemes with
 \begin{proof}[Proof for $n=1$.]
 	We can construct the locally free $\mathcal{O}_X$-modules of rank 1 for $X = \P^1_k$, which are the elements of the Picard group. 
 	
-	$X$ is open covered by $U_1 = \spec \; k[t]$ and $U_2 = \spec \; k[s]$ with transition map $t = s^{-1}$. On $U_1$, we have $\mathcal{L}$ being a free $k[t]$-module of rank 1, generated by some $e_1$. And on $U_2$, it is a free $k[t^{-1}]$-module of rank 1, generated by some $e_2$. 
+	$X$ is open covered by $U_1 = \Spec k[t]$ and $U_2 = \Spec k[s]$ with transition map $t = s^{-1}$. On $U_1$, we have $\mathcal{L}$ being a free $k[t]$-module of rank 1, generated by some $e_1$. And on $U_2$, it is a free $k[t^{-1}]$-module of rank 1, generated by some $e_2$. 
 	
 	On the intersection, we need an isomorphism $\varphi: k[t,t^{-1}] \cdot e_1 \to k[t, t^{-1}] \cdot e_2$ of $k[t, t^{-1}]$-modules. If we make the forwards map be $\varphi(e_0) = f(t) e_1$ for some $f \in k[t, t^{-1}]$, then in order to have an inverse map, we require $f$ to be a unit, so that there is some $g$ such that $f(t) g(t) = 1$. With this, the inverse is $\varphi(e_1) = g(t) e_0$.
 	

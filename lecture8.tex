@@ -1,62 +1,9 @@
-\documentclass[a4,12pt]{article}
+\newpage
 
-%\usepackage{amsmath}
-\usepackage{amsfonts}
-%\usepackage{amssymb}
-%\usepackage{amscd}
-%\usepackage{mathdots}
-\usepackage{mathtools}
-\usepackage{units}
-%\usepackage{graphicx}
-%\usepackage{cancel}
-\usepackage{tikz-cd}
-\usepackage{xcolor}
+\stepcounter{section}
+\section*{Lecture 8: General Schemes}
 
-%\usepackage[style=numeric]{biblatex}
-%\addbibresource{}
-
-\usepackage{amsthm}
-
-\theoremstyle{definition}
-    \newtheorem{example}{Example}[section]
-    \newtheorem{nonexample}{Non-Example}[section]
-    \newtheorem{definition}{Definition}[section]
-
-\theoremstyle{remark}
-    \newtheorem{remark}{Remark}[section]
-
-\theoremstyle{plain}
-    \newtheorem{proposition}{Proposition}[section]
-    \newtheorem{theorem}{Theorem}[section]
-	\newtheorem{lemma}{Lemma}[section]
-	\newtheorem{conjecture}{Conjecture}[section]
-	\newtheorem{corollary}{Corollary}[section]
-
-\numberwithin{equation}{section}
-
-\setlength{\parskip}{4pt}
-\allowdisplaybreaks[1]
-
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\renewcommand{\H}{\mathbb{H}}
-\newcommand{\A}{\mathbb{A}}
-\newcommand{\RP}{\mathbb{RP}}
-\newcommand{\CP}{\mathbb{CP}}
-\renewcommand{\P}{\mathbb{P}}
-\newcommand{\Spec}{\textnormal{Spec}\,}
-
-\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} %Partial Derivative
-\newcommand{\2}[4]{\begin{bmatrix}#1 & #2 \\ #3 & #4 \end{bmatrix}} %2x2 matrix w/ square brackets
-\newcommand{\3}[9]{\begin{bmatrix}#1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}} %3x3 matrix w/ square brackets
-\newcommand{\bv}[1]{\mathbf{#1}}
-
-\begin{document}
-
-\section{The Zariski tangent space}
+\subsection{The Zariski tangent space}
 
 We recall two definitions from the previous lecture.
 
@@ -101,7 +48,7 @@ In this way, the notion of an \(R\)-point generalises the notion of an \(R\)-val
   We have encountered solutions of systems of equations in various rings like \(\Z\) or \(\Q\) or \(\C\).
   So we know that \(\Spec \Z\), \(\Spec \Q\), or \(\Spec \C\) points of schemes are significant.
   But points of schemes valued in more exotic rings can also have geometric significance.
-  For example, let us illustrate how \(k[\esplion]/\epsilon^2\)-points of a scheme recover tangent vectors.
+  For example, let us illustrate how \(k[\epsilon]/\epsilon^2\)-points of a scheme recover tangent vectors.
 
   Fix some $n \in \N$, variables $\{a_{ij}\}$ for $1 \le i,j \le n$, and a field \(k\).
   Consider the spectrum of the ring $k[a_{ij}]/(\det a_{ij} - 1)$.
@@ -163,7 +110,7 @@ and consider the $k$-point corresponding to the identity matrix as defined in Pr
 
 It is possible to also retrieve the Lie bracket, but we need to consider points valued in larger infinitesimal rings like \(k[\epsilon,\delta]/(\epsilon^2,\delta^2)\).
 
-\section{Maps into spectra}
+\subsection{Maps into spectra}
 
 Before introducing the general definition of a scheme, we will begin by proving a useful property, the morphisms from any scheme into a spectrum are given by the ring homomorphisms on global sections. This generalises an earlier result in the notes which established such a bijection for morphisms between spectra.
 
@@ -207,7 +154,7 @@ These are similar to our construction of a map from \(\Spec S \to \Spec R\) from
 
 As of yet, we have not discussed schemes which are not affine. This will be taken up in the next section.
 
-\section{Gluing schemes together}
+\subsection{Gluing schemes together}
 
 At long last, we introduce the general definition of a scheme. Recall that for a sheaf \(F\), the \emph{restriction} \(F|_U\) is defined as $F|_U(V) = F(V)$ for all open $V \subseteq U$.
 
@@ -264,7 +211,7 @@ It turns out that, given gluing maps satisfying the above conditions, the scheme
 Exercise. Like Anand said the only person who can convince you of this is you.
 \end{proof}
 
-\subsection{Constructing $\P_k^1$}
+\subsubsection{Constructing $\P_k^1$}
 
 Putting the above gluing lemma into practice, here we outline the construction of $\mathbb{P}_k^1$ --- the projective line --- by giving two copies of $\Spec k[x]$ with appropriate attaching maps. This construction will circumvent the construction of $\textnormal{Proj}\; S$ for graded rings $S$, the details of which can be found in Eisenbud and Harris, \S III.2.
 
@@ -300,7 +247,7 @@ So $f_1$ is a polynomial in $x$, which is mapped to a polynomial in $y^{-1}$ by 
 Hence $\Gamma(\mathbb{P}_k^1, \mathcal{O}_\mathbb{P}) \cong k$, and clearly $\mathbb{P}_k^1 \to \Spec k = \{(0)\}$ is not an isomorphism.
 \end{proof}
 
-\subsection{Constructing $\P_k^2$}
+\subsubsection{Constructing $\P_k^2$}
 
 Our method of classifying dimension 1 subspaces generalises nicely to higher dimensional spaces. For brevity's sake we will only do this for $\P_k^2$. This construction largely follows the formulation above, with the added detail that we will verify the gluing condition.
 
@@ -347,5 +294,3 @@ $\Gamma(\P_k^n, \mathcal{O}_\P) \cong k$, so $\P_k^n$ is not affine for any $n$.
 \end{proposition}
 
 We will see that projective schemes arise naturally in algebraic geometry. There is, however, no simple classification of maps into projective schemes like there was for affine schemes. This will be taken up in future lectures.
-
-\end{document}

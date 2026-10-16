@@ -1,20 +1,18 @@
 \documentclass{article}
 
 % AMS packages and theorem style setup
-\usepackage{amssymb, amsthm, amsmath, stmaryrd}
-
-% Tikz
-\usepackage{tikz-cd}
+\usepackage{amssymb, amsthm, amsmath, amsfonts, stmaryrd}
 
 % Misc packages
 \usepackage{faktor}
 \usepackage{mathtools}
+\usepackage{units}
 
 \usepackage{hyperref}
 \usepackage{cleveref}
 \theoremstyle{definition}
     \newtheorem{example}{Example}[section]
-    \newtheorem{nonexample}{Non-Example}[section]
+    \newtheorem{nonexample}[example]{Non-Example}
 
     \newtheorem{definition}{Definition}[section]
 
@@ -24,11 +22,9 @@
 \theoremstyle{plain}
     \newtheorem{proposition}{Proposition}[section]
     \newtheorem{theorem}{Theorem}[section]
+    \newtheorem{lemma}{Lemma}[section]
     \newtheorem{corollary}{Corollary}[section]
     \newtheorem{exercise}{Exercise}[section]
-
-\DeclareMathOperator{\Spec}{Spec}
-
 
 % Typesetting shortcuts
 \newcommand{\N}{\mathbb{N}}
@@ -39,11 +35,10 @@
 \newcommand{\A}{\mathbb{A}}
 \newcommand{\F}{\mathbb{F}}
 \renewcommand{\P}{\mathbb{P}}
-\newcommand{\spec}{\mathrm{spec}}
+\DeclareMathOperator{\Spec}{Spec}
 \renewcommand{\l}{\langle}
 \renewcommand{\r}{\rangle}
 \newcommand{\set}[1]{\{#1\}}
-
 
 % Tikz
 \usepackage{tikz-cd}
@@ -61,8 +56,11 @@
 \input{lecture3}
 \input{lecture4}
 \input{lecture5}
+\input{lecture6}
+\input{lecture8}
 \input{lecture9}
 \input{lecture10}
+\input{lecture11}
 \input{lecture13}
 \input{lecture14}
 \input{lecture15}
