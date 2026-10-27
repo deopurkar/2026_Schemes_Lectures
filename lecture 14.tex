@@ -1,0 +1,711 @@
+\documentclass{article}
+
+% Packages
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{needspace}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\newtheorem{nonexample}{Non-Example}[section]
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{exercise}{Exercise}[section]
+
+% Mathematical notation
+\DeclareMathOperator{\Spec}{Spec}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\P}{\mathbb{P}}
+
+\begin{document}
+
+% Number the environments as 14.1, 14.2, ...
+\setcounter{section}{13}
+\stepcounter{section}
+
+\section*{Lecture 14: Morphisms to Projective Space}
+
+\subsection*{Locally split injections and fibres}
+
+We have been trying to generalise the description of
+\(\operatorname{Mor}(\Spec k,\P^n_\Z)\) to a description of
+\(\operatorname{Mor}(X,\P^n_\Z)\). Recall that the proposed correspondence is
+\[
+    \operatorname{Mor}(X,\P^n_\Z)
+    \longleftrightarrow
+    \{(\mathcal{L},\iota)\}/\cong,
+\]
+where \(\mathcal{L}\) is a locally free \(\mathcal{O}_X\)-module of rank 1
+and \(\iota:\mathcal{L}\to\mathcal{O}_X^{\oplus(n+1)}\) is a locally split
+injection. Here an isomorphism of pairs must commute with the maps into
+\(\mathcal{O}_X^{\oplus(n+1)}\).
+
+For \(\Spec k\), a point of projective space is obtained by choosing a line
+in \(k^{n+1}\). For an arbitrary scheme \(X\), we would similarly like to
+choose a line at every point of \(X\), with these lines varying locally in
+a coherent way. However, an injection of sheaves need not give an injection
+after evaluation at every point. This is why we require a locally split
+injection, rather than just an injection of sheaves.
+
+Let us examine what this condition means for a map
+\[
+    \iota:\mathcal{L}\longrightarrow\mathcal{O}_X^{\oplus(n+1)}.
+\]
+Since \(\mathcal{L}\) is locally free of rank 1, we can choose an open set
+\(U\subseteq X\) and a trivialisation
+\(\tau:\mathcal{O}_U\xrightarrow{\sim}\mathcal{L}|_U\).
+Restriction commutes with finite direct sums, so
+\[
+    \bigl(\mathcal{O}_X^{\oplus(n+1)}\bigr)|_U
+    \cong\mathcal{O}_U^{\oplus(n+1)}.
+\]
+Thus, in this trivialisation, \(\iota|_U\) becomes the map
+\[
+    \phi=(\iota|_U)\circ\tau:
+    \mathcal{O}_U\longrightarrow\mathcal{O}_U^{\oplus(n+1)}.
+\]
+The condition that \(\iota\) is locally split means that we can choose an
+open cover by such sets \(U\) on each of which \(\phi\) is a split injection.
+
+\begin{proposition}\label{prop:lsi-section-criterion}
+    Let \(\phi:\mathcal{O}_U\to\mathcal{O}_U^{\oplus(n+1)}\) be an
+    \(\mathcal{O}_U\)-linear map, written as
+    \[
+        1\longmapsto(f_0,\dots,f_n),
+        \qquad f_0,\dots,f_n\in\mathcal{O}_X(U).
+    \]
+    Then \(\phi\) is a split injection if and only if there exist
+    \(g_0,\dots,g_n\in\mathcal{O}_X(U)\) such that
+    \[
+        f_0g_0+\cdots+f_ng_n=1.
+    \]
+\end{proposition}
+
+\begin{proof}
+    \postdisplaypenalty=10000
+    A map between finite free modules is determined by the images of the
+    basis vectors. The same applies here to maps of sheaves of
+    \(\mathcal{O}_U\)-modules. If \(e_0,\dots,e_n\) are the standard basis
+    sections of \(\mathcal{O}_U^{\oplus(n+1)}\), then
+    \[
+        \phi(1)=(f_0,\dots,f_n)=\sum_{i=0}^n f_i e_i
+    \]
+    determines \(\phi\).
+
+    Suppose first that \(\phi\) has a retraction
+    \(\psi:\mathcal{O}_U^{\oplus(n+1)}\to\mathcal{O}_U\), so that
+    \(\psi\circ\phi=\operatorname{id}_{\mathcal{O}_U}\).
+    \[
+    \begin{tikzcd}[column sep=large]
+        \mathcal{O}_U \arrow[r,"\phi",bend left=15]
+        & \mathcal{O}_U^{\oplus(n+1)}
+            \arrow[l,"\psi",bend left=15]
+    \end{tikzcd}
+    \]
+    Write \(\psi(e_i)=g_i\). Then
+    \[
+        1=\psi(\phi(1))
+        =\sum_{i=0}^n f_i\psi(e_i)
+        =\sum_{i=0}^n f_i g_i.
+    \]
+
+    Conversely, given such \(g_0,\dots,g_n\), define \(\psi\) on every open
+    set \(V\subseteq U\) by
+    \[
+        \psi_V(a_0,\dots,a_n)
+        =\sum_{i=0}^n (g_i|_V)a_i.
+    \]
+    These maps are \(\mathcal{O}_X(V)\)-linear and commute with restriction,
+    so they define a morphism of sheaves of \(\mathcal{O}_U\)-modules.
+    The identity \(\sum_i f_i g_i=1\) gives
+    \(\psi\circ\phi=\operatorname{id}_{\mathcal{O}_U}\), as required.
+\end{proof}
+
+\begin{remark}\label{rem:lsi-sections}
+    Here \(1\) denotes the unit section, and the \(f_i\) are sections of a
+    sheaf, not fixed scalars. More precisely, for every open
+    \(V\subseteq U\), the map on sections is
+    \[
+        \phi_V:\mathcal{O}_X(V)
+        \longrightarrow\mathcal{O}_X(V)^{\oplus(n+1)},
+        \qquad
+        1_V\longmapsto(f_0|_V,\dots,f_n|_V).
+    \]
+    We will sometimes suppress these restriction symbols and simply write
+    \(f_0,\dots,f_n\) when the open set is understood.
+\end{remark}
+
+\begin{corollary}\label{cor:lsi-unit-ideal}
+    If \(\phi\) is a split injection as above, then
+    \[
+        (f_0,\dots,f_n)=\mathcal{O}_X(U).
+    \]
+    More generally, for every open \(V\subseteq U\),
+    \[
+        (f_0|_V,\dots,f_n|_V)=\mathcal{O}_X(V),
+    \]
+    and, for every \(x\in U\),
+    \[
+        (f_{0,x},\dots,f_{n,x})=\mathcal{O}_{X,x},
+    \]
+    where \(f_{i,x}\) denotes the germ of \(f_i\) at \(x\).
+\end{corollary}
+
+\begin{proof}
+    Restrict the identity \(\sum_i f_i g_i=1\) to \(V\), or pass to its germ
+    at \(x\).
+\end{proof}
+
+The stalk \(\mathcal{O}_{X,x}\) is a local ring, with unique maximal ideal
+\(\mathfrak{m}_x\). Every principal ideal in this ring is either the whole
+ring or is contained in \(\mathfrak{m}_x\). If all the \(f_{i,x}\) belonged
+to \(\mathfrak{m}_x\), every linear combination
+\(\sum_i g_{i,x}f_{i,x}\) would also belong to \(\mathfrak{m}_x\), and could
+not equal 1. Consequently, at least one \(f_{i,x}\) lies outside
+\(\mathfrak{m}_x\), and is therefore a unit.
+
+\begin{corollary}\label{cor:lsi-unit-at-stalks}
+    If \(\phi:\mathcal{O}_U\to\mathcal{O}_U^{\oplus(n+1)}\), with
+    \(1\mapsto(f_0,\dots,f_n)\), is locally split, then for every \(x\in U\)
+    the stalk map is
+    \[
+        \phi_x:\mathcal{O}_{X,x}
+        \longrightarrow\mathcal{O}_{X,x}^{\oplus(n+1)},
+        \qquad 1\longmapsto(f_{0,x},\dots,f_{n,x}),
+    \]
+    and at least one \(f_{i,x}\) is a unit in \(\mathcal{O}_{X,x}\).
+\end{corollary}
+
+\begin{proof}
+    For each \(x\), choose a neighbourhood on which \(\phi\) splits, and
+    apply the preceding argument there.
+\end{proof}
+
+A stalk consists of germs of sections near a point. If a germ \(f_{i,x}\)
+is invertible, its inverse is represented by a section on some
+neighbourhood of \(x\). After shrinking that neighbourhood, the product
+of the two sections is 1. Thus \(f_i\) is invertible on some open
+neighbourhood \(W\) of \(x\). This lets us recover information on a
+neighbourhood from information at a stalk, and gives the following stalk
+criterion.
+
+\begin{proposition}\label{prop:lsi-stalk-criterion}
+    Let \(\mathcal{L}\) be a locally free \(\mathcal{O}_X\)-module of rank 1.
+    A map
+    \(\iota:\mathcal{L}\to\mathcal{O}_X^{\oplus(n+1)}\) is locally split
+    if and only if, for every \(x\in X\), the stalk map
+    \[
+        \iota_x:\mathcal{L}_x
+        \longrightarrow\mathcal{O}_{X,x}^{\oplus(n+1)}
+    \]
+    is a split injection.
+\end{proposition}
+
+\begin{proof}
+    If \(\iota\) splits on a neighbourhood of \(x\), taking stalks of the
+    retraction gives a retraction of \(\iota_x\).
+
+    Conversely, suppose every \(\iota_x\) is split. Fix \(x\) and choose
+    a trivialisation of \(\mathcal{L}\) on a neighbourhood \(U\), writing
+    \(\iota\) there as \(1\mapsto(f_0,\dots,f_n)\). A retraction of the
+    stalk map gives coefficients \(g_i\in\mathcal{O}_{X,x}\) with
+    \(\sum_i f_{i,x}g_i=1\). Since \(\mathcal{O}_{X,x}\) is local, at least
+    one \(f_{i,x}\) is a unit. Shrink to an open neighbourhood
+    \(W\subseteq U\) of \(x\) on which \(f_i\) is invertible. Then
+    \[
+        (a_0,\dots,a_n)\longmapsto (f_i|_W)^{-1}a_i
+    \]
+    defines a retraction in this trivialisation. These neighbourhoods
+    \(W\), as \(x\) varies, form an open cover on which \(\iota\) splits.
+\end{proof}
+
+This still does not quite express our original expectation: at every
+point, a locally split injection should give an inclusion of a
+one-dimensional vector space into an \((n+1)\)-dimensional vector space,
+without becoming zero. The following examples explain the distinction
+between a stalk map and a fibre map.
+
+\Needspace{24\baselineskip}
+\begin{example}\label{ex:lsi-23}
+    Consider the map of \(\Z\)-modules
+    \[
+        \phi:\Z\longrightarrow\Z^2,
+        \qquad 1\longmapsto(2,3).
+    \]
+    The associated morphism of sheaves on \(\Spec\Z\), which we also
+    denote by \(\phi\), is locally split. Indeed,
+    \(D(2)\cup D(3)=\Spec\Z\), and we have the following retractions:
+    \begin{itemize}
+        \item On \(D(2)\), the element 2 is invertible, and a retraction is
+        \[
+            \Z[1/2]^2\longrightarrow\Z[1/2],
+            \qquad (a,b)\longmapsto a/2.
+        \]
+        \item On \(D(3)\), the element 3 is invertible, and a retraction is
+        \[
+            \Z[1/3]^2\longrightarrow\Z[1/3],
+            \qquad (a,b)\longmapsto b/3.
+        \]
+    \end{itemize}
+    At the point \(x=(7)\), the fibre map is
+    \[
+        \overline{\phi}_x:\F_7\longrightarrow\F_7^2,
+        \qquad 1\longmapsto(\overline{2},\overline{3})\ne(0,0).
+    \]
+    It is non-zero, so it embeds a one-dimensional vector space as a
+    line in \(\F_7^2\).
+\end{example}
+
+\begin{example}\label{ex:lsi-46}
+    Now consider
+    \[
+        \psi:\Z\longrightarrow\Z^2,
+        \qquad 1\longmapsto(4,6).
+    \]
+    This is an injection, but it is not split, since
+    \((4,6)=2\Z\ne\Z\). Its associated sheaf morphism is also injective,
+    but is not locally split. To see what happens, compare the stalk
+    map and the fibre map at \(x=(2)\).
+
+    The stalk map is
+    \[
+        \psi_x:\Z_{(2)}\longrightarrow\Z_{(2)}^2,
+        \qquad 1\longmapsto(4/1,6/1).
+    \]
+    Although \(4/1\) and \(6/1\) lie in the maximal ideal
+    \(2\Z_{(2)}\), they have not been reduced modulo that ideal.
+    The ring \(\Z_{(2)}\) is a domain, so \(4a=0\) implies \(a=0\).
+    Hence \(\psi_x\) remains injective. Neither coordinate is a unit,
+    however, so this stalk map is not split.
+
+    The fibre map is instead
+    \[
+        \overline{\psi}_x:\F_2\longrightarrow\F_2^2,
+        \qquad 1\longmapsto(\overline{4},\overline{6})=(0,0).
+    \]
+    Thus the fibre map is zero.
+\end{example}
+
+These examples show that injectivity of every stalk map is not enough
+to imply that a sheaf morphism is locally split. The stalk criterion in
+\Cref{prop:lsi-stalk-criterion} requires \emph{split} injections. Fibre
+maps, on the other hand, give a criterion using injectivity alone.
+
+\begin{definition}[Fibre map]\label{def:lsi-fibre-map}
+    For \(x\in X\), let \(A=\mathcal{O}_{X,x}\) and let
+    \(k(x)=A/\mathfrak{m}_x\) be the residue field at \(x\).
+    A morphism \(\iota:\mathcal{L}\to\mathcal{O}_X^{\oplus(n+1)}\)
+    induces an \(A\)-linear stalk map
+    \(\iota_x:\mathcal{L}_x\to A^{\oplus(n+1)}\).
+    Reducing modulo \(\mathfrak{m}_x\) gives the \emph{fibre map}
+    \[
+    \begin{tikzcd}[column sep=large]
+        \mathcal{L}_x
+            \arrow[r,"\iota_x"] \arrow[d,two heads]
+        & A^{\oplus(n+1)} \arrow[d,two heads] \\
+        \mathcal{L}_x/\mathfrak{m}_x\mathcal{L}_x
+            \arrow[r,"\overline{\iota}_x"']
+        & k(x)^{\oplus(n+1)}.
+    \end{tikzcd}
+    \]
+    The bottom map is well-defined because \(\iota_x\) is \(A\)-linear,
+    and therefore
+    \[
+        \iota_x(\mathfrak{m}_x\mathcal{L}_x)
+        \subseteq\mathfrak{m}_x A^{\oplus(n+1)}.
+    \]
+\end{definition}
+
+\begin{proposition}[Fibre criterion]\label{prop:lsi-fibre-criterion}
+    Let \(\mathcal{L}\) be locally free of rank 1. A morphism
+    \(\iota:\mathcal{L}\to\mathcal{O}_X^{\oplus(n+1)}\) is locally split
+    if and only if, for every \(x\in X\), the fibre map
+    \(\overline{\iota}_x\) is non-zero. Equivalently, every fibre map is
+    injective.
+\end{proposition}
+
+\begin{proof}
+    Suppose first that \(\iota\) is locally split. Near each \(x\), choose
+    a retraction \(\rho\) with
+    \(\rho\circ\iota=\operatorname{id}_{\mathcal{L}}\).
+    Taking stalks and then reducing modulo \(\mathfrak{m}_x\) gives
+    \[
+        \overline{\rho}_x\circ\overline{\iota}_x
+        =\operatorname{id}_{\mathcal{L}_x/
+            \mathfrak{m}_x\mathcal{L}_x}.
+    \]
+    Hence \(\overline{\iota}_x\) is injective. Its source is a
+    one-dimensional vector space, so it is also non-zero.
+
+    Conversely, suppose \(\overline{\iota}_x\ne0\) for every \(x\).
+    Choose a trivialisation on a neighbourhood \(U\) of \(x\), so that
+    the map is written as
+    \[
+        \phi:\mathcal{O}_U\longrightarrow
+        \mathcal{O}_U^{\oplus(n+1)},
+        \qquad 1\longmapsto(f_0,\dots,f_n).
+    \]
+    Its fibre map, in this trivialisation, is
+    \[
+        \overline{\phi}_x:k(x)\longrightarrow k(x)^{\oplus(n+1)},
+        \qquad 1\longmapsto\bigl(f_0(x),\dots,f_n(x)\bigr),
+    \]
+    where \(f_i(x)\) is the image of the germ \(f_{i,x}\) in \(k(x)\).
+    Since this map is non-zero, some \(f_i(x)\ne0\). But
+    \[
+        f_i(x)\ne0
+        \quad\Longleftrightarrow\quad
+        f_{i,x}\notin\mathfrak{m}_x
+        \quad\Longleftrightarrow\quad
+        f_{i,x}\in\mathcal{O}_{X,x}^{\times}.
+    \]
+    This germ has an inverse, so \(f_i\) is invertible on some smaller
+    neighbourhood \(W\) of \(x\). On \(W\), the map
+    \((a_0,\dots,a_n)\mapsto(f_i|_W)^{-1}a_i\) is a retraction in the
+    chosen trivialisation. Such neighbourhoods give an open cover on
+    which \(\iota\) splits.
+
+    Finally, a linear map from a one-dimensional vector space is
+    injective if and only if it is non-zero.
+\end{proof}
+
+\begin{remark}\label{rem:lsi-fibre-line}
+    The residue ring \(k(x)\) is a field. The quotient
+    \(\mathcal{L}_x/\mathfrak{m}_x\mathcal{L}_x\), however, is naturally
+    a one-dimensional \(k(x)\)-vector space, not a field with a chosen
+    element 1. A trivialisation gives an isomorphism
+    \[
+        \mathcal{L}_x/\mathfrak{m}_x\mathcal{L}_x\cong k(x),
+    \]
+    but this isomorphism depends on the choice of trivialisation.
+    The non-zero fibre map embeds this one-dimensional vector space
+    into \(k(x)^{n+1}\). This is exactly the line at \(x\) that we wanted,
+    in agreement with the description of maps
+    \(\Spec k\to\P^n_\Z\).
+\end{remark}
+
+\Needspace{22\baselineskip}
+We can now collect the equivalent criteria.
+
+\begin{proposition}\label{prop:lsi-equivalent-conditions}
+    Let \(\mathcal{L}\) be a locally free \(\mathcal{O}_X\)-module of rank 1
+    and let \(\iota:\mathcal{L}\to\mathcal{O}_X^{\oplus(n+1)}\) be a
+    morphism. The following are equivalent:
+    \begin{enumerate}
+        \item \(\iota\) is locally split.
+        \item For every \(x\in X\), the stalk map \(\iota_x\) is a split
+        injection.
+        \item For every \(x\in X\), after choosing a local trivialisation
+        near \(x\) and writing \(1\mapsto(f_0,\dots,f_n)\), at least one
+        germ \(f_{i,x}\) is a unit in \(\mathcal{O}_{X,x}\).
+        \item For every \(x\in X\), the fibre map
+        \(\overline{\iota}_x\) is non-zero.
+        \item For every \(x\in X\), the fibre map
+        \(\overline{\iota}_x\) is injective.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    The stalk criterion and its proof give the equivalence of the first
+    three conditions. The fibre criterion identifies the first condition
+    with the fourth and fifth.
+\end{proof}
+
+\subsection*{Constructing a morphism to projective space}
+
+We now use the preceding criteria to construct a morphism to projective
+space from a line bundle with a locally split injection.
+
+\begin{proposition}\label{prop:lsi-map-to-projective-space}
+    Let \(\mathcal{L}\) be a line bundle on \(X\). A locally split injection
+    \[
+        \iota:\mathcal{L}\hookrightarrow
+        \mathcal{O}_X^{\oplus(n+1)}
+    \]
+    canonically determines a morphism
+    \(F:X\to\P^n_\Z\).
+\end{proposition}
+
+\begin{proof}
+    We construct the morphism locally and check agreement on overlaps.
+    Write
+    \[
+        V_i=\Spec\Z\left[\frac{X_r}{X_i}\;\middle|\;r\ne i\right]
+        \subseteq\P^n_\Z
+    \]
+    for the standard affine charts.
+
+    \emph{Local construction.}
+    Choose \(x\in X\), a neighbourhood \(U\), and a trivialisation
+    \(\alpha:\mathcal{O}_U\xrightarrow{\sim}\mathcal{L}|_U\).
+    In these coordinates, write
+    \[
+        \phi=(\iota|_U)\circ\alpha:
+        \mathcal{O}_U\longrightarrow\mathcal{O}_U^{\oplus(n+1)},
+        \qquad 1\longmapsto(f_0,\dots,f_n).
+    \]
+    At least one \(f_{i,x}\) is a unit. Suppose it is \(f_{0,x}\), and
+    shrink \(U\) so that \(f_0\in\mathcal{O}_X(U)^\times\).
+    The ring homomorphism
+    \[
+        \Z\left[\frac{X_1}{X_0},\dots,\frac{X_n}{X_0}\right]
+        \longrightarrow\mathcal{O}_X(U),
+        \qquad \frac{X_r}{X_0}\longmapsto\frac{f_r}{f_0}
+    \]
+    defines \(q_0:U\to V_0\), hence a morphism
+    \[
+        F_U:U\xrightarrow{q_0}V_0\hookrightarrow\P^n_\Z.
+    \]
+    Here \(U\) need not be affine: we use that the target \(V_0\) is affine.
+
+    \emph{Independence of choices.}
+    First keep \(U\) fixed and change the trivialisation. Any other
+    trivialisation is \(\alpha'=\alpha\circ(\times g)\) for some
+    \(g\in\mathcal{O}_X(U)^\times\). This replaces the coordinates by
+    \((gf_0,\dots,gf_n)\), but
+    \[
+        \frac{gf_r}{gf_0}=\frac{f_r}{f_0},
+    \]
+    so the ring map, and therefore \(F_U\), is unchanged.
+
+    There is also the choice of unit coordinate. Suppose \(f_0\) and
+    \(f_1\) are both units on \(U\). Choosing \(f_1\) instead gives
+    \(q_1:U\to V_1\), corresponding to
+    \(X_r/X_1\mapsto f_r/f_1\). We must compare their composites to
+    \(\P^n_\Z\). Put
+    \[
+        V_{01}=D\left(\frac{X_1}{X_0}\right)\subseteq V_0,
+        \qquad
+        V_{10}=D\left(\frac{X_0}{X_1}\right)\subseteq V_1.
+    \]
+    These opens are identified by the transition isomorphism
+    \(\tau_{01}:V_{01}\xrightarrow{\sim}V_{10}\) used to construct
+    \(\P^n_\Z\). Since \(f_1/f_0\) and \(f_0/f_1\) are units, the two
+    maps factor through these opens:
+    \[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        & V_{01}
+            \arrow[r,hook]
+            \arrow[dd,"\tau_{01}"',"\sim"]
+        & V_0 \arrow[dr,hook] & \\
+        U \arrow[ur,"\widetilde q_0"]
+          \arrow[dr,"\widetilde q_1"']
+        & & & \P^n_\Z \\
+        & V_{10} \arrow[r,hook]
+        & V_1 \arrow[ur,hook] &
+    \end{tikzcd}
+    \]
+    To check commutativity, compare the ring maps. For example, when
+    \(n\ge2\), following the transition and then the map from \(U\) gives
+    \[
+        \frac{X_2}{X_1}
+        \longmapsto\frac{X_2}{X_0}\frac{X_0}{X_1}
+        \longmapsto\frac{f_2}{f_0}\frac{f_0}{f_1}
+        =\frac{f_2}{f_1}.
+    \]
+    This is its image under the ring map for \(\widetilde q_1\).
+    The other generators are checked in the same way, so
+    \(\widetilde q_1=\tau_{01}\circ\widetilde q_0\).
+    Thus the two composites to \(\P^n_\Z\) agree. The same argument
+    applies to any two unit coordinates.
+
+    For \(\P^1\), this is just the choice between slope \(f_1/f_0\)
+    and anti-slope \(f_0/f_1\). They are reciprocals, exactly as in
+    the gluing of the two charts of \(\P^1\).
+
+    \emph{Gluing on \(X\).}
+    These neighbourhoods cover \(X\). On \(U_1\cap U_2\), the restrictions
+    of the local morphisms are obtained by restricting their
+    trivialisations and unit coordinates. These give two choices for
+    the same data \((\mathcal{L},\iota)|_{U_1\cap U_2}\). Since neither
+    choice affects the resulting morphism,
+    \[
+        F_{U_1}|_{U_1\cap U_2}=F_{U_2}|_{U_1\cap U_2}.
+    \]
+    The local morphisms therefore glue uniquely to a morphism
+    \(F:X\to\P^n_\Z\). The same overlap argument shows that it is
+    independent of the chosen neighbourhoods.
+\end{proof}
+
+% Third part
+
+\subsection*{The reverse construction}
+
+Conversely, suppose we are given a morphism
+\(\varphi:X\to\P^n_\Z\). Let
+\[
+    V_i=\Spec\Z\left[
+        \frac{X_r}{X_i}\;\middle|\;r\ne i
+    \right],
+    \qquad
+    U_i=\varphi^{-1}(V_i).
+\]
+The \(U_i\) form an open cover of \(X\). For each \(i\), the
+restriction \(\varphi|_{U_i}:U_i\to V_i\) gives a ring map
+\[
+    \Z\left[
+        \frac{X_r}{X_i}\;\middle|\;r\ne i
+    \right]
+    \longrightarrow\mathcal O_X(U_i),
+    \qquad
+    \frac{X_r}{X_i}\longmapsto h_r^{(i)}.
+\]
+Set \(h_i^{(i)}=1\). On \(U_i\), take the trivial line bundle
+and define
+\[
+    \iota_i:\mathcal O_{U_i}
+    \longrightarrow\mathcal O_{U_i}^{\oplus(n+1)},
+    \qquad
+    1\longmapsto
+    \bigl(h_0^{(i)},\ldots,h_n^{(i)}\bigr).
+\]
+Projection onto the \(i\)-th coordinate is a left inverse, so
+\(\iota_i\) is a split injection. We now need to glue these
+local line bundles and maps.
+
+Consider first \(U_{01}=U_0\cap U_1\). Write the restrictions
+of \(\iota_0\) and \(\iota_1\) as
+\[
+    \begin{aligned}
+        h:\mathcal O_{U_{01}}
+        &\longrightarrow\mathcal O_{U_{01}}^{\oplus(n+1)},
+        &1&\longmapsto(1,h_1,h_2,\ldots,h_n),\\
+        h':\mathcal O_{U_{01}}
+        &\longrightarrow\mathcal O_{U_{01}}^{\oplus(n+1)},
+        &1&\longmapsto(h'_0,1,h'_2,\ldots,h'_n).
+    \end{aligned}
+\]
+Here \(h_r\) is the pullback of \(X_r/X_0\), while \(h'_r\)
+is the pullback of \(X_r/X_1\), with all sections restricted
+to \(U_{01}\). These vectors need not be equal. However,
+the coordinate relations on projective space give
+\[
+    h'_0=h_1^{-1}.
+\]
+For example, when \(n\ge2\),
+\[
+    \frac{X_2}{X_1}
+    =
+    \frac{X_2}{X_0}\frac{X_0}{X_1}
+    \quad\Longrightarrow\quad
+    h'_2=h_2h_1^{-1}.
+\]
+The other coordinates behave in the same way. Hence
+\[
+    h'(1)
+    =
+    (h_1^{-1},1,h_2h_1^{-1},\ldots,h_nh_1^{-1})
+    =
+    h_1^{-1}h(1).
+\]
+Thus we should identify the two sources by multiplication
+by \(h_1\), rather than by the identity. This makes the
+following diagram commute:
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    \mathcal O_{U_{01}}
+        \arrow[r,"h"]
+        \arrow[d,"\times h_1"']
+    & \mathcal O_{U_{01}}^{\oplus(n+1)}
+        \arrow[d,equal]\\
+    \mathcal O_{U_{01}}
+        \arrow[r,"h'"']
+    & \mathcal O_{U_{01}}^{\oplus(n+1)}.
+\end{tikzcd}
+\]
+Indeed, \(h'\circ(\times h_1)=h\), and multiplication by
+\(h_1\) is an isomorphism since \(h_1\) is a unit on
+\(U_{01}\).
+
+More generally, on \(U_{ij}=U_i\cap U_j\), define
+\[
+    h_{ij}
+    =
+    \varphi^\#\left(\frac{X_j}{X_i}\right)
+    \in\mathcal O_X(U_{ij})^\times.
+\]
+Its inverse is \(h_{ji}\). The same calculation gives
+\[
+    \iota_j\circ(\times h_{ij})=\iota_i
+    \qquad\text{on }U_{ij}.
+\]
+On a triple overlap, the coordinate ratios satisfy
+\[
+    \frac{X_j}{X_i}
+    \frac{X_k}{X_j}
+    \frac{X_i}{X_k}=1,
+\]
+so their pullbacks satisfy the cocycle condition
+\[
+    h_{ij}h_{jk}h_{ki}=1.
+\]
+We may therefore glue the sheaves \(\mathcal O_{U_i}\)
+using the isomorphisms
+\[
+    \times h_{ij}:
+    \mathcal O_{U_i}|_{U_{ij}}
+    \xrightarrow{\sim}
+    \mathcal O_{U_j}|_{U_{ij}}.
+\]
+This gives a line bundle \(\mathcal L\), since
+\(\mathcal L|_{U_i}\cong\mathcal O_{U_i}\).
+The compatibility of the \(\iota_i\) with these
+identifications makes them glue to a global map
+\[
+    \iota:\mathcal L\longrightarrow
+    \mathcal O_X^{\oplus(n+1)}.
+\]
+It is split on each \(U_i\), and hence is a locally split
+injection.
+
+If
+\(\alpha_i:\mathcal O_{U_i}\xrightarrow{\sim}\mathcal L|_{U_i}\)
+are the resulting trivialisations, the gluing relation is
+\[
+    \alpha_i=\alpha_j\circ(\times h_{ij}).
+\]
+Thus, in the convention \(\alpha_j=\lambda_{ij}\alpha_i\),
+we have \(\lambda_{ij}=h_{ij}^{-1}\).
+
+Locally, the two constructions undo one another: the
+normalised vectors recover the affine coordinate ratios,
+and the ratios recover the same local line and injection.
+We therefore obtain the correspondence
+\[
+    \operatorname{Mor}(X,\P^n_\Z)
+    \longleftrightarrow
+    \{(\mathcal L,\iota)\}/\cong.
+\]
+
+\begin{remark}
+    The local sources are trivial, but their identifications
+    on overlaps need not be the identity. The resulting
+    \(\mathcal L\) need not be globally trivial: a family of
+    lines may have local generating vectors without a global
+    generating vector. This is why we need a line bundle
+    rather than always taking \(\mathcal L=\mathcal O_X\).
+
+    The same construction works for a locally ringed space
+    \(X\).
+\end{remark}
+
+\end{document}
