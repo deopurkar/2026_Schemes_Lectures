@@ -1,0 +1,531 @@
+\newpage
+
+\stepcounter{section}
+\section*{Lecture 16: Fibred Products; Scheme Theoretic Fibres}
+
+\indent\indent In previous lectures, we discussed the fibred products for affine schemes. The universal property of the pullback diagram corresponds contravariantly to that of the pushout diagram for rings. In particular, given $X = \Spec A$, $Y = \Spec B$ and $Z = \Spec R$ with $X \to Z$ and $Y \to Z$, the fibred product is
+\[
+    X \times_Z Y \cong \Spec (A \otimes_R B).
+\]
+
+\begin{example}[Base change of affine spaces] 
+    \label{ex:base-change-affine-space}
+    For any ring $R$, there is a canonical ring homomorphism $\Z \to R$ that induces a morphism on schemes $\Spec R \to \Spec \Z$. Therefore, one immediate application of the above construction is the base change of affine spaces. Let $\A_{\Z}^n = \Spec \Z[x_1, \dots, x_n]$ be the affine space over $\Z$. Then
+    \[
+        \begin{aligned}
+            \A_{\Z}^n \times_{\Spec \Z} \Spec R 
+            & = \Spec \Z[x_1, \dots, x_n] \times_{\Spec \Z} \Spec R \\
+            & \cong \Spec(\Z[x_1, \dots, x_n] \otimes_{\Z} R) \\
+            & \cong \Spec(R[x_1, \dots, x_n]) \\
+            & = \A_{R}^n.
+        \end{aligned}
+    \]
+    Thus, base change from $\Z$ to $R$ sends $\A_{\Z}^n$ to $\A_R^n$.
+\end{example}
+
+Recall the definition of scheme theoretic fibre at the end of last lecture: given a morphism $X \to T$ and a $k$-point $\Spec k \to T$, the scheme-theoretic fibre of $X$ over this point is the fibred product $X \times_T \Spec k$. Changing the choice of $k$-points gives different fibres of $X \to T$. This motivates the next example:
+
+\begin{example}[A family over {$\C[t]$}]
+    Let $T = \Spec \C[t]$ and $X = \Spec\bigl(\C[x, y, t]/(xy - t)\bigr)$. There is a canonical scheme morphism $X \to T$ induced by $\C[t] \to \C[x, y, t]/(xy - t)$, $t \mapsto t$. Consider the $\C$-point $\Spec \C \to T$ induced by the ring homomorphism $\C[t] \to \C$, $t \mapsto a$. Thus the fibre is
+    \[
+        \begin{aligned}
+            \C \otimes_{\C[t]} \C[x, y, t]/(xy - t) 
+            & = \bigl(\C[t]/(t - a)\bigr) \otimes_{\C[t]} \C[x, y, t]/(xy - t) \\
+            & = \bigl(\C[x, y, t]/(xy - t)\bigr)/(t - a) \\
+            & = \C[x, y, t]/(xy - t, t - a) \\
+            & = \C[x, y]/(xy - a)
+        \end{aligned}
+    \]
+    and fits into the pullback diagram
+    \[
+        \begin{tikzcd}
+            \Spec \bigl(\C[x,y]/(xy - a)\bigr) & X \\
+            \Spec \C & T \rlap{$\,= \Spec \C[t]$}
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-1, to=2-1]
+            \arrow[from=1-2, to=2-2]
+            \arrow["{a \mapsfrom \, t}"', from=2-1, to=2-2]
+        \end{tikzcd}
+    \]
+    Geometrically, the fibre may be viewed as the affine plane curve defined by $xy = a$. If $a \neq 0$, this gives a hyperbola; however when $a = 0$, the hyperbola degenerates to a union of two coordinate lines, namely $x = 0$ and $y = 0$. 
+    \[
+        \begin{tikzpicture}[scale=0.95]
+            
+            \def\ytop{0.55}
+            \def\ybot{-0.55}
+            
+            % X -> T
+            \node at (-3.7,\ytop) {$X$};
+            \node at (-3.7,\ybot) {$T$};
+            \draw[->] (-3.7,0.28) -- (-3.7,-0.28);
+            
+            % continuation dots
+            \node at (-2.8,\ytop) {$\cdots$};
+            \node at ( 2.8,\ytop) {$\cdots$};
+            \node at (-2.8,\ybot) {$\cdots$};
+            \node at ( 2.8,\ybot) {$\cdots$};
+            
+            % base
+            \draw (-2.25,\ybot) -- (2.25,\ybot);
+            
+            % marked parameter values
+            \foreach \x/\lab in {-1.45/{-1}, 0/{0}, 1.45/{1}} {
+                \fill (\x,\ybot) circle (1.2pt);
+                \node[below=2pt] at (\x,\ybot) {$\lab$};
+            }
+            
+            % xy = -1
+            \begin{scope}[shift={(-1.45,\ytop)}, scale=0.48]
+                \draw (-0.07,0.92)
+                    .. controls (-0.08,0.36) and (-0.34,0.08)
+                    .. (-0.92,0.07);
+                \draw (0.07,-0.92)
+                    .. controls (0.08,-0.36) and (0.34,-0.08)
+                    .. (0.92,-0.07);
+            \end{scope}
+            
+            % xy = 0
+            \begin{scope}[shift={(0,\ytop)}, scale=0.48]
+                \draw (-0.85,0) -- (0.85,0);
+                \draw (0,-0.85) -- (0,0.85);
+            \end{scope}
+            
+            % xy = 1
+            \begin{scope}[shift={(1.45,\ytop)}, scale=0.48]
+                \draw (0.07,0.92)
+                    .. controls (0.08,0.36) and (0.34,0.08)
+                    .. (0.92,0.07);
+                \draw (-0.07,-0.92)
+                    .. controls (-0.08,-0.36) and (-0.34,-0.08)
+                    .. (-0.92,-0.07);
+            \end{scope}
+            
+        \end{tikzpicture}
+    \]
+    These fibres may therefore be viewed as \textit{a family of schemes parametrized by $T$}.
+\end{example}
+
+The previous example considered fibres over $\C$-points of a scheme over $\C$. More generally, for points $p \in T$, the fibre over $p$ is naturally a scheme over its residue field, and these underlying residue fields may vary from point to point. A typical example is $\Spec\Z$, whose closed points $(p)$ have residue fields $\F_p$.
+
+\begin{example}
+    Let $T = \Spec \Z$ and $X = \Spec\bigl(\Z[x, y]/(xy - 2)\bigr)$. For a closed point $(p)\in T$, the fibre is $\Spec\bigl(\F_p[x,y]/(xy-2)\bigr)$. Since $\F_p$ is not algebraically closed, we may further base change to $\overline{\F}_p$ in order to describe its geometry using closed $\overline{\F}_p$-points:
+    \[
+        \begin{tikzcd}
+            X & \Spec\bigl(\F_p[x,y]/(xy - 2)\bigr) & \Spec\bigl(\overline{\F}_p[x,y]/(xy - 2)\bigr) \\
+            T & \Spec\F_p & \Spec\overline{\F}_p
+            \arrow[from=1-2,to=1-1]
+            \arrow[from=1-3,to=1-2]
+            \arrow[from=1-1,to=2-1]
+            \arrow[from=1-2,to=2-2]
+            \arrow[from=1-3,to=2-3]
+            \arrow[from=2-2,to=2-1]
+            \arrow[from=2-3,to=2-2]
+        \end{tikzcd}
+    \]
+    The resulting fibre over $\overline{\F}_p$ is called the \textit{geometric fibre}. For $p \neq 2$, $xy = 2$ gives a hyperbola, whereas for $p = 2$, the equation becomes $xy = 0$, so the fibre degenerates into a cross.
+\end{example}
+
+However, not every morphism $X \to T$ gives an interesting picture as a family of schemes parametrized by $T$. Consider $T = \Spec\Z$ and $X = \Spec\C[x]$. The canonical map induced by $\Z \hookrightarrow \C[x]$ sends every point of $X$ to the generic point $(0)$. Hence all fibres over closed points $(p)$ are empty.
+
+This geometric interpretation may also be illustrated by Example~\ref{ex:base-change-affine-space}: taking $R = k$ gives a base change to $\A^n_k$, whose $k$-points form the familiar coordinate space $k^n$. The same viewpoint can also give intuition for nonreduced structure: nilpotents do not create additional points, but can record the multiplicity of a repeated root.
+
+\begin{example}
+    \label{ex:Z[i]}
+    Consider $\Spec\Z[i] \cong \Spec \bigl(\Z[x]/(x^2 + 1)\bigr) \to \Spec \Z$. For a prime $p$, the geometric fibre is $\Spec \bigl(\overline{\F}_p[x]/(x^2 + 1)\bigr)$. We distinguish the following specific cases:
+    \begin{itemize}
+        \item $p = 2$. The geometric fibre is $\Spec\overline{\F}_2[x]/(x^2 + 1) \cong \Spec\overline{\F}_2[x]/(x + 1)^2 \cong \Spec\overline{\F}_2[y]/(y^2)$ where $y = x + 1$. It only presents one point in $\A^1_{\overline{\F}_2}$ with multiplicity $2$.
+        \[
+            \begin{tikzpicture}[>=Latex, scale=1]
+                % affine line
+                \draw[dashed, <->] (0,-1) -- (0,1);
+            
+                % one point
+                \fill (0,0) circle (1.5pt);
+            
+                % multiplicity
+                \draw[->] (0,0) -- (0,0.3);
+                \draw[->] (0,0) -- (0,-0.3);
+            \end{tikzpicture}
+        \]
+        \item $p \neq 2$. $x^2 + 1 = 0$ has two roots in $\overline{\F}_p$.
+        \[
+            \begin{tikzpicture}[>=Latex, scale=1]
+                % affine line
+                \draw[dashed, <->] (0,-1) -- (0,1);
+            
+                % two points
+                \fill (0,0.3) circle (1.5pt);
+                \fill (0,-0.3) circle (1.5pt);
+            \end{tikzpicture}
+        \]
+    \end{itemize}
+    In conclusion, we may summarize this situation in the following schematic figure. (This figure is schematic, geometrically inspired by the family $\Spec \C[t][x]/(x^2 + t) \to \Spec\C[t]$.)
+    \[
+        \begin{tikzpicture}[>=Latex, scale=1]
+        
+            % base line
+            \draw[dashed, <->] (-0.8,0) -- (6.8,0);
+            \node[left] at (-1.0,0) {$\Spec \Z$};
+        
+            % prime points on base
+            \foreach \x/\p in {0/2, 2/3, 4/5, 6/7} {
+                \fill (\x,0) circle (1.4pt);
+                \node[below] at (\x,0) {$\p$};
+            }
+        
+            % fibre over p=2
+            \draw[dashed, <->] (0,0.4) -- (0,2.4);
+            \fill (0,1.4) circle (1.5pt);
+            \draw[->] (0,1.4) -- (0,1.7);
+            \draw[->] (0,1.4) -- (0,1.1);
+        
+            % fibre over p=3
+            \draw[dashed, <->] (2,0.4) -- (2,2.4);
+            \fill (2,1.8) circle (1.5pt);
+            \fill (2,1.0) circle (1.5pt);
+        
+            % fibre over p=5
+            \draw[dashed, <->] (4,0.4) -- (4,2.4);
+            \fill (4,1.8) circle (1.5pt);
+            \fill (4,1.0) circle (1.5pt);
+        
+            % fibre over p=7
+            \draw[dashed, <->] (6,0.4) -- (6,2.4);
+            \fill (6,1.8) circle (1.5pt);
+            \fill (6,1.0) circle (1.5pt);
+    
+            % two branches of geometric points
+            \draw[dashed]
+                (0,1.4)
+                .. controls (0.22,1.85) and (1.05,1.8) .. (2,1.8)
+                .. controls (2.7,1.8) and (3.3,1.8) .. (4,1.8)
+                .. controls (4.7,1.8) and (5.3,1.8) .. (6,1.8)
+                .. controls (6.3,1.8) and (6.55,1.8) .. (6.8,1.8);
+    
+            \draw[dashed]
+                (0,1.4)
+                .. controls (0.22,0.95) and (1.05,1.0) .. (2,1.0)
+                .. controls (2.7,1.0) and (3.3,1.0) .. (4,1.0)
+                .. controls (4.7,1.0) and (5.3,1.0) .. (6,1.0)
+                .. controls (6.3,1.0) and (6.55,1.0) .. (6.8,1.0);
+        
+        \end{tikzpicture}
+    \]
+\end{example}
+
+In some cases, e.g. $p = 5$, the solution for $x^2 + 1 = 0$ is $\pm 2$, which already lie in $\F_5$. Therefore, the Frobenius automorphism in $\Aut\bigl(\overline{\F}_5/\F_5\bigr)$ fixes $2$ and $-2$. Meanwhile, for $p = 3$, the roots are not in $\F_3$, so the Frobenius automorphism in $\Aut\bigl(\overline{\F}_3/\F_3\bigr)$ interchanges the two roots. 
+
+Examples above suggest that automorphisms naturally act on geometric points in the geometric fibre, and the following gives one way of formalizing it. For a non-algebraically closed field $k$, let $X$ be a $k$-scheme and $\overline{X} := X \times_{\Spec k} \Spec \bar{k}$ be the base change of $X$ to $\bar{k}$. Consider two copies of $\overline{X}$, each equipped with its fibred product structure. Given $\varphi \in \Aut(\bar{k}/k)$, it induces an isomorphism $\Spec(\varphi): \Spec\bar{k} \to \Spec\bar{k}$. We can use the universal property of fibred product to obtain a unique morphism $\widetilde{\varphi}: \overline{X} \to \overline{X}$. For this purpose, we need for upper copy of $\overline{X}$ $p: \overline{X} \to \Spec\bar{k}$ and $q: \overline{X} \to X$ satisfying $f \circ p = g \circ q$, as shown in the diagram. $\tilde{p}$ and $q$ are already given by fibred product structure that comes with this copy of $\overline{X}$, and we define $p := \Spec(\varphi) \circ \tilde{p}$. It follows from the commutative upper square and the middle commutative triangle that $f \circ p = f \circ \Spec(\varphi) \circ \tilde{p} = f \circ \tilde{p} = g \circ q$.
+
+\[
+\begin{tikzcd}
+    &&& \Spec\bar{k} && \overline{X} \\
+    X && \Spec k &&& \\
+    &&& \Spec\bar{k} && \overline{X}
+    \arrow[from=1-6,to=1-4, "{\tilde{p}}"]
+    \arrow[from=1-4,to=2-3, "{f}"]
+    \arrow[from=1-6,to=2-1,bend right=25, "{q}"]
+    \arrow[from=2-1,to=2-3, "{g}"]
+    \arrow[from=3-6,to=3-4]
+    \arrow[from=3-4,to=2-3, "{f}"]
+    \arrow[from=3-6,to=2-1,bend left=25]
+    \arrow[from=1-4,to=3-4,
+        "{\Spec(\varphi)}"']
+    \arrow[from=1-6,to=3-6,
+        dashed,
+        "{\exists!\,\widetilde{\varphi}}"]
+    \arrow[from=1-6,to=3-4, "{p}"]
+    \arrow[
+        phantom,
+        from=2-1,to=1-4,
+        yshift=0.5em,
+        "{\scriptstyle\circlearrowleft}" description
+    ]
+    \arrow[
+        phantom,
+        from=1-4,to=3-4,
+        xshift=-1.15em,
+        yshift=1.0em,
+        "{\scriptstyle\circlearrowleft}" description
+    ]
+    \arrow[
+        phantom,
+        from=2-1,to=3-4,
+        yshift=-0.5em,
+        "{\scriptstyle\circlearrowleft}" description
+    ]
+\end{tikzcd}
+\]
+
+We define the action of $\varphi\in\Aut(\bar k/k)$ on $\overline X$ by the induced map $\widetilde{\varphi}$. In this way, we obtain an action of $\Aut(\bar k/k)$ on $\overline X$ and on the $\bar k$-points of $\overline X$.
+
+In affine cases where $X = \Spec k[x_1, \dots, x_n]/I$, this action on $\overline{X}$ can be described explicitly as fixing $x_i \mapsto x_i$ and acting on coefficients by $k \ni \lambda \mapsto \varphi(\lambda) \in \overline{k}$. Returning to Example \ref{ex:Z[i]} where $\overline{X} = \Spec\bigl(\overline{\F}_p[x]/(x^2 + 1)\bigr)$, we may emphasize the action of $\Aut\bigl(\overline{\F}_p/\F_p\bigr)$ in the following figure:
+
+\[
+    \begin{tikzpicture}[>=Latex, scale=1]
+    
+        % base line
+        \draw[dashed, <->] (-0.8,0) -- (6.8,0);
+        \node[left] at (-1.0,0) {$\Spec \Z$};
+    
+        % prime points on base
+        \foreach \x/\p in {0/2, 2/3, 4/5, 6/7} {
+            \fill (\x,0) circle (1.4pt);
+            \node[below] at (\x,0) {$\p$};
+        }
+    
+        % fibre over p=2
+        \draw[dashed] (0,0.4) -- (0,2.4);
+        \fill (0,1.4) circle (1.5pt);
+        \draw[->] (0,1.4) -- (0,1.7);
+        \draw[->] (0,1.4) -- (0,1.1);
+    
+        % fibre over p=3
+        \draw[dashed] (2,0.4) -- (2,2.4);
+        \fill (2,1.8) circle (1.5pt);
+        \fill (2,1.0) circle (1.5pt);
+        \draw[dashed, <->]
+            (2.08,1.8)
+            .. controls (2.50,1.68) and (2.50,1.12) ..
+            (2.08,1.0);
+    
+        % fibre over p=5
+        \draw[dashed] (4,0.4) -- (4,2.4);
+        \fill (4,1.8) circle (1.5pt);
+        \fill (4,1.0) circle (1.5pt);
+        \draw[dashed, <-] (4.02,1.88) arc[start angle=150,end angle=-210,radius=0.18];
+        \draw[dashed, <-] (4.02,1.08) arc[start angle=150,end angle=-210,radius=0.18];
+    
+        % fibre over p=7
+        \draw[dashed] (6,0.4) -- (6,2.4);
+        \fill (6,1.8) circle (1.5pt);
+        \fill (6,1.0) circle (1.5pt);
+        \draw[dashed, <->]
+            (6.08,1.8)
+            .. controls (6.50,1.68) and (6.50,1.12) ..
+            (6.08,1.0);
+      
+    \end{tikzpicture}
+\]
+
+Another example is the following:
+
+\begin{example}
+    Let $T = \Spec \R[t]$ and $X = \Spec \R[x, t]/(x^2 + t)$. We have $\Aut(\C/\R) = \{1, \sigma\}$ acting on $\overline{X} = \Spec \C[x, t]/(x^2 + t)$, where $\sigma(z) = \bar{z}$ is the complex conjugation. The induced action of $\sigma$ is fixing the real geometric points and exchanges complex conjugate pairs.
+    \[
+        \begin{tikzpicture}[>=Latex, scale=1]
+        
+            \def\A{0.23}
+            \def\ang{-58}
+        
+            % complex plane
+            \coordinate (P1) at (-1.815,-0.59);
+            \coordinate (P2) at ( 2.685,-0.59);
+            \coordinate (P3) at ( 3.985, 0.25);
+            \coordinate (P4) at (-0.515, 0.25);
+        
+            \draw (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+        
+            % real axis
+            \draw[<->] (-1.1,-0.17) -- (3.3,-0.17);
+        
+            % real points fixed by conjugation
+            \foreach \x in {-0.35,0.95,2.25} {
+                \fill (\x,-0.17) circle (1.4pt);
+                \draw[dashed] (\x,-0.1) circle (0.09);
+            }
+            
+            \node[below] at (0.95,-0.17) {$0$};
+            \node at (-1.38, 0.04) {$z$};
+            \node at (-1.72,-0.17) {$\mathbb{R}$};
+            \node at (-2.06,-0.38) {$\bar z$};
+        
+            % conjugate pair 0
+            \coordinate (C0) at (-0.95,-0.17);
+            \begin{scope}[shift={(C0)},rotate=\ang]
+                \coordinate (C0a) at (0,\A);
+                \coordinate (C0b) at (0,-\A);
+                \fill (C0a) circle (1.4pt);
+                \fill (C0b) circle (1.4pt);
+            \end{scope}
+            \draw[dashed, <->]
+                (C0a)
+                .. controls ([yshift=0.60cm]C0a)
+                            and ([yshift=0.60cm]C0b) ..
+                (C0b);
+        
+            % conjugate pair 1
+            \coordinate (C1) at (0.25,-0.17);
+            \begin{scope}[shift={(C1)},rotate=\ang]
+                \coordinate (C1a) at (0,\A);
+                \coordinate (C1b) at (0,-\A);
+                \fill (C1a) circle (1.4pt);
+                \fill (C1b) circle (1.4pt);
+            \end{scope}
+            \draw[dashed, <->]
+                (C1a)
+                .. controls ([yshift=0.60cm]C1a)
+                            and ([yshift=0.60cm]C1b) ..
+                (C1b);
+        
+            % conjugate pair 2
+            \coordinate (C2) at (1.60,-0.17);
+            \begin{scope}[shift={(C2)},rotate=\ang]
+                \coordinate (C2a) at (0,\A);
+                \coordinate (C2b) at (0,-\A);
+                \fill (C2a) circle (1.4pt);
+                \fill (C2b) circle (1.4pt);
+            \end{scope}
+            \draw[dashed, <->]
+                (C2a)
+                .. controls ([yshift=0.60cm]C2a)
+                            and ([yshift=0.60cm]C2b) ..
+                (C2b);
+        
+            % conjugate pair 3
+            \coordinate (C3) at (2.85,-0.17);
+            \begin{scope}[shift={(C3)},rotate=\ang]
+                \coordinate (C3a) at (0,\A);
+                \coordinate (C3b) at (0,-\A);
+                \fill (C3a) circle (1.4pt);
+                \fill (C3b) circle (1.4pt);
+            \end{scope}
+            \draw[dashed, <->]
+                (C3a)
+                .. controls ([yshift=0.60cm]C3a)
+                            and ([yshift=0.60cm]C3b) ..
+                (C3b);
+        
+        \end{tikzpicture}
+    \]
+    Now we consider the families of schemes $X \to T$. For $t < 0$, the equation $t = -x^2$ has two real solutions, which together form a real parabola in the $(t,\operatorname{Re}x)$-plane and are fixed by complex conjugation. At $t = 0$, the two solutions meet at $0$, giving a point of multiplicity $2$. For $t > 0$, there are no real solutions; after base change to $\C$, the fibre consists of a pair of complex conjugate points, as indicated along the imaginary direction in the figure.
+    \[
+        \begin{tikzpicture}[
+            >=Latex,
+            x={(1cm,0cm)},          % t-axis
+            y={(0.77cm,0.50cm)},    % Re x-axis
+            z={(0cm,1cm)}           % Im x-axis:
+        ]
+        
+        % ------------------------------------------------
+        % Real (t, Re x)-plane
+        % ------------------------------------------------
+        
+        \coordinate (A) at (-3.5,-1.8,0);
+        \coordinate (B) at ( 3.5,-1.8,0);
+        \coordinate (C) at ( 3.5, 1.5,0);
+        \coordinate (D) at (-3.5, 1.5,0);
+        
+        \draw (A) -- (B) -- (C) -- (D) -- cycle;
+        
+        \node[left] at (-3.85,1.18,0) {$\mathbb{R}^2$};
+        
+            % t-axis
+            \draw[<->] (-4.00,0,0) -- (4.00,0,0);
+            \node[below right] at (4.00,0,0) {$t$};
+        
+            % Im x-axis
+            \draw[dashed,->] (0,0,-1.50) -- (0,0,1.50);
+            \node[above] at (0,0,1.50) {$\operatorname{Im}x$};
+        
+            % origin
+            \fill (0,0,0) circle (1.5pt);
+            \node[below right] at (0,0,0) {$0$};
+            \draw[->] (0,0,0) -- (0,0.3,0);
+        
+        
+            % ------------------------------------------------
+            % Real parabola
+            % ------------------------------------------------
+            \begin{scope}[xshift=-0.105cm,yshift=-0.1cm]
+                \draw[
+                    smooth,
+                    variable=\u,
+                    domain=-1.30:1.30,
+                    samples=81
+                ]
+                    plot (
+                        {-1.3*\u*\u},
+                        {\u},
+                        0
+                    );
+            
+                % representative real points
+                \coordinate (R1+) at ({-1.3*(0.8)^2}, {0.8}, 0);
+                \coordinate (R1-) at ({-1.3*(0.8)^2}, {-0.8}, 0);
+            
+                \coordinate (R2+) at ({-1.3*(1.15)^2}, {1.15}, 0);
+                \coordinate (R2-) at ({-1.3*(1.15)^2}, {-1.15}, 0);
+            
+                \foreach \P in {R1+,R1-,R2+,R2-} {
+                    \fill (\P) circle (1.4pt);
+                
+                    \path (\P) ++(0,0,0.11) coordinate (fixedmark);
+                    \node[
+                        draw,
+                        dashed,
+                        circle,
+                        inner sep=2pt
+                    ] at (fixedmark) {};
+                }
+            \end{scope}
+        
+        
+            % ------------------------------------------------
+            % Complex parabola
+            % ------------------------------------------------
+        
+            \draw[
+                dashed,
+                smooth,
+                variable=\v,
+                domain=-1.28:1.28,
+                samples=81
+            ]
+                plot (
+                    {1.3*\v*\v},
+                    0,
+                    {\v}
+                );
+        
+            % conjugate pair 1
+            \coordinate (C1+) at
+                ({1.3*(0.72)^2},0,{0.72});
+            \coordinate (C1-) at
+                ({1.3*(0.72)^2},0,{-0.72});
+        
+            \fill (C1+) circle (1.4pt);
+            \fill (C1-) circle (1.4pt);
+        
+            \draw[dashed,<->]
+                (C1+)
+                .. controls
+                    ({1.3*(0.72)^2+0.45},0,{0.38})
+                    and
+                    ({1.3*(0.72)^2+0.45},0,{-0.38})
+                ..
+                (C1-);
+        
+        
+            % conjugate pair 2
+            \coordinate (C2+) at
+                ({1.3*(1.08)^2},0,{1.08});
+            \coordinate (C2-) at
+                ({1.3*(1.08)^2},0,{-1.08});
+        
+            \fill (C2+) circle (1.4pt);
+            \fill (C2-) circle (1.4pt);
+        
+            \draw[dashed,<->]
+                (C2+)
+                .. controls
+                    ({1.3*(1.08)^2+0.55},0,{0.65})
+                    and
+                    ({1.3*(1.08)^2+0.55},0,{-0.65})
+                ..
+                (C2-);
+        
+        \end{tikzpicture}
+    \]
+    
+\end{example}
