@@ -26,21 +26,22 @@
 Recall the definition of scheme theoretic fibre at the end of last lecture: given a morphism $X \to T$ and a $k$-point $\Spec k \to T$, the scheme-theoretic fibre of $X$ over this point is the fibred product $X \times_T \Spec k$. Changing the choice of $k$-points gives different fibres of $X \to T$. This motivates the next example:
 
 \begin{example}[A family over {$\C[t]$}]
-    Let $T = \Spec \C[t]$ and $X = \Spec\bigl(\C[x, y, t]/(xy - t)\bigr)$. There is a canonical scheme morphism $X \to T$ induced by $\C[t] \to \C[x, y, t]/(xy - t)$, $t \mapsto t$. Consider the $\C$-point $\Spec \C \to T$ induced by the ring homomorphism $\C[t] \to \C$, $t \mapsto a$. Thus the fibre is
+  Let $T = \Spec \C[t]$ and
+  \[X = \Spec\bigl(\C[x, y, t]/(xy - t)\bigr).\] There is a morphism $X \to T$ induced by the map $\C[t] \to \C[x, y, t]/(xy - t)$ given by $t \mapsto t$. Consider the $\C$-point $\Spec \C \to T$ induced by the ring homomorphism $\C[t] \to \C$ that sends $t \mapsto a$. Thus the scheme theoretic fibre is the spectrum of
     \[
         \begin{aligned}
             \C \otimes_{\C[t]} \C[x, y, t]/(xy - t) 
             & = \bigl(\C[t]/(t - a)\bigr) \otimes_{\C[t]} \C[x, y, t]/(xy - t) \\
             & = \bigl(\C[x, y, t]/(xy - t)\bigr)/(t - a) \\
             & = \C[x, y, t]/(xy - t, t - a) \\
-            & = \C[x, y]/(xy - a)
+            & = \C[x, y]/(xy - a).
         \end{aligned}
     \]
-    and fits into the pullback diagram
+    The fiber fits into the pullback diagram
     \[
         \begin{tikzcd}
             \Spec \bigl(\C[x,y]/(xy - a)\bigr) & X \\
-            \Spec \C & T \rlap{$\,= \Spec \C[t]$}
+            \Spec \C & T \rlap{$\,= \Spec \C[t]$.}
             \arrow[from=1-1, to=1-2]
             \arrow[from=1-1, to=2-1]
             \arrow[from=1-2, to=2-2]
@@ -108,7 +109,8 @@ Recall the definition of scheme theoretic fibre at the end of last lecture: give
 The previous example considered fibres over $\C$-points of a scheme over $\C$. More generally, for points $p \in T$, the fibre over $p$ is naturally a scheme over its residue field, and these underlying residue fields may vary from point to point. A typical example is $\Spec\Z$, whose closed points $(p)$ have residue fields $\F_p$.
 
 \begin{example}
-    Let $T = \Spec \Z$ and $X = \Spec\bigl(\Z[x, y]/(xy - 2)\bigr)$. For a closed point $(p)\in T$, the fibre is $\Spec\bigl(\F_p[x,y]/(xy-2)\bigr)$. Since $\F_p$ is not algebraically closed, we may further base change to $\overline{\F}_p$ in order to describe its geometry using closed $\overline{\F}_p$-points:
+  Let $T = \Spec \Z$ and $X = \Spec\bigl(\Z[x, y]/(xy - 2)\bigr)$. The closed point $(p)\in T$ gives a morphism \(\Spec \F_p \to T\) whose image is \((p)\).
+  The scheme theoretic fiber of \(X \to T\) over \(\Spec \F_p\) is $\Spec\bigl(\F_p[x,y]/(xy-2)\bigr)$. Since $\F_p$ is not algebraically closed, we may further base change to $\overline{\F}_p$ in order to describe its geometry using closed $\overline{\F}_p$-points:
     \[
         \begin{tikzcd}
             X & \Spec\bigl(\F_p[x,y]/(xy - 2)\bigr) & \Spec\bigl(\overline{\F}_p[x,y]/(xy - 2)\bigr) \\
@@ -529,3 +531,8 @@ Another example is the following:
     \]
     
 \end{example}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:
