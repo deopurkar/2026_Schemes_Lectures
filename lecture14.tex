@@ -1,44 +1,5 @@
-\documentclass{article}
-
-% Packages
-\usepackage{amssymb,amsthm,amsmath}
-\usepackage{tikz-cd}
-\usepackage{mathtools}
-\usepackage{microtype}
-\usepackage{needspace}
-\usepackage{hyperref}
-\usepackage{cleveref}
-
-% Theorem environments
-\theoremstyle{definition}
-\newtheorem{example}{Example}[section]
-\newtheorem{nonexample}{Non-Example}[section]
-\newtheorem{definition}{Definition}[section]
-
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
-
-\theoremstyle{plain}
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[section]
-\newtheorem{exercise}{Exercise}[section]
-
-% Mathematical notation
-\DeclareMathOperator{\Spec}{Spec}
-
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\A}{\mathbb{A}}
-\newcommand{\F}{\mathbb{F}}
-\renewcommand{\P}{\mathbb{P}}
-
-\begin{document}
-
 % Number the environments as 14.1, 14.2, ...
+\newpage
 \setcounter{section}{13}
 \stepcounter{section}
 
@@ -59,21 +20,50 @@ and \(\iota:\mathcal{L}\to\mathcal{O}_X^{\oplus(n+1)}\) is a locally split
 injection. Here an isomorphism of pairs must commute with the maps into
 \(\mathcal{O}_X^{\oplus(n+1)}\).
 
-For \(\Spec k\), a point of projective space is obtained by choosing a line
+A \(\Spec k\) point of \(\mathbf{P}^{n}\) is obtained by choosing a line
 in \(k^{n+1}\). For an arbitrary scheme \(X\), we would similarly like to
 choose a line at every point of \(X\), with these lines varying locally in
-a coherent way. However, an injection of sheaves need not give an injection
+a coherent way.
+To make this precise, we introduced the notions of a locally free modulo of rank 1 and a locally split injection.
+
+We now explain how a locally split injection \(\mathcal{L} \to \mathcal{O}^{n+1}\) corresponds to the a varying family of lines in an \((n+1)\)-dimensional vector space.
+To do so, we first define the \emph{fiber} of an \(\mathcal{O}_X\)-module at a point \(x \in X\).
+Recall that \(\mathcal{O}_{X,x}\) denotes the stalk of the structure sheaf at \(x\).
+Let \(m_x \subset \mathcal{O}_{X,x}\) be the unique maximal ideal, and let \(k(x)\) be the residue field \(\mathcal{O}_{X,x}/m_x\).
+\begin{definition}
+  Let \(\mathcal{F}\) be an \(\mathcal{O}_X\)-module and \(x \in X\) a point.
+  The \emph{fiber} of \(F\) at \(x\) is the \(k(x)\)-vector space
+  \[ F|_x = F_x/m_xF_x.\]
+\end{definition}
+By definition, the fiber of \(\mathcal{O}_X\) at \(x\) is \(k(x)\); the fiber of \(\mathcal{O}_X^{n+1}\) is  \(k(x)^{n+1}\); and the fiber of a locally free sheaf of rank \(r\) is a \(k(x)\)-vector space of dimension \(r\).
+An \(\mathcal{O}_X\)-linear map of \(\mathcal{O}_X\)-modules \(F \to G\) induces a map between fibers \(F|x \to G|_x\).
+
+\begin{remark}
+  Later, we will see that the fiber \(F|_x\) can also be seen as the pull-back of \(F\) along the morphism \(\Spec k(x) \to X\) defined by \(x\).
+\end{remark}
+
+The following proposition (proved later; see \Cref{prop:lsi-fibre-criterion}) makes precise the idea that a locally split injection is precisely the notion that gives a family of one-dimensional subspaces of \(k(x)^{n+1}\) as \(x \in X\) varies.
+\begin{proposition}
+  Let \(\mathcal{L}\) be a line bundle and \(i \colon \mathcal{L} \to \mathcal{O}_X^{n+1}\) an \(\mathcal{O}_X\)-linear map.
+  Then \(i\) is a locally split injection if and only if for every \(x \in X\), the map on fibers
+  \[ \mathcal{L}|_x \to k(x)^{n+1}\]
+  is injective.
+  That is, for every \(x \in X\), the image of \(\mathcal{L}|_x\) is a one-dimensional subspace of \(k(x)^{n+1}\).
+\end{proposition}
+
+
+However, an injection of sheaves need not give an injection
 after evaluation at every point. This is why we require a locally split
 injection, rather than just an injection of sheaves.
 
-Let us examine what this condition means for a map
+Let us examine what the condition of being locally split means for a map
 \[
     \iota:\mathcal{L}\longrightarrow\mathcal{O}_X^{\oplus(n+1)}.
 \]
 Since \(\mathcal{L}\) is locally free of rank 1, we can choose an open set
 \(U\subseteq X\) and a trivialisation
 \(\tau:\mathcal{O}_U\xrightarrow{\sim}\mathcal{L}|_U\).
-Restriction commutes with finite direct sums, so
+We have
 \[
     \bigl(\mathcal{O}_X^{\oplus(n+1)}\bigr)|_U
     \cong\mathcal{O}_U^{\oplus(n+1)}.
@@ -86,6 +76,7 @@ Thus, in this trivialisation, \(\iota|_U\) becomes the map
 The condition that \(\iota\) is locally split means that we can choose an
 open cover by such sets \(U\) on each of which \(\phi\) is a split injection.
 
+The next proposition gives explicit criteria for a map \(\mathcal{O}_U \to \mathcal{O}_U^{n+1}\) to be a split injection.
 \begin{proposition}\label{prop:lsi-section-criterion}
     Let \(\phi:\mathcal{O}_U\to\mathcal{O}_U^{\oplus(n+1)}\) be an
     \(\mathcal{O}_U\)-linear map, written as
@@ -244,7 +235,6 @@ one-dimensional vector space into an \((n+1)\)-dimensional vector space,
 without becoming zero. The following examples explain the distinction
 between a stalk map and a fibre map.
 
-\Needspace{24\baselineskip}
 \begin{example}\label{ex:lsi-23}
     Consider the map of \(\Z\)-modules
     \[
@@ -403,7 +393,6 @@ maps, on the other hand, give a criterion using injectivity alone.
     \(\Spec k\to\P^n_\Z\).
 \end{remark}
 
-\Needspace{22\baselineskip}
 We can now collect the equivalent criteria.
 
 \begin{proposition}\label{prop:lsi-equivalent-conditions}
@@ -708,4 +697,8 @@ We therefore obtain the correspondence
     \(X\).
 \end{remark}
 
-\end{document}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:
