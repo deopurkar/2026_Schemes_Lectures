@@ -2,23 +2,24 @@
 
 \stepcounter{section}
 \section*{Lecture 15: Fibered Products}
-In this lecture we turn our attention to a categorical construction which will be a sort of generalisation of the product. \\
-The setup will consist of three schemes $X,Y,Z$, together with morphisms $f:X\to Z,g:Y\to Z$. The fibered product will be a universal object that is the `closest' to this configuration, in the following sense:
+In this lecture we turn our attention to a categorical construction which will be a generalisation of the Cartesian product of sets.
+The setup will consist of three schemes $X,Y,Z$, together with morphisms $f:X\to Z$ and $g:Y\to Z$. The fibered product will be a universal object that is the `closest' to this configuration, in the following sense:
 \begin{definition}[Fibered product]
-    Let $X,Y,Z$ be schemes, and $f:X\to Z,g:Y\to Z$ be morphisms. A fibered product of this configuration is a scheme $\square$, together with morphisms $p_X:\square\to X,p_Y:\square\to Y$ which make the following diagram commute:
+  Let $X,Y,Z$ be schemes.
+  Let $f:X\to Z$ and $g:Y\to Z$ be morphisms. A fibered product of this configuration is a scheme $\square$, together with morphisms $p_X:\square\to X$ and $p_Y:\square\to Y$ which make the following diagram commute:
 \[\begin{tikzcd}
 	\square & X \\
-	Y & Z
+	Y & Z.
 	\arrow["{p_X}", from=1-1, to=1-2]
 	\arrow["{p_Y}"', from=1-1, to=2-1]
 	\arrow["f", from=1-2, to=2-2]
 	\arrow["g"', from=2-1, to=2-2]
 \end{tikzcd}\]
-    Moreover, a fibered product must satisfy the following universal property. Whenever $T$ is a scheme with maps $T\to X,T\to Y$ which commute with $f,g$, we have a unique morphism $\varphi:T\to\square$ which makes the following diagram commute:
+    Moreover, a fibered product must satisfy the following universal property. Whenever $T$ is a scheme with maps $T\to X$ and$T\to Y$ which commute with $f$ and $g$, we have a unique morphism $\varphi:T\to\square$ which makes the following diagram commute:
 \[\begin{tikzcd}
 	T && \\
 	& \square & X \\
-	& Y & Z
+	& Y & Z.
 	\arrow["{\exists!\varphi}"{description}, dashed, from=1-1, to=2-2]
 	\arrow[curve={height=-12pt}, from=1-1, to=2-3]
 	\arrow[curve={height=12pt}, from=1-1, to=3-2]
@@ -28,7 +29,8 @@ The setup will consist of three schemes $X,Y,Z$, together with morphisms $f:X\to
 	\arrow["g"', from=3-2, to=3-3]
 \end{tikzcd}\]
 \end{definition}
-If a fibered product exists, it is unique up to unique isomorphism by the same argument as for the product, and so we refer to it as \textit{the} fibered product, and denote it by $X\times_ZY$. As is often the case in mathematics, this notation omits the most important information: the morphisms involved. \\
+If a fibered product exists, it is unique up to unique isomorphism by the same argument as for the product, and so we refer to it as \textit{the} fibered product, and denote it by $X\times_ZY$. As is often the case in mathematics, this notation omits the most important information: the morphisms involved.
+
 Of course this definition need not be restricted to schemes, and works for any category. Let's go through some examples in more familiar categories.
 \begin{example}[Sets]
     Let $X,Y,Z$ be sets, and $f:X\to Y,g:X\to Z$ functions. The fibered product, if it exists, is a set with maps to $X$ and $Y$, and so by the universal property of the product, there is a unique map $\varphi :X\times_ZY\to X\times Y$ making the following diagram commute:
@@ -75,7 +77,9 @@ Of course this definition need not be restricted to schemes, and works for any c
 	       \arrow["f", from=1-2, to=2-2]
 	       \arrow[hook, from=2-1, to=2-2]
         \end{tikzcd}\]
-        This set can be naturally identified with $f^{-1}(Y)$, the preimage of $Y$ under $f$. 
+      This set can be naturally identified with $f^{-1}(Y)$, the preimage of $Y$ under $f$.
+      A particular example of this setup is when \(Y\) is a singleton.
+      Then the image of \(Y\) is a single element \(z \in Z\), and the fibred product \(X \times_Z Y\) is the fiber of the map \(f \colon X \to Z\) over \(z\).
     \end{itemize}
 \end{example}
 \begin{remark}
@@ -91,7 +95,7 @@ All throughout the discussion on fibered products so far, it has not been clear 
     Fibered products of schemes exist.
 \end{theorem}
 \begin{proof}
-    We prove this when $X,Y,Z$ are affine schemes $\Spec A,\Spec B,\Spec R$, with maps $\Spec A\to \Spec R,\Spec B\to \Spec R$. We want $\square$ which makes the following diagram commute:
+    We only prove this when $X,Y,Z$ are affine schemes $\Spec A,\Spec B,\Spec R$, with maps $\Spec A\to \Spec R,\Spec B\to \Spec R$. We want $\square$ which makes the following diagram commute:
 \[\begin{tikzcd}
 	\bigcirc && \\
 	& \square & {\Spec A} \\
@@ -104,7 +108,7 @@ All throughout the discussion on fibered products so far, it has not been clear 
 	\arrow[from=2-3, to=3-3]
 	\arrow[from=3-2, to=3-3]
 \end{tikzcd}\]
-    Since morphisms of affine schemes are exactly morphisms of their global sections in the other direction, this amounts to finding a ring $\square$ which satisfies the following universal property for any ring $\bigcirc$:
+    Since morphisms to affine schemes are exactly morphisms on the global sections in the other direction, this amounts to finding a ring $\square$ which satisfies the following universal property for any ring $\bigcirc$:
 \[\begin{tikzcd}
 	\bigcirc && \\
 	& \square & A \\
@@ -193,7 +197,8 @@ Let's look at some examples of tensor products and how to compute them. Througho
     \end{enumerate}
 \end{exercise}
 \begin{remark}
-    These results all display a shortcut for how to think about the tensor product. When $A$ is obtained from $R$ by a particular algebraic construction, the tensor product $A\otimes_RB$ often corresponds to performing the same construction over $B$. Informally, tensoring with $B$ replaces the coefficients in $R$ with coefficients in $B$, while preserving the structure of the construction.
+  These results all display a shortcut for how to think about the tensor product. When $A$ is obtained from $R$ by a particular algebraic construction, the tensor product $A\otimes_RB$ often corresponds to performing the same construction over $B$. Informally, tensoring with $B$ replaces the coefficients in $R$ with coefficients in $B$, while preserving the structure of the construction.
+  The procedure of replacing \(R\) in an algebraic construction by \(B\) is often called ``extending the scalars'' from \(R\) to \(B\).
 \end{remark}
 \begin{example}
     \[
@@ -249,3 +254,7 @@ Let's look at some examples of tensor products and how to compute them. Througho
 \end{tikzcd}\]
 \end{definition}
 In the previous example we computed the scheme theoretic fibers of the map $\Spec \C[x]\to \Spec \C[y]$ induced by $y\mapsto x^2$ at the $\C$-points $0$ and $1$. What we found was that the fiber at $0$ saw a sort of squashed infinitesimal fiber corresponding to $\Spec\C[x]/(x^2)$, which has a single $\C$-point which we like to think of as possessing some `fuzz' around it. On the other hand, the fiber at $1$ saw $\pm1$, corresponding to $\Spec\C[x]/(x^2-1)$ which has two $\C$-points. This is somewhat reminiscent of a double-sheeted covering of the complex plane, where a point has two distinct preimages, but at the branch point $0$ the sheets come together, producing a single point with that kind of `fuzz'.
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:
