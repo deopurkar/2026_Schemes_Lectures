@@ -1,63 +1,9 @@
-\documentclass[a4,12pt]{article}
+\newpage
 
-%\usepackage{amsmath}
-\usepackage{amsfonts}
-%\usepackage{amssymb}
-%\usepackage{amscd}
-%\usepackage{mathdots}
-\usepackage{mathtools}
-\usepackage{units}
-%\usepackage{graphicx}
-%\usepackage{cancel}
-\usepackage{tikz-cd}
-\usepackage{xcolor}
+\stepcounter{section}
+\section*{Lecture 6: Locally Ringed Spaces and their Morphisms}
 
-%\usepackage[style=numeric]{biblatex}
-%\addbibresource{}
-
-\usepackage{amsthm}
-
-\theoremstyle{definition}
-    \newtheorem{example}{Example}[section]
-    \newtheorem{nonexample}{Non-Example}[section]
-
-    \newtheorem{definition}{Definition}[section]
-
-
-\theoremstyle{remark}
-    \newtheorem{remark}{Remark}[section]
-
-\theoremstyle{plain}
-    \newtheorem{proposition}{Proposition}[section]
-    \newtheorem{theorem}{Theorem}[section]
-	\newtheorem{lemma}{Lemma}[section]
-	\newtheorem{conjecture}{Conjecture}[section]
-	\newtheorem{corollary}{Corollary}[section]
-
-\numberwithin{equation}{section}
-
-\setlength{\parskip}{4pt}
-\allowdisplaybreaks[1]
-
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\renewcommand{\H}{\mathbb{H}}
-\newcommand{\A}{\mathbb{A}}
-\newcommand{\RP}{\mathbb{RP}}
-\newcommand{\CP}{\mathbb{CP}}
-\newcommand{\Spec}{\textnormal{Spec}\,}
-
-\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} %Partial Derivative
-\newcommand{\2}[4]{\begin{bmatrix}#1 & #2 \\ #3 & #4 \end{bmatrix}} %2x2 matrix w/ square brackets
-\newcommand{\3}[9]{\begin{bmatrix}#1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{bmatrix}} %3x3 matrix w/ square brackets
-\newcommand{\bv}[1]{\mathbf{#1}}
-
-\begin{document}
-
-\section{Two results about non-vanishing sections on a ringed space}
+\subsection{Two results about non-vanishing sections on a ringed space}
 
 We begin with two lemmas, which will make essential use of the sheaf conditions. Recall for a locally ringed space $(X,\mathcal{O}_X)$ and $f \in \mathcal{O}_X(X)$,  the \textit{evaluation of $f$ at $x$} is the image of $f$ under the map $\mathcal{O}_X \to \nicefrac{\mathcal{O}_{X,x}}{\mathfrak{m}_x}$. We denote $f(x)$ as this evaluation.
 
@@ -94,7 +40,7 @@ The set $Y = \{x \in X \, | \, f(x) \ne 0\} \subseteq X$ is open.
 In the proof of Theorem 1.1, we found a local inverse $g_x$ of $f$ defined in some open neighbourhood $U_x$ of $x$ so long as $f(x) \ne 0$. But then $f$ is non-zero in this entire neighbourhood, so $U_x \subseteq Y$.
 \end{proof}
 
-\section{Morphisms of Locally Ringed Spaces}
+\subsection{Morphisms of Locally Ringed Spaces}
 
 Having defined locally ringed spaces, we now turn our attention to maps between them. As it turns out, by asking a few common-sense things of our morphisms, we will find that in the case when our locally ringed spaces are both spectra, the morphisms of locally ringed spaces are exactly in bijection with the ring homomorphisms on the underlying rings.
 
@@ -182,7 +128,7 @@ Consider the continuous map $\phi : \Spec\Q \to \Spec\Z$ defined by sending the 
 \Q &\text{otherwise},
 \end{cases}
 \end{equation}
-and as before $O_{\Spec\Z}(\textnormal{Spec}\Z[1/p_1\cdots p_n]) = \Z[1/p_1\cdots p_n]$. We define $\phi^\#$ as either inclusion into $\Q$ or the unique map to the zero ring as appropriate, and we check this is a map of sheaf of rings by checking the diagram
+and as before $O_{\Spec\Z}(\Spec\Z[1/p_1\cdots p_n]) = \Z[1/p_1\cdots p_n]$. We define $\phi^\#$ as either inclusion into $\Q$ or the unique map to the zero ring as appropriate, and we check this is a map of sheaf of rings by checking the diagram
 \begin{equation}
 \begin{tikzcd}
 \Z\left[\frac{1}{p_1 \cdots p_n}\right] 	\arrow[r, hook] \arrow[d]
@@ -207,7 +153,7 @@ and again $\mathcal{O}_{\Spec\Q, (0)} = \Q$, so the induced map on stalks is inc
 Example \ref{Good Q to Z} and Non-example \ref{Bad Q to Z} together show that there is a unique morphism of locally ringed spaces $(\Spec\Q, \mathcal{O}_{\Spec\Q}) \to (\Spec\Z, \mathcal{O}_{\Spec\Z})$, which in fact could be induced by the unique map $\Z \to \Q$. This is an example of a bigger theorem given below.
 \end{remark}
 
-\section{Maps of rings induce maps of spectra}
+\subsection{Maps of rings induce maps of spectra}
 Let \(R\) and \(S\) be rings and \(f \colon R \to S\) a ring homomorphism.
 We explain how \(f\) induces a map of locally ringed spaces
 \[ \phi = \phi_{f} \colon \Spec S \to \Spec R.\] 
@@ -226,4 +172,3 @@ Since \(f \colon R \to S\) sends \(a \in R\) to a unit \(f(a) \in S_{f(a)}\), it
 \[ R_a \to S_{f(a)}.\]
 This gives the required map on sheaves of rings.
 It can be checked that this is a local homomorphism on stalks.
-\end{document}

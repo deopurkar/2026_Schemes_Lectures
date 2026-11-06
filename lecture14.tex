@@ -24,33 +24,50 @@ A \(\Spec k\) point of \(\mathbf{P}^{n}\) is obtained by choosing a line
 in \(k^{n+1}\). For an arbitrary scheme \(X\), we would similarly like to
 choose a line at every point of \(X\), with these lines varying locally in
 a coherent way.
-To make this precise, we introduced the notions of a locally free modulo of rank 1 and a locally split injection.
+To make this precise, we introduced the notions of a locally free
+modulo of rank 1 and a locally split injection.
 
-We now explain how a locally split injection \(\mathcal{L} \to \mathcal{O}^{n+1}\) corresponds to the a varying family of lines in an \((n+1)\)-dimensional vector space.
-To do so, we first define the \emph{fiber} of an \(\mathcal{O}_X\)-module at a point \(x \in X\).
-Recall that \(\mathcal{O}_{X,x}\) denotes the stalk of the structure sheaf at \(x\).
-Let \(m_x \subset \mathcal{O}_{X,x}\) be the unique maximal ideal, and let \(k(x)\) be the residue field \(\mathcal{O}_{X,x}/m_x\).
+We now explain how a locally split injection \(\mathcal{L} \to
+\mathcal{O}^{n+1}\) corresponds to the a varying family of lines in
+an \((n+1)\)-dimensional vector space.
+To do so, we first define the \emph{fiber} of an
+\(\mathcal{O}_X\)-module at a point \(x \in X\).
+Recall that \(\mathcal{O}_{X,x}\) denotes the stalk of the structure
+sheaf at \(x\).
+Let \(m_x \subset \mathcal{O}_{X,x}\) be the unique maximal ideal,
+and let \(k(x)\) be the residue field \(\mathcal{O}_{X,x}/m_x\).
 \begin{definition}
-  Let \(\mathcal{F}\) be an \(\mathcal{O}_X\)-module and \(x \in X\) a point.
-  The \emph{fiber} of \(F\) at \(x\) is the \(k(x)\)-vector space
-  \[ F|_x = F_x/m_xF_x.\]
+    Let \(\mathcal{F}\) be an \(\mathcal{O}_X\)-module and \(x \in X\) a point.
+    The \emph{fiber} of \(F\) at \(x\) is the \(k(x)\)-vector space
+    \[ F|_x = F_x/m_xF_x.\]
 \end{definition}
-By definition, the fiber of \(\mathcal{O}_X\) at \(x\) is \(k(x)\); the fiber of \(\mathcal{O}_X^{n+1}\) is  \(k(x)^{n+1}\); and the fiber of a locally free sheaf of rank \(r\) is a \(k(x)\)-vector space of dimension \(r\).
-An \(\mathcal{O}_X\)-linear map of \(\mathcal{O}_X\)-modules \(F \to G\) induces a map between fibers \(F|x \to G|_x\).
+By definition, the fiber of \(\mathcal{O}_X\) at \(x\) is \(k(x)\);
+the fiber of \(\mathcal{O}_X^{n+1}\) is  \(k(x)^{n+1}\); and the
+fiber of a locally free sheaf of rank \(r\) is a \(k(x)\)-vector
+space of dimension \(r\).
+An \(\mathcal{O}_X\)-linear map of \(\mathcal{O}_X\)-modules \(F \to
+G\) induces a map between fibers \(F|x \to G|_x\).
 
 \begin{remark}
-  Later, we will see that the fiber \(F|_x\) can also be seen as the pull-back of \(F\) along the morphism \(\Spec k(x) \to X\) defined by \(x\).
+    Later, we will see that the fiber \(F|_x\) can also be seen as
+    the pull-back of \(F\) along the morphism \(\Spec k(x) \to X\)
+    defined by \(x\).
 \end{remark}
 
-The following proposition (proved later; see \Cref{prop:lsi-fibre-criterion}) makes precise the idea that a locally split injection is precisely the notion that gives a family of one-dimensional subspaces of \(k(x)^{n+1}\) as \(x \in X\) varies.
+The following proposition (proved later; see
+\Cref{prop:lsi-fibre-criterion}) makes precise the idea that a
+locally split injection is precisely the notion that gives a family
+of one-dimensional subspaces of \(k(x)^{n+1}\) as \(x \in X\) varies.
 \begin{proposition}
-  Let \(\mathcal{L}\) be a line bundle and \(i \colon \mathcal{L} \to \mathcal{O}_X^{n+1}\) an \(\mathcal{O}_X\)-linear map.
-  Then \(i\) is a locally split injection if and only if for every \(x \in X\), the map on fibers
-  \[ \mathcal{L}|_x \to k(x)^{n+1}\]
-  is injective.
-  That is, for every \(x \in X\), the image of \(\mathcal{L}|_x\) is a one-dimensional subspace of \(k(x)^{n+1}\).
+    Let \(\mathcal{L}\) be a line bundle and \(i \colon \mathcal{L}
+    \to \mathcal{O}_X^{n+1}\) an \(\mathcal{O}_X\)-linear map.
+    Then \(i\) is a locally split injection if and only if for every
+    \(x \in X\), the map on fibers
+    \[ \mathcal{L}|_x \to k(x)^{n+1}\]
+    is injective.
+    That is, for every \(x \in X\), the image of \(\mathcal{L}|_x\)
+    is a one-dimensional subspace of \(k(x)^{n+1}\).
 \end{proposition}
-
 
 However, an injection of sheaves need not give an injection
 after evaluation at every point. This is why we require a locally split
@@ -76,7 +93,8 @@ Thus, in this trivialisation, \(\iota|_U\) becomes the map
 The condition that \(\iota\) is locally split means that we can choose an
 open cover by such sets \(U\) on each of which \(\phi\) is a split injection.
 
-The next proposition gives explicit criteria for a map \(\mathcal{O}_U \to \mathcal{O}_U^{n+1}\) to be a split injection.
+The next proposition gives explicit criteria for a map
+\(\mathcal{O}_U \to \mathcal{O}_U^{n+1}\) to be a split injection.
 \begin{proposition}\label{prop:lsi-section-criterion}
     Let \(\phi:\mathcal{O}_U\to\mathcal{O}_U^{\oplus(n+1)}\) be an
     \(\mathcal{O}_U\)-linear map, written as
@@ -106,11 +124,11 @@ The next proposition gives explicit criteria for a map \(\mathcal{O}_U \to \math
     \(\psi:\mathcal{O}_U^{\oplus(n+1)}\to\mathcal{O}_U\), so that
     \(\psi\circ\phi=\operatorname{id}_{\mathcal{O}_U}\).
     \[
-    \begin{tikzcd}[column sep=large]
-        \mathcal{O}_U \arrow[r,"\phi",bend left=15]
-        & \mathcal{O}_U^{\oplus(n+1)}
+        \begin{tikzcd}[column sep=large]
+            \mathcal{O}_U \arrow[r,"\phi",bend left=15]
+            & \mathcal{O}_U^{\oplus(n+1)}
             \arrow[l,"\psi",bend left=15]
-    \end{tikzcd}
+        \end{tikzcd}
     \]
     Write \(\psi(e_i)=g_i\). Then
     \[
@@ -246,15 +264,15 @@ between a stalk map and a fibre map.
     \(D(2)\cup D(3)=\Spec\Z\), and we have the following retractions:
     \begin{itemize}
         \item On \(D(2)\), the element 2 is invertible, and a retraction is
-        \[
-            \Z[1/2]^2\longrightarrow\Z[1/2],
-            \qquad (a,b)\longmapsto a/2.
-        \]
+            \[
+                \Z[1/2]^2\longrightarrow\Z[1/2],
+                \qquad (a,b)\longmapsto a/2.
+            \]
         \item On \(D(3)\), the element 3 is invertible, and a retraction is
-        \[
-            \Z[1/3]^2\longrightarrow\Z[1/3],
-            \qquad (a,b)\longmapsto b/3.
-        \]
+            \[
+                \Z[1/3]^2\longrightarrow\Z[1/3],
+                \qquad (a,b)\longmapsto b/3.
+            \]
     \end{itemize}
     At the point \(x=(7)\), the fibre map is
     \[
@@ -308,14 +326,14 @@ maps, on the other hand, give a criterion using injectivity alone.
     \(\iota_x:\mathcal{L}_x\to A^{\oplus(n+1)}\).
     Reducing modulo \(\mathfrak{m}_x\) gives the \emph{fibre map}
     \[
-    \begin{tikzcd}[column sep=large]
-        \mathcal{L}_x
+        \begin{tikzcd}[column sep=large]
+            \mathcal{L}_x
             \arrow[r,"\iota_x"] \arrow[d,two heads]
-        & A^{\oplus(n+1)} \arrow[d,two heads] \\
-        \mathcal{L}_x/\mathfrak{m}_x\mathcal{L}_x
+            & A^{\oplus(n+1)} \arrow[d,two heads] \\
+            \mathcal{L}_x/\mathfrak{m}_x\mathcal{L}_x
             \arrow[r,"\overline{\iota}_x"']
-        & k(x)^{\oplus(n+1)}.
-    \end{tikzcd}
+            & k(x)^{\oplus(n+1)}.
+        \end{tikzcd}
     \]
     The bottom map is well-defined because \(\iota_x\) is \(A\)-linear,
     and therefore
@@ -341,7 +359,7 @@ maps, on the other hand, give a criterion using injectivity alone.
     \[
         \overline{\rho}_x\circ\overline{\iota}_x
         =\operatorname{id}_{\mathcal{L}_x/
-            \mathfrak{m}_x\mathcal{L}_x}.
+        \mathfrak{m}_x\mathcal{L}_x}.
     \]
     Hence \(\overline{\iota}_x\) is injective. Its source is a
     one-dimensional vector space, so it is also non-zero.
@@ -402,14 +420,14 @@ We can now collect the equivalent criteria.
     \begin{enumerate}
         \item \(\iota\) is locally split.
         \item For every \(x\in X\), the stalk map \(\iota_x\) is a split
-        injection.
+            injection.
         \item For every \(x\in X\), after choosing a local trivialisation
-        near \(x\) and writing \(1\mapsto(f_0,\dots,f_n)\), at least one
-        germ \(f_{i,x}\) is a unit in \(\mathcal{O}_{X,x}\).
+            near \(x\) and writing \(1\mapsto(f_0,\dots,f_n)\), at least one
+            germ \(f_{i,x}\) is a unit in \(\mathcal{O}_{X,x}\).
         \item For every \(x\in X\), the fibre map
-        \(\overline{\iota}_x\) is non-zero.
+            \(\overline{\iota}_x\) is non-zero.
         \item For every \(x\in X\), the fibre map
-        \(\overline{\iota}_x\) is injective.
+            \(\overline{\iota}_x\) is injective.
     \end{enumerate}
 \end{proposition}
 
@@ -491,17 +509,17 @@ space from a line bundle with a locally split injection.
     \(\P^n_\Z\). Since \(f_1/f_0\) and \(f_0/f_1\) are units, the two
     maps factor through these opens:
     \[
-    \begin{tikzcd}[column sep=large,row sep=large]
-        & V_{01}
+        \begin{tikzcd}[column sep=large,row sep=large]
+            & V_{01}
             \arrow[r,hook]
             \arrow[dd,"\tau_{01}"',"\sim"]
-        & V_0 \arrow[dr,hook] & \\
-        U \arrow[ur,"\widetilde q_0"]
-          \arrow[dr,"\widetilde q_1"']
-        & & & \P^n_\Z \\
-        & V_{10} \arrow[r,hook]
-        & V_1 \arrow[ur,hook] &
-    \end{tikzcd}
+            & V_0 \arrow[dr,hook] & \\
+            U \arrow[ur,"\widetilde q_0"]
+            \arrow[dr,"\widetilde q_1"']
+            & & & \P^n_\Z \\
+            & V_{10} \arrow[r,hook]
+            & V_1 \arrow[ur,hook] &
+        \end{tikzcd}
     \]
     To check commutativity, compare the ring maps. For example, when
     \(n\ge2\), following the transition and then the map from \(U\) gives
@@ -610,16 +628,16 @@ Thus we should identify the two sources by multiplication
 by \(h_1\), rather than by the identity. This makes the
 following diagram commute:
 \[
-\begin{tikzcd}[column sep=large,row sep=large]
-    \mathcal O_{U_{01}}
+    \begin{tikzcd}[column sep=large,row sep=large]
+        \mathcal O_{U_{01}}
         \arrow[r,"h"]
         \arrow[d,"\times h_1"']
-    & \mathcal O_{U_{01}}^{\oplus(n+1)}
+        & \mathcal O_{U_{01}}^{\oplus(n+1)}
         \arrow[d,equal]\\
-    \mathcal O_{U_{01}}
+        \mathcal O_{U_{01}}
         \arrow[r,"h'"']
-    & \mathcal O_{U_{01}}^{\oplus(n+1)}.
-\end{tikzcd}
+        & \mathcal O_{U_{01}}^{\oplus(n+1)}.
+    \end{tikzcd}
 \]
 Indeed, \(h'\circ(\times h_1)=h\), and multiplication by
 \(h_1\) is an isomorphism since \(h_1\) is a unit on
@@ -696,7 +714,6 @@ We therefore obtain the correspondence
     The same construction works for a locally ringed space
     \(X\).
 \end{remark}
-
 
 %%% Local Variables:
 %%% mode: LaTeX

@@ -1,7 +1,7 @@
 \newpage
 
 \stepcounter{section}
-\section*{Lecture 5: Structure Sheaf of Spec $\!R$}
+\section*{Lecture 5: Structure Sheaf of $\Spec R$}
 Recall that for a ring $R$ we have defined an `incomplete' presheaf $\mathcal{F}$ on the base of the topology $\{D_f\}$, given by 
 \[
 \mathcal{F}(D_f) = R_f.
@@ -110,21 +110,21 @@ Some might recognise this as the inverse limit $\varprojlim_{\substack{U_i \subs
   However, this sheaf also has another extension to a presheaf, namely the pre-sheaf that sends every non-empty open set in \(\mathbf{R}^n\) to \(\mathbf{Z}\).
 \end{example}
 
-In our verification of the sheaf axioms for the incomplete structure sheaf, we used that \(D_s\) and \(D_t\) cover \(\spec R\) if and only if \(\langle s,t\rangle = (1)\).
+In our verification of the sheaf axioms for the incomplete structure sheaf, we used that \(D_s\) and \(D_t\) cover \(\Spec R\) if and only if \(\langle s,t\rangle = (1)\).
 This observation leads to the following.
 \begin{proposition}
-  Suppose \(\spec R = \cup_{i\in I} D_{s_i}\) for some potentially infinite set $I$.
-  Then there is a finite subset \(J \in I\) such that \(\spec R = \cup_{i\in J} D_{s_i}\).
-  As a result, \(\spec R\) is quasicompact (every open cover has a finite subcover).
+  Suppose \(\Spec R = \cup_{i\in I} D_{s_i}\) for some potentially infinite set $I$.
+  Then there is a finite subset \(J \in I\) such that \(\Spec R = \cup_{i\in J} D_{s_i}\).
+  As a result, \(\Spec R\) is quasicompact (every open cover has a finite subcover).
 
 \end{proposition}
 \begin{proof}
-  If \(\spec R = \cup_{i\in I} D_{s_i}\), then no prime ideal contains all \(s_i\).
+  If \(\Spec R = \cup_{i\in I} D_{s_i}\), then no prime ideal contains all \(s_i\).
   Therefore, \(\langle s_i \rangle = (1)\).
   This means a finite linear combination of the $s_i$ is equal to $1$.
   Let \(J \subset I\) be the indices that appear in this linear combination.
    
-  Since every open cover has a refinement by basic open sets, it follows that \(\spec R\) is quasicompact.
+  Since every open cover has a refinement by basic open sets, it follows that \(\Spec R\) is quasicompact.
 \end{proof}
 
 \begin{remark}
@@ -133,9 +133,9 @@ This observation leads to the following.
 \end{remark}
 
 
-From now on we will use $(X,\mathcal{O}_X)$ to denote the structure sheaf on $X =\text{Spec }\!R $. The following examples will illustrate what the structure sheaf looks like in practice.
+From now on we will use $(X,\mathcal{O}_X)$ to denote the structure sheaf on $X =\Spec R$. The following examples will illustrate what the structure sheaf looks like in practice.
 \begin{example}
-    Let $R = \C[x,y]$, then we define $\A^2_\C:=\text{Spec }\!R$ and consider the open set $U = \A^2 - (0,0) = \!\text{ Spec }\!R - (x,y)$, note $U$ is the complement of the closed point corresponding to the maximal ideal $(x,y)$. We wish to characterise $\mathcal{O}_{\A^2}(U)$. Note that $U$ consists of those prime ideals which do not contain either $(x)$ or $(y)$, thus
+    Let $R = \C[x,y]$, then we define $\A^2_\C:=\Spec R$ and consider the open set $U = \A^2 - (0,0) = \Spec R - (x,y)$, note $U$ is the complement of the closed point corresponding to the maximal ideal $(x,y)$. We wish to characterise $\mathcal{O}_{\A^2}(U)$. Note that $U$ consists of those prime ideals which do not contain either $(x)$ or $(y)$, thus
     \[
     U = D_x \cup D_y.
     \]
@@ -171,9 +171,9 @@ From now on we will use $(X,\mathcal{O}_X)$ to denote the structure sheaf on $X 
 \begin{example}[Examples of structure sheaves]
 We now give some more examples with familiar rings.
 \begin{itemize}
-    \item Let \(X = \operatorname{Spec}\C\). Since \(\C\) is a field,
+    \item Let \(X = \Spec\C\). Since \(\C\) is a field,
     \[
-        \operatorname{Spec}\C
+        \Spec\C
         =
         \{(0)\}.
     \]
@@ -187,7 +187,7 @@ We now give some more examples with familiar rings.
     \[
         X
         =
-        \operatorname{Spec}\frac{\C[x]}{(x^2)}.
+        \Spec\frac{\C[x]}{(x^2)}.
     \]
     The only prime ideal is \((x)\), since \(x\) is nilpotent. Thus
     \[
@@ -199,9 +199,9 @@ We now give some more examples with familiar rings.
         =
         \frac{\C[x]}{(x^2)}.
     \]
- \item Let \(X = \operatorname{Spec}\Q\). Then
+ \item Let \(X = \Spec\Q\). Then
     \[
-        \operatorname{Spec}\Q
+        \Spec\Q
         =
         \{(0)\}.
     \]
@@ -213,7 +213,7 @@ We now give some more examples with familiar rings.
     \]
     \item Let
     \[
-        X = \operatorname{Spec}(\mathbb{Z}/6\mathbb{Z}).
+        X = \Spec(\mathbb{Z}/6\mathbb{Z}).
     \]
     The prime ideals are
     \[
@@ -248,7 +248,7 @@ We now give some more examples with familiar rings.
 From which we recover $\Z/6\Z \cong \Z/2\Z\times \Z/3\Z$, as the Chinese remainder theorem states.
     \item Let
     \[
-        X = \operatorname{Spec}\mathbb{C}[|t|].
+        X = \Spec\mathbb{C}[|t|].
     \]
     The prime ideals are
     \[
@@ -266,7 +266,7 @@ From which we recover $\Z/6\Z \cong \Z/2\Z\times \Z/3\Z$, as the Chinese remaind
 \end{example}
 
 Finally, let us compute the stalks of the structure sheaf.
-Let $X = \operatorname{Spec}R$ and let \(\mathfrak{p}\in X\). Then the stalk at $\mathfrak{p}$ given by
+Let $X = \Spec R$ and let \(\mathfrak{p}\in X\). Then the stalk at $\mathfrak{p}$ given by
     \[
         \mathcal{O}_{X,\mathfrak{p}}
         =
@@ -287,13 +287,13 @@ Let $X = \operatorname{Spec}R$ and let \(\mathfrak{p}\in X\). Then the stalk at 
     \]
     The notation \(R_{{\mathfrak{p}}}\) denotes the localisation of \(R\) in the multiplicative set that is the complement of \(\mathfrak p\).
 \begin{example}
-    In Spec $\! \Z$ the stalk at $(5)$ is given by
+    In $\Spec \Z$ the stalk at $(5)$ is given by
     \[
     \left\{ \frac{a}{b} \mid 5\nmid b \right\}
     \] 
 \end{example}
 \begin{example}
-    In Spec $\! \C[x,y]$ the stalk at $(x,y)$ is given by
+    In $\Spec \C[x,y]$ the stalk at $(x,y)$ is given by
     \[
     \left\{ \frac{f(x,y)}{g(x,y)} \mid g(0,0)\neq 0 \right\}
     \] 
